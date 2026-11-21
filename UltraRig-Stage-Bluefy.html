@@ -19093,6 +19093,16 @@ function stPadAssign(note, file) {
 async function stPadStart(note) {
   const file = stPadFiles.get(note);
   if (!file) throw Error(`Import or drop an MP3 onto ${note} first.`);
+  if (!DEMO && S.connected) {
+    try {
+      await Pedal.cmd("BTM on", "BTM", 5000);
+      const padPercent = Math.round(stPadVolume * 100);
+      const btmPercent = Math.max(0, Math.min(100, Math.round(padPercent / 10) * 10));
+      await Pedal.cmd(`BTM vol ${btmPercent}`, "BTM", 5000);
+    } catch (error) {
+      throw Error("Could not route this pad to Tank-G Bluetooth music.");
+    }
+  }
   stPadSelect(note);
   stPadStop();
   const audio = new Audio();
