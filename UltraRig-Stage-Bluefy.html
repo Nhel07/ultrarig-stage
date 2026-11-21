@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>UltraRig for Tank-G and Tank-B</title>
+<title>StageTone for Tank-G and Tank-B</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071819'/%3E%3Cpath d='M20 13v21a12 12 0 0 0 24 0V13' fill='none' stroke='%2363e0f5' stroke-width='10'/%3E%3Ccircle cx='50' cy='51' r='4.5' fill='%23ff7a1a'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -1375,9 +1375,6 @@ body:not(.ph) .bhead #snapSave { flex: none; width: 44px; height: 38px; margin-l
 body:not(.ph) .bhead #snapSave:hover { background: color-mix(in srgb, var(--bg2) 55%, var(--panel)); color: var(--text); }
 body:not(.ph) .bhead #snapSave svg { width: 21px; height: 21px; }
 body:not(.ph) .bhead #snapSave.hot { color: var(--amber); }
-.mainlive { flex: none; margin-left: auto; height: 38px; min-width: 88px; padding: 0 18px; border: 0; background: var(--rig); color: #04191a; font: 800 17px/1 var(--fd); text-transform: uppercase; }
-.mainlive:hover { filter: brightness(1.12); }
-body.ph .mainlive { display: none; }
 .mainc > .board { position: relative; }
 @media (max-width: 1279px) { body:not(.ph) .bhead .snaps button.snap { width: 96px; padding-left: 9px; padding-right: 9px; } body:not(.ph) .bhead .presetbtn { font-size: 22px !important; margin-right: 12px; } }
 /* 2026-10-29: los snapshots se llaman escenas: la pestaña dice "SCENE 1" en una línea; con nombre o vacía, "SCENE 1" chico arriba y el nombre (o "empty") abajo */
@@ -1542,10 +1539,12 @@ body.st-amoled .stcurrent, body.st-mono .stcurrent { background: #000; border-co
 .stsection { display: flex; align-items: center; gap: 10px; flex: none; color: var(--sdim); font: 700 11px/1.2 var(--ft); letter-spacing: .12em; text-transform: uppercase; }
 .stsection::after { content: ""; height: 1px; flex: 1; background: var(--sedge); }
 .stpresets { display: grid; grid-template-rows: 194px 92px; gap: 8px; flex: none; position: relative; z-index: 1; }
+.ststage-slots { display: none; }
 .stbanks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .stslots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .stbank, .stpreset { min-width: 0; border: 1px solid var(--sedge); border-radius: 8px !important; background: var(--stile); color: var(--stx); cursor: pointer; }
 .stbank { font: 700 clamp(12px, 1.15vw, 16px)/1.2 var(--ft); letter-spacing: .025em; }
+.stbank-label { display:block; width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .stbank.on { background: #e5c27c; color: #1c1b15; border-color: #f1d393; box-shadow: inset 0 0 0 1px #fff4; }
 .stpreset { position: relative; overflow: hidden; padding: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
 .stpreset::before, .stscene::before { content: ""; position: absolute; top: 0; left: 18%; right: 18%; height: 3px; border-radius: 0 0 4px 4px; background: #3c6170; }
@@ -1677,7 +1676,7 @@ body.st-amoled .sttoast, body.st-mono .sttoast { background: #000; color: var(--
 }
 @media (max-width: 1050px) { .sthead { flex-wrap: wrap; } }
 @media (max-width: 1050px) {
-  .sthead { display: grid; grid-template-columns: auto minmax(64px, 1fr) auto auto auto auto; grid-template-areas: "nav bpm mode tuner lock close" "meters meters meters meters meters meters"; gap: 8px; }
+  .sthead { display: grid; grid-template-columns: auto minmax(64px, 1fr) auto auto auto auto; grid-template-areas: "bpm mode tuner lock nav nav" "meters meters meters meters meters meters"; gap: 8px; }
   .sthead .stnav-controls { grid-area: nav; }
   .sthead .stage-meters { grid-area: meters; width: 100%; max-width: none; }
   .sthead .grow { display: none; }
@@ -1689,7 +1688,7 @@ body.st-amoled .sttoast, body.st-mono .sttoast { background: #000; color: var(--
 }
 @media (max-width: 599px) {
   .stage { padding-left: max(8px, env(safe-area-inset-left)); padding-right: max(8px, env(safe-area-inset-right)); }
-  .sthead { grid-template-columns: minmax(110px, 1fr) minmax(64px, 1fr) 44px; grid-template-areas: "nav bpm close" "mode tuner lock" "meters meters meters"; }
+  .sthead { grid-template-columns: minmax(64px, 1fr) auto auto auto; grid-template-areas: "bpm mode tuner lock" "meters meters meters nav"; }
   .sthead > .stbtn { width: 100%; }
   .sthead > .stbtn .tx { display: none; }
 }
@@ -2212,6 +2211,74 @@ body.ph .chain > .amp.vrow + .vwire { margin-top: -2px; }
 body.ph .chain > .vwire + .amp.vrow { margin-top: 0; }
 /* mientras se arrastra, el hueco que se abre en la lista también lleva el cable */
 body.ph .chain > .slot.open { background: linear-gradient(var(--gold), var(--gold)) center / 3px 100% no-repeat, rgba(217,178,106,.08); }
+.stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,
+.stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,
+.stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
+.stage.on .stpadkey::after {display:none!important;content:none!important}
+.stage.on .stpadkey::after {display:none!important;content:none!important}
+.stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,
+.stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,
+.stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
+.stage.on .stpadkey {font-size:24px!important;font-weight:950!important}
+.stage.on .stpadkey::after {font-size:10px!important;font-weight:900!important}
+ .stage.on .stchips .liveEffectCard {
+   flex:0 0 130px;width:130px;min-width:130px;height:82px;min-height:82px;max-height:82px;
+   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+   padding:10px;border:1px solid color-mix(in srgb,var(--cc) 55%,#526072);
+   border-radius:10px!important;background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 18%,#192438),#111827);
+   box-shadow:inset 0 3px 0 var(--cc),0 5px 10px #0007;color:#f4f7ff;
+ }
+ .stage.on .stchips .liveEffectCard.off {filter:grayscale(.25);opacity:.72}
+ .stage.on .liveEffectName {max-width:100%;font:900 15px/1.05 var(--fd);text-align:center;text-transform:uppercase}
+ .stage.on .liveEffectState {font:800 8px/1 var(--ft);letter-spacing:1.2px;color:var(--cc)}
+ .stage.on .liveEffectLed {position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;border:1px solid #3a1214;background:#42161a;box-shadow:inset 0 1px 2px #000}
+ .stage.on .liveEffectCard.on .liveEffectLed {background:#ff3434;border-color:#ffc2c2;box-shadow:0 0 4px #ff6b6b,0 0 9px #f00,0 0 14px #f008,inset 0 1px 2px #ffe0e0}
+.steditchain {display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;min-height:170px;overflow-x:auto;padding:8px}
+.steditlane {display:grid;grid-template-columns:repeat(2,minmax(112px,112px));grid-auto-flow:column;grid-template-rows:repeat(2,82px);gap:6px 10px;position:relative}
+.steditlane b {position:absolute;left:-12px;top:-8px;font-size:12px;color:#75e1ff}
+.steditlane .stchip.block {grid-row:auto!important;width:112px!important;height:82px!important;min-height:82px!important;max-height:82px!important;padding:5px!important}
+.steditlane .stchip.block .dial {width:34px!important;height:34px!important}
+.steditlane .stchip.block .pedalControl {margin-top:0!important}
+.steditlane .stchip.block .name {font-size:9px!important;min-height:10px!important}
+.steditlane .stchip.block .mini,.steditlane .stchip.block .switchCaption {display:none!important}
+.steditamp {width:180px;height:82px;display:grid;place-items:center;position:relative;border-radius:12px;background:linear-gradient(145deg,#d3a34a,#7f5b27);color:#10131a;border:1px solid #e0bd73;box-shadow:0 8px 14px #0008}
+.steditamp span {position:absolute;top:8px;font-size:11px;font-weight:950}
+.steditamp strong {margin-top:12px;font-size:16px;text-align:center;padding:0 8px}
+.steditamp small {position:absolute;bottom:8px;font-size:9px;font-weight:900}
+.steditamp i {position:absolute;right:-5px;top:30px;width:10px;height:10px;border-radius:50%;background:#ff4b3e}
+.steditio {width:70px;height:70px;display:grid;place-items:center;position:relative;color:#75e1ff;font-size:12px}
+.steditio i {width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#eef6fa,#8997a5 35%,#26394d 65%,#101923 72%)}
+.steditwire {width:42px;height:5px;background:#6b879c;border-radius:5px}
+ .stage.on .stchips .stchip.block {
+   --fx:var(--cc); flex:0 0 112px; width:112px; min-width:112px; height:140px; min-height:140px; max-height:140px;
+   display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:3px;
+   overflow:hidden; padding:8px 7px 7px; border-radius:14px!important;
+   border:1px solid rgba(var(--fx-rgb),.55);
+   background:radial-gradient(ellipse at 30% 0%,rgba(var(--fx-rgb),.28),transparent 82%),linear-gradient(150deg,#1b2537,#0e1624);
+   box-shadow:inset 0 5px 0 var(--fx),inset 1px 0 0 #ffffff30,inset -2px -4px 0 #0008,0 8px 12px #0009;
+   text-align:center;
+ }
+ .stage.on .stchip.block > span:first-child {width:100%; display:grid; gap:2px}
+ .stage.on .stchip.block .pedalTop {display:flex;align-items:center;justify-content:space-between;width:100%}
+ .stage.on .stchip.block .pedalIcon {width:18px;height:18px;padding:3px;border-radius:5px;background:rgba(var(--fx-rgb),.14);border:1px solid rgba(var(--fx-rgb),.35);color:var(--fx)}
+ .stage.on .stchip.block .pedalIcon svg {width:100%;height:100%}
+ .stage.on .stchip.block .ledLabel {font-size:6px;letter-spacing:.4px}
+ .stage.on .stchip.block .led {width:5px;height:5px}
+ .stage.on .stchip.block .type {font-size:6px;margin-top:3px;color:var(--fx);letter-spacing:.8px}
+ .stage.on .stchip.block .name {font-size:11px;line-height:1;min-height:14px;margin-top:2px;color:#f6faff;font-weight:900}
+ .stage.on .stchip.block .pedalControl {display:grid;justify-items:center;gap:1px;margin-top:1px}
+ .stage.on .stchip.block .dial {width:44px;height:44px;padding:3px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(from 225deg,var(--fx) 0deg,rgba(var(--fx-rgb),.8) calc(var(--amount)*270deg),#344257 calc(var(--amount)*270deg) 270deg,transparent 270deg)}
+ .stage.on .stchip.block .dialCore {position:relative;width:100%;height:100%;border:2px solid #3f4c61;border-radius:50%;background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);box-shadow:inset 0 0 4px #000,0 3px 6px #0009}
+ .stage.on .stchip.block .knobCap {position:relative;display:block;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 32% 25%,#596777,#263344 48%,#111b29 80%)}
+ .stage.on .stchip.block .knobCap:before {content:"";position:absolute;top:2px;left:calc(50% - 1.5px);width:3px;height:10px;border-radius:3px;background:#f3f8ff}
+ .stage.on .stchip.block .controlLabel {display:none}
+ .stage.on .stchip.block .mini {display:block;position:absolute;left:50%;bottom:5px;width:32px;height:32px;transform:translateX(-50%)}
+ .stage.on .stchip.block .liveBlockSwitch {display:block;width:32px;height:32px;border-radius:50%;background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);border:1px solid #07101b;box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--fx),0 5px 8px #0008}
+ .stage.on .stchip.block .liveBlockSwitch:before {content:"";display:block;width:20px;height:20px;margin:5px;border-radius:50%;border:1px solid #697a8f;background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%)}
+ .stage.on .stchip.block .switchCaption {position:absolute;bottom:1px;font-size:5px}
+ .stage.on .stchip.block .screw {position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:#8e9aae}
+ .stage.on .stchip.block .screw.left {left:6px}
+ .stage.on .stchip.block .screw.right {right:6px}
 </style>
 <script>
 /* alfa 11 (2026-11-12, un usuario con la página en blanco): la guardia del arranque, en JavaScript viejo (ES5) para que corra en cualquier navegador.
@@ -2618,13 +2685,2331 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 
 -->
+<style id="stagetone-design">
+  .stage {
+    --sbg:#080c14;
+    --stx:#f4f7ff;
+    --sdim:#a2b0c6;
+    --sedge:#2c3a51;
+    --stile:#111827;
+    --sbtn:#182238;
+    --rig:#75e1ff;
+    background:
+      radial-gradient(ellipse at 12% -10%,#1a2b47 0,transparent 48%),
+      radial-gradient(ellipse at 96% 100%,#19182d 0,transparent 38%),
+      #080c14;
+  }
+  .sthead {
+    min-height:72px;
+    padding:8px 10px;
+    border-radius:8px;
+    border-color:#344760;
+    background:linear-gradient(180deg,#131d2e,#090e17);
+    box-shadow:0 3px 12px #0008;
+  }
+  .sthead .stbtn {
+    min-height:42px;
+    border-radius:8px;
+    background:linear-gradient(180deg,#26374e,#121c2b);
+    border-color:#405570;
+    box-shadow:inset 0 1px #ffffff1c,0 2px 4px #0005;
+  }
+  .sthead .stbtn:hover,
+  .sthead .stbtn:focus-visible {
+    border-color:#75e1ff;
+    background:linear-gradient(180deg,#304967,#182a40);
+    color:#eafaff;
+  }
+  .stnav-controls .stbtn.on {
+    background:linear-gradient(180deg,#9cecff,#48bce3);
+    color:#07101e;
+    border-color:#75e1ff;
+    box-shadow:inset 0 1px #ffffffb3,0 3px 6px #0007;
+  }
+  .stcurrent {
+    grid-column:1;
+    min-height:112px;
+    border-radius:14px;
+    background:linear-gradient(145deg,#1a2436,#101827);
+    border-color:#34445f;
+    justify-content:flex-start;
+    align-content:start;
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-rows:auto auto auto;
+    gap:8px 12px;
+    padding:14px 18px;
+  }
+  .stbadge {
+    background:#75e1ff;
+    color:#07101e;
+    border-radius:9px;
+  }
+  .stname {
+    text-shadow:0 1px 8px #0008;
+  }
+  .stnav {
+    grid-template-columns:376px minmax(0,1fr) 150px;
+  }
+  .stpreset-meta {
+    grid-column:1;
+    grid-row:1;
+    color:#dcecff;
+    font:900 12px/1 var(--ft);
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+  }
+  .stpreset-status {
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+    color:#f5f8ff;
+    font:900 12px/1 var(--ft);
+    letter-spacing:1px;
+  }
+  .stbadge {
+    display:none;
+  }
+  .stname {
+    grid-column:1/-1;
+    grid-row:2;
+    width:100%;
+    min-height:38px;
+    align-self:center;
+    font:900 30px/1.05 var(--fd);
+  }
+  .stname small {
+    display:none;
+  }
+  .stpreset-bottom {
+    grid-column:1/-1;
+    grid-row:3;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#dcecff;
+    font:900 11px/1 var(--ft);
+    letter-spacing:.8px;
+  }
+  .stpresets {
+    grid-template-rows:194px 112px;
+  }
+  .stbanks {
+    gap:8px;
+  }
+  .stbank {
+    border-radius:13px;
+    background:linear-gradient(145deg,#1a2436,#121a28);
+    border-color:#33415a;
+  }
+  .stbank.on {
+    background:linear-gradient(145deg,#1d3b4d,#17283e);
+    color:#f4f7ff;
+    border-color:#75e1ff;
+    box-shadow:inset 0 3px 0 #75e1ff,0 0 18px #75e1ff18;
+  }
+  .stslots {
+    gap:8px;
+  }
+  .stpreset {
+    border-radius:14px;
+    background:linear-gradient(145deg,#26354d,#101827);
+    border-color:#33415a;
+    min-height:112px;
+    padding:7px 8px 9px;
+    justify-content:flex-end;
+    gap:4px;
+    box-shadow:inset 0 1px 0 #b6d1ff18,0 8px 18px #0005;
+  }
+  .stpreset.on {
+    background:linear-gradient(145deg,#25465a,#101827);
+    color:#f4f7ff;
+    border-color:#75e1ff;
+    box-shadow:inset 0 2px 0 #75e1ff,0 0 18px #75e1ff18;
+  }
+  .stpreset-slot {
+    position:absolute;
+    top:10px;
+    left:50%;
+    width:62px;
+    height:62px;
+    transform:translateX(-50%);
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    color:transparent;
+    background:
+      radial-gradient(circle at 38% 27%,#fbfdff 0 10%,#cfd7e1 28%,#8d9bac 48%,#dce4ec 58%,#69798e 73%,#172132 75%);
+    border:2px solid #9cabbc;
+    box-shadow:
+      0 0 0 5px #121b29,
+      0 0 0 7px #6f7d91,
+      inset 0 3px 5px #fff9,
+      inset 0 -5px 7px #536176,
+      0 8px 12px #0009;
+  }
+  .stpreset-slot::after {
+    content:"";
+    position:absolute;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#edf2f7,#929dab);
+    border:1px solid #f8fbff;
+    box-shadow:inset 0 2px 4px #fff,0 2px 5px #0008;
+  }
+  .stpreset.on .stpreset-slot {
+    border-color:#b8fbff;
+    box-shadow:
+      0 0 0 5px #121b29,
+      0 0 0 7px #75e1ff,
+      0 0 16px #75e1ff,
+      inset 0 3px 5px #fff9,
+      inset 0 -5px 7px #536176,
+      0 8px 12px #0009;
+  }
+  .stpreset.on .stpreset-slot::after {
+    background:radial-gradient(circle at 42% 35%,#a8f0bd,#58c98a 58%,#25724d);
+    border-color:#dfffee;
+  }
+  .stpreset-name {
+    position:relative;
+    z-index:1;
+    min-height:38px;
+    display:grid;
+    place-items:center;
+    width:100%;
+    padding:5px 4px 4px;
+    border-radius:7px;
+    background:linear-gradient(145deg,#30455d,#172238);
+    border:1px solid #3f526b;
+    color:#edf4ff;
+    font:800 18px/1 var(--fd);
+  }
+  .stpreset.on .stpreset-name {
+    border-color:#75e1ff;
+    background:linear-gradient(145deg,#1d4a5c,#172438);
+  }
+  .stpreset::before,
+  .stscene::before {
+    display:none;
+  }
+  .stscene {
+    border-radius:14px;
+    background:linear-gradient(145deg,#1a2436,#101827);
+    border-color:#33415a;
+  }
+  .stscene.on {
+    background:linear-gradient(145deg,#1d3b4d,#17283e);
+    color:#f4f7ff;
+    border-color:#75e1ff;
+    box-shadow:inset 0 3px 0 #75e1ff,0 0 18px #75e1ff18;
+  }
+  .stscene.on small {
+    color:#a2b0c6;
+  }
+  .stscene {
+    padding:12px 12px 12px 78px;
+    text-align:left;
+  }
+  .stscene::before {
+    content:"";
+    display:block;
+    position:absolute;
+    right:18px;
+    top:18px;
+    left:auto;
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#57667a;
+    border:2px solid #1b2534;
+    box-shadow:0 0 0 3px #0b1018,0 2px 4px #0008;
+  }
+  .stscene.on::before {
+    background:#75e1ff;
+    box-shadow:0 0 0 3px #0b1018,0 0 12px #75e1ff,0 2px 4px #0008;
+  }
+  .stscene::after {
+    content:"";
+    position:absolute;
+    left:14px;
+    top:50%;
+    bottom:auto;
+    width:52px;
+    height:52px;
+    transform:translateY(-50%);
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 38% 28%,#f8fbff 0 9%,#bdc9d7 25%,#77879a 48%,#344156 72%,#101621 74%);
+    border:2px solid #9aa8ba;
+    box-shadow:
+      0 0 0 5px #121b29,
+      0 0 0 7px #65768e,
+      inset 0 3px 6px #fff9,
+      inset 0 -5px 8px #46546a,
+      0 8px 12px #0009;
+  }
+  .stscene:active:not(:disabled)::after {
+    top:calc(50% + 2px);
+    bottom:auto;
+    transform:translateY(-50%) scale(.96);
+    box-shadow:
+      0 0 0 5px #121b29,
+      0 0 0 7px #65768e,
+      inset 0 4px 8px #46546a,
+      0 4px 7px #0009;
+  }
+  .stscene:disabled::after {
+    filter:grayscale(.8);
+    opacity:.55;
+  }
+  .stchips {
+    height:clamp(132px,20vh,174px);
+    border-radius:18px;
+    border-color:#2b3950;
+    background:linear-gradient(145deg,#131d2eea,#0d1422f5);
+  }
+  .stchip {
+    border-radius:16px;
+    box-shadow:0 7px 0 color-mix(in srgb,var(--cc) 55%,#000),0 14px 22px #0007;
+  }
+  body .stage .meters {
+    border-radius:12px;
+    border-color:#34445f;
+    background:#101828;
+  }
+  .sttoast {
+    border-radius:12px;
+  }
+  .stpads {
+    position:absolute;
+    left:8px;
+    right:8px;
+    bottom:174px;
+    z-index:2;
+    display:grid;
+    grid-template-columns:minmax(170px,auto) minmax(0,1fr) 74px;
+    align-items:center;
+    gap:10px;
+    flex:none;
+    min-height:76px;
+    padding:9px 12px;
+    border:1px solid #2c3a51;
+    border-radius:16px;
+    background:linear-gradient(145deg,#131d2eea,#0d1422f5);
+  }
+  .stpads-head {
+    min-width:0;
+  }
+  .stpads-title {
+    display:block;
+    font:900 14px/1 var(--ft);
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+  }
+  .stpads-status {
+    display:block;
+    margin-top:6px;
+    color:#a2b0c6;
+    font:700 12px/1.2 var(--ft);
+  }
+  .stpadkeys {
+    display:grid;
+    grid-template-columns:repeat(12,minmax(34px,1fr));
+    gap:5px;
+  }
+  .stpad-card {
+    grid-column:1/-1;
+    grid-row:2;
+    min-width:0;
+    min-height:0;
+    padding:8px;
+    border:1px solid #34445f;
+    border-radius:12px;
+    background:linear-gradient(145deg,#182438ee,#0c1422f5);
+    box-shadow:inset 0 1px 0 #ffffff0b,0 4px 10px #0006;
+  }
+  .stpad-card .stpadkeys {
+    height:100%;
+  }
+  .stpadkey {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    height:52px;
+    border:1px solid #34445f;
+    border-radius:10px;
+    background:linear-gradient(145deg,#23324a,#111a29);
+    color:#eef4ff;
+    font:850 24px/1 var(--fd);
+    cursor:pointer;
+  }
+  .stpadkey::after {
+    content:"DROP MP3";
+    color:#91a2bc;
+    font:800 10px/1 var(--ft);
+    letter-spacing:.35px;
+  }
+  .stpadkey.loaded::after {content:"READY";color:#87f4b4}
+  .stpadkey.on::after {content:"PLAYING";color:#9df4ff}
+  .stpadkey.drop-target {
+    border-color:#75e1ff;
+    background:linear-gradient(145deg,#1d6e78,#12303d);
+    box-shadow:0 0 16px #75e1ff66,inset 0 2px 0 #75e1ff;
+  }
+  .stpadkey:focus-visible {
+    outline:2px solid #75e1ff;
+    outline-offset:2px;
+  }
+  .stpadkey.on {
+    border-color:#75e1ff;
+    background:linear-gradient(145deg,#1d6e78,#12303d);
+    box-shadow:0 0 14px #75e1ff33,inset 0 2px 0 #75e1ff;
+  }
+  .stpadstop {
+    width:100%;
+    height:52px;
+    border:1px solid #714657;
+    border-radius:10px;
+    background:linear-gradient(145deg,#5e2738,#311721);
+    color:#ffdbe4;
+    font:900 10px/1 var(--ft);
+  }
+  .stpadstop::after {content:"STOP"}
+  .stpadstop svg {display:none}
+  .stpads-volume {
+    grid-column:3;
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    width:100%;
+  }
+  .stpad-volume-control {display:none}
+  .stbrand-stage {display:none}
+  @media (min-width:761px) and (orientation:landscape) {
+    .stage.on {
+      display:grid;
+      grid-template-columns:minmax(210px,27%) minmax(230px,1fr) clamp(120px,9vw,170px);
+      grid-template-rows:auto 98px minmax(0,1fr) minmax(82px,12vh) minmax(150px,22vh);
+      gap:8px;
+      overflow:hidden;
+      padding:8px;
+    }
+    .sthead {
+      grid-column:1/-1;
+      grid-row:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:46px;
+      padding:4px 6px;
+      overflow:visible;
+    }
+    .stbrand-stage {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:none;
+      min-width:190px;
+      margin-right:4px;
+    }
+    .stbrand-stage .mark {
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      flex:none;
+      border-radius:11px;
+      color:#07101e;
+      background:linear-gradient(135deg,#6ce2ff,#7362ff);
+      box-shadow:0 0 22px #5acbff25;
+    }
+    .stbrand-stage .mark svg {width:22px;height:22px}
+    .stbrand-stage .wordmark {
+      font:950 16px/1 var(--fd);
+      color:#a2b0c6;
+      letter-spacing:-.3px;
+    }
+    .stbrand-stage .wordmark b {color:#75e1ff}
+    .stbrand-stage small {
+      display:block;
+      margin-top:4px;
+      color:#a2b0c6;
+      font:800 7px/1 var(--ft);
+      letter-spacing:1.5px;
+    }
+    .sthead .stnav-controls {flex:none}
+    .sthead .stbtn {height:36px;min-width:36px;padding:0 10px;font-size:11px}
+    .sthead .stbtn.ico {padding:0}
+    .sthead .stage-meters {
+      flex:1 1 270px;
+      width:auto;
+      max-width:380px;
+      margin-left:auto;
+    }
+    .sthead .grow {display:none}
+    .sthead .stbpm {flex:none}
+    @media(max-width:1050px) {
+      .stbrand-stage {min-width:190px}
+      .stbrand-stage .wordmark {font-size:16px}
+      .stbrand-stage small {display:block;white-space:nowrap;font-size:7px;letter-spacing:1px}
+      .sthead .stage-meters {flex-basis:160px;max-width:240px}
+      .sthead .stbpm b {font-size:24px}
+      .sthead .stbtn {min-width:40px;padding-left:9px;padding-right:9px}
+      #stMode .tx,#stTuner .tx {display:none}
+      .stbank {font-size:12px}
+      .stpreset-name {font-size:11px}
+    }
+    .stnav {
+      grid-column:1;
+      grid-row:2;
+      display:block;
+      min-width:0;
+      align-self:start;
+      z-index:1;
+      height:98px;
+    }
+    .stcurrent {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      grid-template-areas:"meta status" "name name" "bottom bottom";
+      align-content:stretch;
+      justify-content:stretch;
+      gap:4px 8px;
+      width:100%;
+      height:100%;
+      min-height:98px;
+      padding:9px 12px;
+      border:1px solid #245166;
+      border-radius:11px !important;
+      background:linear-gradient(145deg,#102c39,#071923 75%);
+      box-shadow:0 5px 10px #0008,inset 0 1px 0 #75e1ff18;
+    }
+    .stpreset-meta {grid-area:meta;align-self:center;color:#75e1ff;font:900 9px/1.1 var(--ft);letter-spacing:.6px}
+    .stpreset-status {grid-area:status;align-self:center;color:#eaf1f5;font:900 9px/1 var(--ft)}
+    .stbadge {display:none}
+    .stname {
+      grid-area:name;
+      align-self:center;
+      max-width:100%;
+      color:#f2f6f7;
+      font:950 clamp(20px,2.4vw,27px)/1 var(--fd);
+      letter-spacing:-.4px;
+      text-shadow:0 2px 6px #0009;
+    }
+    .stpreset-bottom {grid-area:bottom;display:flex;justify-content:space-between;gap:8px;color:#91bfd0;font:800 8px/1.1 var(--ft)}
+    .stpresets {
+      grid-column:2;
+      grid-row:2/4;
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:minmax(0,1fr);
+      align-items:stretch;
+      gap:8px;
+      min-width:0;
+      min-height:0;
+      align-self:stretch;
+    }
+    .stbanks {
+      width:100%;
+      height:100%;
+      align-self:center;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      grid-template-rows:repeat(3,minmax(44px,1fr));
+      gap:7px;
+      min-height:0;
+    }
+    .stbanks .stpreset {
+      min-width:0;
+      min-height:0;
+      height:100%;
+      border-radius:7px;
+    }
+    .stmaster {
+      display:grid;
+      grid-template-rows:auto auto auto minmax(0,1fr) auto;
+      justify-items:center;
+      align-items:stretch;
+      gap:5px;
+      width:100%;
+      height:100%;
+      min-width:0;
+      min-height:0;
+      padding:7px 6px;
+      border:1px solid #394553;
+      border-radius:10px;
+      background:linear-gradient(150deg,#171e28,#0c1016 62%,#141a22);
+      box-shadow:inset 0 1px #ffffff20,inset 0 0 0 2px #0006,0 4px 9px #0009;
+    }
+    .stmaster-mute,
+    .stmaster-focus {
+      width:72%;
+      max-width:120px;
+      min-height:26px;
+      padding:4px 3px;
+      border:1px solid #536375;
+      border-radius:6px;
+      background:linear-gradient(#394451 0%,#202832 22%,#121820 54%,#080c11 100%);
+      color:#e7edf5;
+      box-shadow:inset 0 1px 2px #ffffff3b,inset 0 -2px 3px #000a,0 3px 5px #000a;
+      font:900 7px/1 var(--ft);
+      letter-spacing:.6px;
+    }
+    .stmaster-mute[aria-pressed="true"] {
+      border-color:#ff717d;
+      background:linear-gradient(#78343b,#3a171d);
+      color:#fff;
+      box-shadow:0 0 10px #ff717d33,inset 0 1px #fff4;
+    }
+    .stmaster-focus {
+      border-color:#3385b1;
+      background:linear-gradient(#3189ba,#135279 45%,#09263b);
+      color:#e4f6ff;
+    }
+    .stmaster-focus:focus-visible,
+    .stmaster-mute:focus-visible {
+      outline:2px solid #8bdfff;
+      outline-offset:2px;
+    }
+    .stmaster-title {
+      margin:0;
+      color:#a9c4da;
+      font:900 8px/1 var(--ft);
+      letter-spacing:1.2px;
+    }
+    .stmaster-pedal {
+      position:relative;
+      display:block;
+      justify-self:center;
+      width:min(100%,100px);
+      height:100%;
+      min-height:0;
+      overflow:visible;
+      touch-action:none;
+      perspective:500px;
+    }
+    .stmaster-pedal::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:0;
+      clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+      border:1px solid #69798b;
+      background:
+        linear-gradient(90deg,#0a0d12 0,#394553 8%,#1b242d 16%,#090d12 100%);
+      filter:drop-shadow(0 7px 7px #000c);
+      pointer-events:none;
+    }
+    .stmaster-pedal::after {
+      content:"";
+      position:absolute;
+      z-index:0;
+      left:17%;
+      right:2%;
+      bottom:2%;
+      height:8px;
+      border-radius:5px;
+      background:linear-gradient(#1b222d,#b3bcc9 42%,#333c49 70%,#090d13);
+      box-shadow:0 2px 3px #000b;
+      pointer-events:none;
+    }
+    .stmaster-treadle {
+      position:absolute;
+      inset:2px;
+      z-index:1;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      justify-items:center;
+      align-items:center;
+      gap:8px;
+      min-height:0;
+      padding:12px 6px 9px;
+      border:2px solid #667686;
+      border-radius:15px;
+      clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+      background:
+        radial-gradient(circle at 50% 13%,#98a5b333 0 2px,transparent 3px),
+        radial-gradient(circle at 50% 87%,#98a5b333 0 2px,transparent 3px),
+        repeating-linear-gradient(0deg,#303945 0,#303945 4px,#171d24 5px,#171d24 9px);
+      box-shadow:
+        inset 3px 3px 5px #a9b4c033,
+        inset -4px -5px 7px #05080d,
+        inset 0 0 0 5px #1a222b,
+        0 3px 5px #000c;
+      transform:rotateX(var(--stmaster-angle,0deg));
+      transform-origin:50% 94%;
+      transform-style:preserve-3d;
+      transition:transform 180ms cubic-bezier(.2,.75,.3,1),box-shadow 180ms ease;
+      will-change:transform;
+      pointer-events:none;
+    }
+    .stmaster-pedal.is-pressed .stmaster-treadle {
+      transform:translateY(3px) rotateX(calc(var(--stmaster-angle,0deg) + 4deg)) scaleY(.985);
+      box-shadow:inset 0 2px 3px #ffffff44,inset 0 -2px 3px #000e,0 1px 2px #000c;
+      transition-duration:80ms;
+    }
+    .stmaster-treadle-pattern {
+      position:absolute;
+      inset:4px;
+      width:calc(100% - 8px);
+      height:calc(100% - 8px);
+      overflow:visible;
+      z-index:0;
+      filter:drop-shadow(0 1px 0 #05080d);
+    }
+    .stmaster-treadle-pattern path {
+      fill:none;
+      stroke:#9caabb;
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .stmaster-treadle-pattern .groove {
+      stroke:#3f4a58;
+      stroke-width:3.4;
+    }
+    .stmaster-brand,
+    .stmaster-heel {
+      position:relative;
+      z-index:1;
+    }
+    .stmaster-treadle::before,
+    .stmaster-treadle::after {
+      content:"";
+      position:absolute;
+      left:5px;
+      right:5px;
+      height:4px;
+      border-radius:4px;
+      background:linear-gradient(#35404d,#c1cbd6 45%,#414c59);
+      box-shadow:0 1px 2px #000;
+    }
+    .stmaster-treadle::before {top:5px}
+    .stmaster-treadle::after {bottom:5px}
+    .stmaster-brand,
+    .stmaster-heel {
+      color:#d7e0eb;
+      font:900 6px/1 var(--ft);
+      letter-spacing:.65px;
+      text-shadow:0 1px 2px #000;
+    }
+    .stmaster-brand {font-size:5px;letter-spacing:.35px;transform:translateX(7px)}
+    .stmaster-heel {color:#9dabbc;font-size:5px}
+    .stmaster-pedal input {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      min-height:0;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      appearance:none;
+      -webkit-appearance:none;
+      writing-mode:vertical-lr;
+      direction:rtl;
+      background:transparent;
+      cursor:ns-resize;
+      touch-action:none;
+    }
+    .stmaster-pedal input {z-index:2}
+    .stmaster-pedal input {clip-path:polygon(6% 0,100% 0,100% 100%,5% 100%,5% 58%,0 58%,0 5%)}
+    .stmaster-pedal input::-webkit-slider-runnable-track {width:100%;height:100%;background:transparent}
+    .stmaster-pedal input::-webkit-slider-thumb {
+      width:18px;
+      height:18px;
+      border:2px solid #aeb8c4;
+      border-radius:50%;
+      appearance:none;
+      -webkit-appearance:none;
+      background:radial-gradient(circle at 35% 30%,#f3f6f9,#b6c0cb 38%,#586473 70%,#171d25 100%);
+      box-shadow:0 0 5px #dce5ef55,0 2px 4px #000a,inset 0 1px 2px #fff8;
+      cursor:ns-resize;
+    }
+    .stmaster-pedal input::-moz-range-track {width:100%;height:100%;border:0;background:transparent}
+    .stmaster-pedal input::-moz-range-thumb {
+      width:16px;
+      height:16px;
+      border:2px solid #aeb8c4;
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 30%,#f3f6f9,#b6c0cb 38%,#586473 70%,#171d25 100%);
+      box-shadow:0 0 5px #dce5ef55,0 2px 4px #000a,inset 0 1px 2px #fff8;
+      cursor:ns-resize;
+    }
+    .stmaster-pedal.stmaster-analog-fader {
+      display:grid;
+      grid-template-columns:54px;
+      align-items:stretch;
+      justify-content:center;
+      justify-self:center;
+      gap:0;
+      width:54px;
+      max-width:100%;
+      perspective:none;
+    }
+    .stmaster-pedal.stmaster-analog-fader .stmaster-analog-scale {
+      display:none;
+    }
+    .stmaster-pedal.stmaster-analog-fader::before,
+    .stmaster-pedal.stmaster-analog-fader::after,
+    .stmaster-pedal.stmaster-analog-fader .stmaster-treadle {
+      display:none;
+    }
+    .stmaster-analog-scale {
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:flex-end;
+      height:calc(100% - 16px);
+      margin:8px 0;
+      color:#aab9c8;
+      font:800 7px/1 var(--ft);
+      letter-spacing:.1px;
+    }
+    .stmaster-analog-scale i {
+      position:relative;
+      display:block;
+      min-height:8px;
+      padding-right:7px;
+      font-style:normal;
+    }
+    .stmaster-analog-scale i::after {
+      content:"";
+      position:absolute;
+      right:0;
+      top:50%;
+      width:5px;
+      height:1px;
+      background:#b2bfcc;
+    }
+    .stmaster-analog-track {
+      position:relative;
+      height:100%;
+      min-height:92px;
+      width:54px;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+    }
+    .stmaster-analog-track::before {
+      content:"";
+      position:absolute;
+      z-index:1;
+      left:calc(50% - 4px);
+      top:8px;
+      bottom:8px;
+      width:8px;
+      border:1px solid #05070a;
+      border-radius:4px;
+      background:linear-gradient(90deg,#07090b,#29313a 38%,#11151a 62%,#050608);
+      box-shadow:0 0 5px #000,inset 1px 0 1px #69717a,inset -1px 0 1px #000;
+    }
+    .stmaster-line-meter {
+      position:absolute;
+      z-index:2;
+      left:calc(50% - 1.5px);
+      top:11px;
+      bottom:11px;
+      width:3px;
+      border-radius:3px;
+      overflow:hidden;
+      pointer-events:none;
+    }
+    .stmaster-line-meter i {
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:var(--stmaster-level,0%);
+      min-height:0;
+      border-radius:3px;
+      background:
+        repeating-linear-gradient(0deg,#50dc8a 0 3px,#0b2e22 3px 5px),
+        linear-gradient(0deg,#50dc8a,#c8ef68 70%,#ffcf56 88%,#ff7777);
+      box-shadow:0 0 7px #58e1a088;
+      transition:height 70ms linear;
+    }
+    .stmaster-pedal.stmaster-analog-fader input {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:3;
+      margin:0;
+      border:0;
+      border-radius:5px;
+      appearance:none;
+      -webkit-appearance:none;
+      writing-mode:vertical-lr;
+      direction:rtl;
+      background:transparent;
+      cursor:ns-resize;
+      clip-path:none;
+    }
+    .stmaster-pedal.stmaster-analog-fader input::-webkit-slider-runnable-track {
+      width:100%;
+      height:100%;
+      background:transparent;
+    }
+    .stmaster-pedal.stmaster-analog-fader input::-webkit-slider-thumb {
+      width:54px;
+      height:74px;
+      margin-left:0;
+      border:1px solid #737c84;
+      border-radius:5px;
+      appearance:none;
+      -webkit-appearance:none;
+      background:
+        repeating-linear-gradient(0deg,transparent 0 5px,#1d2228 6px 9px,#69717a 10px 12px,transparent 13px 15px),
+        linear-gradient(180deg,#aeb5ba 0%,#7e878e 13%,#667078 25%,#9da5aa 38%,#69737a 50%,#a5acae 62%,#6a7379 74%,#1f252a 100%);
+      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;
+      cursor:ns-resize;
+    }
+    .stmaster-pedal.stmaster-analog-fader input::-moz-range-track {
+      width:100%;
+      height:100%;
+      border:0;
+      background:transparent;
+    }
+    .stmaster-pedal.stmaster-analog-fader input::-moz-range-thumb {
+      width:54px;
+      height:74px;
+      border:1px solid #737c84;
+      border-radius:5px;
+      background:repeating-linear-gradient(0deg,transparent 0 5px,#1d2228 6px 9px,#69717a 10px 12px,transparent 13px 15px),linear-gradient(180deg,#aeb5ba 0%,#7e878e 13%,#667078 25%,#9da5aa 38%,#69737a 50%,#a5acae 62%,#6a7379 74%,#1f252a 100%);
+      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;
+      cursor:ns-resize;
+    }
+    .stmaster-readout {
+      color:#8bdfff;
+      font:900 6px/1 var(--ft);
+      letter-spacing:.25px;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .stbank {
+      min-height:44px;
+      border-radius:9px;
+      background:linear-gradient(180deg,#303438,#111315);
+      border-color:#30363d;
+      box-shadow:inset 0 1px 0 #ffffff17,0 4px 5px #0009;
+      font-size:clamp(12px,1.05vw,16px);
+      font-weight:900;
+      text-shadow:0 1px 2px #000b;
+    }
+    .stbank.on {
+      background:linear-gradient(145deg,#17536b,#102c3e);
+      border-color:#75e1ff;
+      box-shadow:inset 0 0 0 1px #75e1ff66,0 0 15px #75e1ff22;
+    }
+    .ststage-slots {
+      display:none !important;
+    }
+    .ststage-slots .stslots {height:100%;min-height:0;gap:7px}
+    .stpreset {min-height:88px}
+    .stpreset-slot {
+      top:38%;
+      left:50%;
+      display:grid;
+      place-items:center;
+      width:72px;
+      height:72px;
+      transform:translate(-50%,-50%);
+      border:0;
+      border-radius:0;
+      color:#91bfd0;
+      background:none;
+      box-shadow:none;
+      font:950 36px/1 var(--fd);
+      letter-spacing:0;
+    }
+    .stpreset-slot::after {
+      display:none;
+    }
+    .stpreset.on .stpreset-slot {
+      border:0;
+      color:#75e1ff;
+      box-shadow:none;
+    }
+    .stpreset.on .stpreset-slot::after {
+      display:none;
+    }
+    .stscenes {
+      grid-column:1/3;
+      grid-row:4;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      grid-template-rows:minmax(0,1fr);
+      align-self:stretch;
+      min-height:0;
+    }
+    .stscene {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:0;
+      padding:8px 12px 8px 70px;
+      font-size:clamp(16px,1.5vw,24px);
+      text-align:left;
+    }
+    .stscene small {
+      margin:0;
+      font-size:clamp(11px,1.1vw,15px);
+    }
+    .stscene::after {
+      width:46px;
+      height:46px;
+      top:50%;
+      left:14px;
+      bottom:auto;
+      right:auto;
+      transform:translateY(-50%);
+    }
+    .stscene:active:not(:disabled)::after {
+      top:calc(50% + 2px);
+      bottom:auto;
+      transform:translateY(-50%) scale(.96);
+    }
+    .stscene::before {top:8px;right:10px}
+    .stpads {
+      position:relative;
+      inset:auto;
+      z-index:1;
+      grid-column:1;
+      grid-row:3;
+      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-rows:20px minmax(0,1fr) 32px;
+      gap:4px;
+      min-height:0;
+      height:100%;
+      padding:6px 6px 2px;
+      align-self:stretch;
+      max-height:100%;
+    }
+    .stpads-volume {
+      grid-column:1/-1;
+      grid-row:3;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:stretch;
+      gap:8px;
+      min-height:0;
+    }
+    .stpads-head {display:contents}
+    .stpads-title {grid-column:1;grid-row:1;align-self:center;font-size:9px;letter-spacing:1px}
+    .stpads-status {grid-column:2;grid-row:1;align-self:center;margin:0;font-size:7px;text-align:right;white-space:nowrap}
+    .stpad-volume-control {
+      display:flex;
+      flex:1 1 auto;
+      min-width:0;
+      min-height:0;
+      flex-direction:row;
+      align-items:center;
+      justify-content:stretch;
+      gap:6px;
+    }
+    .stpad-volume-control input {
+      width:100%;
+      min-width:0;
+      height:18px;
+      margin:0;
+      appearance:none;
+      -webkit-appearance:none;
+      background:transparent;
+      writing-mode:horizontal-tb;
+      direction:ltr;
+      cursor:ew-resize;
+    }
+    .stpad-volume-control input::-webkit-slider-runnable-track {
+      width:100%;
+      height:6px;
+      border:1px solid #29313a;
+      border-radius:999px;
+      background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+      box-shadow:inset 0 1px 3px #000b;
+    }
+    .stpad-volume-control input::-webkit-slider-thumb {
+      width:22px;
+      height:18px;
+      margin-top:-6px;
+      border:1px solid #738191;
+      border-radius:6px;
+      background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+      box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+      -webkit-appearance:none;
+    }
+    .stpad-volume-control input::-moz-range-track {
+      width:100%;
+      height:6px;
+      border:1px solid #29313a;
+      border-radius:999px;
+      background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+      box-shadow:inset 0 1px 3px #000b;
+    }
+    .stpad-volume-control input::-moz-range-thumb {
+      width:22px;
+      height:18px;
+      border:1px solid #738191;
+      border-radius:6px;
+      background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+      box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+    }
+    .stpad-volume-control output {color:#e8eef1;font:900 8px/1 var(--ft)}
+    .stpadkeys {
+      grid-column:1/-1;
+      grid-row:2;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-rows:repeat(4,minmax(0,1fr));
+      gap:5px;
+      height:100%;
+    }
+    .stpadkey {height:auto;min-height:0;font-size:14px}
+    .stpadkey::after {font-size:7px}
+    .stpadkey.selected,
+    .stpadkey.on,
+    .stpadkey.drop-target {
+      border-color:#75e1ff;
+      background:linear-gradient(145deg,#17536b,#102c3e);
+      box-shadow:inset 0 0 0 1px #75e1ff55,0 0 12px #75e1ff22;
+    }
+    .stpadstop {
+      width:30px;
+      height:28px;
+      flex:none;
+      box-sizing:border-box;
+      padding:0;
+      display:grid;
+      place-items:center;
+      border-color:#414849;
+      border-radius:10px;
+      background:linear-gradient(145deg,#25292a,#101213);
+      color:#d5dde0;
+      box-shadow:0 4px 8px #0009,inset 0 1px 0 #ffffff17;
+    }
+    .stpadstop::after {content:none}
+    .stpadstop svg {display:block;width:18px;height:18px}
+    .stchips {
+      grid-column:1/3;
+      grid-row:5;
+      align-self:stretch;
+      height:auto;
+      min-height:0;
+      min-width:0;
+      align-items:center;
+      justify-content:flex-start;
+      gap:14px;
+      padding:12px 14px;
+      background:radial-gradient(ellipse at 18% 0%,#26364b66,transparent 58%),linear-gradient(145deg,#101720,#090d13);
+      border-color:#29343e;
+      border-radius:10px;
+    }
+    .stchip {
+      flex:0 0 112px;
+      width:112px;
+      min-width:112px;
+      height:160px;
+      max-height:160px;
+      align-self:center;
+      padding:7px 8px 9px;
+      overflow:hidden;
+      border:2px solid color-mix(in srgb,var(--cc) 62%,#526072);
+      border-radius:14px !important;
+      background:radial-gradient(ellipse at 30% 0%,color-mix(in srgb,var(--cc) 23%,transparent),transparent 76%),linear-gradient(150deg,#303947,#171f2b 52%,#0c121d);
+      color:#f2f6ff;
+      box-shadow:inset 0 7px 0 var(--cc),inset 1px 0 0 #ffffff30,inset -3px -5px 0 #0009,0 8px 12px #000a;
+      text-align:left;
+      transition:border-color .15s,box-shadow .15s,transform .15s;
+    }
+    .stchip:hover:not(:disabled) {
+      transform:translateY(-2px);
+      border-color:var(--cc);
+      box-shadow:inset 0 4px 0 var(--cc),inset 1px 0 0 #ffffff38,inset -2px -4px 0 #0009,0 9px 14px #000b,0 0 12px color-mix(in srgb,var(--cc) 18%,transparent);
+    }
+    .stchip::before {
+      content:"";
+      display:block;
+      left:6px;
+      bottom:8px;
+      width:auto;
+      height:auto;
+      opacity:.8;
+      background:none;
+      color:color-mix(in srgb,var(--cc) 70%,#dce8f8);
+      font:800 5px/1 var(--ft);
+      letter-spacing:.35px;
+    }
+    .stchip-name {
+      position:absolute;
+      top:48px;
+      left:6px;
+      right:6px;
+      max-width:none;
+      padding:0;
+      overflow:hidden;
+      background:none;
+      color:#f2f6ff;
+      font:900 clamp(13px,1.15vw,17px)/1.05 var(--fd);
+      text-align:left;
+      text-overflow:ellipsis;
+      white-space:normal;
+      overflow-wrap:anywhere;
+    }
+    .stchip-type {
+      position:absolute;
+      top:8px;
+      left:6px;
+      right:28px;
+      overflow:hidden;
+      color:color-mix(in srgb,var(--cc) 82%,#eaf1fb);
+      font:800 7px/1 var(--ft);
+      letter-spacing:.4px;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      text-transform:uppercase;
+    }
+    .stchip-icon {
+      position:absolute;
+      top:24px;
+      left:6px;
+      display:grid;
+      width:24px;
+      height:24px;
+      place-items:center;
+      border:1px solid color-mix(in srgb,var(--cc) 42%,#344253);
+      border-radius:5px;
+      background:color-mix(in srgb,var(--cc) 15%,#101720);
+      color:var(--cc);
+    }
+    .stchip-icon svg {
+      display:block;
+      width:15px;
+      height:15px;
+    }
+    .stchip-knobs {
+      top:72px;
+      left:6px;
+      right:6px;
+      justify-content:flex-start;
+      gap:3px;
+    }
+    .stchip-knob {
+      width:16px;
+      height:16px;
+      background:radial-gradient(circle at 35% 28%,#4a5667,#111923 68%);
+      box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cc) 35%,#52637a),0 1px 2px #0009;
+    }
+    .stchip-knob::after {
+      left:5px;
+      top:2px;
+      width:2px;
+      height:4px;
+      background:var(--cc);
+    }
+    .stchip-led {
+      top:8px;
+      right:6px;
+      width:6px;
+      height:6px;
+      background:#263142;
+      box-shadow:none;
+    }
+    .stchip:not(.off) .stchip-led {
+      background:var(--cc);
+      box-shadow:0 0 8px color-mix(in srgb,var(--cc) 85%,transparent);
+    }
+    .stchip.off {
+      border-color:color-mix(in srgb,var(--cc) 30%,#303a4c);
+      background:radial-gradient(ellipse at 30% 0%,color-mix(in srgb,var(--cc) 8%,transparent),transparent 76%),linear-gradient(150deg,#202832,#10151b 72%);
+      box-shadow:inset 0 4px 0 color-mix(in srgb,var(--cc) 42%,#35404d),inset 1px 0 0 #ffffff18,inset -2px -4px 0 #0009,0 5px 9px #0009;
+    }
+    .stchip.off .stchip-led {
+      background:#263142;
+      box-shadow:none;
+    }
+    .stchip-switch {
+      display:block;
+      right:6px;
+      bottom:6px;
+      left:auto;
+      width:34px;
+      height:34px;
+      transform:none;
+      border:1px solid #8997a5;
+      background:radial-gradient(circle at 35% 25%,#f3f7fa,#a7b3bf 30%,#475361 58%,#10161e 72%);
+      box-shadow:inset 0 0 0 3px #344258,0 2px 4px #0009;
+    }
+    .stchip:active:not(:disabled) .stchip-switch {
+      transform:translateY(2px);
+      box-shadow:inset 0 0 0 3px #344258,0 1px 2px #0009;
+    }
+    .stchip-state {
+      top:10px;
+      right:16px;
+      bottom:auto;
+      left:auto;
+      color:#a9b8cb;
+      font:800 5px/1 var(--ft);
+      letter-spacing:.25px;
+    }
+    .stchip:not(.off) .stchip-state {
+      color:var(--cc);
+    }
+    @media(max-height:480px) {
+      .stchip-type,
+      .stchip-icon {display:none}
+      .stchip-name {top:8px}
+      .stchip-knobs {top:27px}
+    }
+    @media(max-height:600px) {
+      .stage.on {
+        gap:7px;
+        padding:7px;
+        grid-template-rows:auto 68px minmax(0,1fr) minmax(50px,10vh) minmax(78px,16vh);
+      }
+      .sthead {min-height:58px}
+      .stnav {height:68px}
+      .stbrand-stage .mark {width:40px;height:40px}
+      .stcurrent {min-height:68px;padding:4px 7px}
+      .stname {font-size:clamp(16px,3.8vh,22px)}
+      .stbanks {height:100%;grid-template-rows:repeat(3,minmax(30px,1fr));gap:5px}
+      .stbank {min-height:30px}
+      .ststage-slots .stslots {gap:5px}
+      .ststage-slots .stpreset {min-height:50px;padding:3px}
+      .stpreset-slot {top:38%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;font-size:36px;z-index:2}
+      .stchips {height:auto;padding:6px}
+      .stchip {min-width:66px;flex-basis:66px}
+      .stchip-name {top:8px;left:7px;right:20px;font-size:8px}
+      .stchip-knobs {top:29px;left:7px;right:7px;gap:3px}
+      .stchip-knob {width:11px;height:11px}
+      .stchip-knob::after {left:4px;top:2px;width:2px;height:4px}
+      .stchip-led {top:8px;right:7px;width:7px;height:7px}
+      .stchip-switch {right:7px;bottom:6px;width:24px;height:24px}
+      .stchip-state {top:8px;right:18px;font-size:6px}
+      .stchip::before {left:7px;bottom:7px;font-size:5px}
+      .stscene {gap:5px;padding:6px 8px 6px 48px;font-size:clamp(12px,1.4vw,16px)}
+      .stscene small {font-size:clamp(10px,1.1vw,13px)}
+      .stscene::after {width:34px;height:34px;left:8px;right:auto}
+      .stscene:active:not(:disabled)::after {top:calc(50% + 2px)}
+      .stscene::before {top:5px;right:6px}
+      .stpads {
+        height:auto;
+        max-height:100%;
+        grid-template-rows:16px minmax(0,1fr) 28px;
+        gap:3px;
+        padding:4px;
+      }
+      .stpadkeys {gap:3px}
+      .stpad-volume-control input {height:16px}
+      .stpadkey {height:auto;font-size:7px;line-height:1}
+      .stpadkey::after {font-size:4px}
+      .stpadstop {width:28px;height:28px}
+    }
+    @media(max-height:480px) {
+      .stage.on {
+        grid-template-rows:auto 64px minmax(0,1fr) minmax(44px,9vh) minmax(72px,16vh);
+      }
+      .stnav {height:64px}
+      .stcurrent {min-height:64px;padding:3px 6px;gap:1px 5px}
+      .stpreset-meta {font-size:7px}
+      .stpreset-status {font-size:7px}
+      .stname {font-size:clamp(14px,3.2vh,18px)}
+      .stpreset-bottom {font-size:7px}
+      .stbanks {height:100%;grid-template-rows:repeat(3,minmax(0,1fr))}
+      .stbank {min-height:0;font-size:10px}
+      .ststage-slots .stpreset {min-height:0;padding:2px;gap:1px}
+      .ststage-slots .stpreset-slot {top:38%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;font-size:34px}
+      .stscene {gap:3px;padding:4px 6px 4px 36px;font-size:11px}
+      .stscene small {font-size:9px}
+      .stscene::after {width:28px;height:28px;left:6px;right:auto}
+      .stscene::before {top:3px;right:4px}
+      .stchips {padding:4px}
+      .stchip {padding:0}
+      .stchip-name {top:6px;left:6px;right:18px}
+      .stchip-knobs {top:22px;left:6px;right:6px;gap:2px}
+      .stchip-knob {width:9px;height:9px}
+      .stchip-knob::after {left:3px;top:1px;width:2px;height:4px}
+      .stchip-led {top:6px;right:5px;width:6px;height:6px}
+      .stchip-switch {right:5px;bottom:5px;width:20px;height:20px}
+      .stchip-state {top:6px;right:14px;font-size:5px}
+      .stpads {
+        grid-template-rows:14px minmax(0,1fr) 26px;
+        gap:2px;
+        padding:3px;
+      }
+      .stpads-title {font-size:8px}
+      .stpads-status {font-size:6px}
+      .stpadkeys {gap:2px}
+      .stpadkey {font-size:8px}
+      .stpadkey::after {font-size:4px}
+      .stpad-volume-control input {height:14px}
+      .stpad-volume-control output {font-size:6px}
+      .stpadstop {width:24px;height:24px}
+    }
+    .stsection {display:none}
+    .stfs {grid-column:3;grid-row:2}
+  }
+  @media(max-width:599px){
+    .sthead {
+      border-radius:14px;
+    }
+  }
+  @media(max-width:760px){
+    .stpads {
+      position:relative;
+      inset:auto;
+    }
+    .stpadkeys {grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media(max-width:599px) and (orientation:portrait){
+    .stage.on {
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:56px 132px minmax(0,1fr);
+      gap:10px;
+      overflow:hidden;
+      padding:12px max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+      background:radial-gradient(ellipse at 50% 28%,#202426 0,#171a1b 65%,#111313 100%);
+    }
+    .sthead {
+      grid-column:1;
+      grid-row:1;
+      display:flex;
+      flex-wrap:nowrap;
+      justify-content:space-between;
+      min-height:0;
+      padding:8px;
+      border:1px solid #5b7390;
+      border-radius:10px;
+      background:linear-gradient(145deg,#29466b,#1a3455 58%,#102541);
+      box-shadow:inset 0 1px 1px #ffffff50,inset 0 -4px 6px #0009,0 4px 8px #0009;
+    }
+    .stbrand-stage {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      margin:0;
+    }
+    .stbrand-stage .mark {
+      display:grid;
+      place-items:center;
+      width:54px;
+      height:54px;
+      flex:none;
+      border-radius:18px;
+      color:#07101e;
+      background:linear-gradient(135deg,#6ce2ff,#7362ff);
+      box-shadow:0 0 22px #5acbff25;
+    }
+    .stbrand-stage .mark svg {width:30px;height:30px}
+    .stbrand-stage .wordmark {
+      color:#a2b0c6;
+      font:950 19px/1 var(--fd);
+      letter-spacing:-.3px;
+    }
+    .stbrand-stage .wordmark b {color:#75e1ff}
+    .stbrand-stage small {
+      display:block;
+      margin-top:5px;
+      color:#a2b0c6;
+      font:800 9px/1 var(--ft);
+      letter-spacing:2px;
+    }
+    .sthead .stnav-controls,
+    .sthead .stage-meters,
+    .sthead .stbpm,
+    #stMode,
+    #stTuner,
+    #stLock {display:none}
+    #stClose {
+      width:40px;
+      height:40px;
+      min-width:40px;
+      border-radius:11px;
+      background:#15191b;
+      border-color:#303638;
+    }
+    .stnav {
+      grid-column:1;
+      grid-row:2;
+      display:block;
+      min-width:0;
+      min-height:0;
+    }
+    .stcurrent {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      grid-template-areas:"meta status" "name name" "bottom bottom";
+      align-content:stretch;
+      justify-content:stretch;
+      gap:5px 8px;
+      width:100%;
+      height:100%;
+      min-height:132px;
+      padding:14px 16px;
+      border:1px solid #245166;
+      border-radius:12px !important;
+      background:linear-gradient(145deg,#102c39,#071923 75%);
+      box-shadow:0 7px 14px #0009,inset 0 1px 0 #75e1ff18;
+    }
+    .stpreset-meta {
+      grid-area:meta;
+      align-self:center;
+      color:#75e1ff;
+      font:900 11px/1.1 var(--ft);
+      letter-spacing:.8px;
+    }
+    .stpreset-status {
+      grid-area:status;
+      align-self:center;
+      color:#eaf1f5;
+      font:900 11px/1 var(--ft);
+    }
+    .stbadge {display:none}
+    .stname {
+      grid-area:name;
+      align-self:center;
+      max-width:100%;
+      color:#f2f6f7;
+      font:950 clamp(24px,8vw,32px)/1 var(--fd);
+      letter-spacing:-.5px;
+      text-shadow:0 2px 8px #0009;
+    }
+    .stpreset-bottom {
+      grid-area:bottom;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      color:#91bfd0;
+      font:800 10px/1.1 var(--ft);
+    }
+    .stpresets,
+    .stmaster,
+    .ststage-slots,
+    .stscenes,
+    .stsection,
+    .stchips,
+    .stfs {display:none !important}
+    .stpads {
+      grid-column:1;
+      grid-row:3;
+      position:relative;
+      inset:auto;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-rows:24px minmax(0,1fr) 36px;
+      align-items:stretch;
+      gap:8px 12px;
+      min-height:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+    }
+    .stpads-head {display:contents}
+    .stpads-title {
+      grid-column:1;
+      grid-row:1;
+      align-self:center;
+      color:#a9c5d4;
+      font-size:12px;
+      letter-spacing:1.6px;
+      text-align:left;
+    }
+    .stpads-status {
+      grid-column:2;
+      grid-row:1;
+      align-self:center;
+      margin:0;
+      color:#a2b0c6;
+      font:700 8px/1 var(--ft);
+      text-align:right;
+      white-space:nowrap;
+    }
+    .stpadkeys {
+      grid-column:1/-1;
+      grid-row:2;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-rows:repeat(4,minmax(0,1fr));
+      gap:8px;
+      min-height:0;
+    }
+    .stpadkey {
+      height:auto;
+      min-height:0;
+      gap:0;
+      border:1px solid #3a4042;
+      border-radius:8px;
+      background:linear-gradient(155deg,#25292a,#111314);
+      color:#e6e9ea;
+      font:900 13px/1 var(--fd);
+      box-shadow:inset 0 1px 0 #ffffff0c,0 3px 5px #0008;
+    }
+    .stpadkey::after {display:none}
+    .stpadkey.loaded {border-color:#526c72}
+    .stpadkey.selected,
+    .stpadkey.on,
+    .stpadkey.drop-target {
+      border-color:#75e1ff;
+      background:linear-gradient(145deg,#17536b,#102c3e);
+      box-shadow:inset 0 0 0 1px #75e1ff55,0 0 12px #75e1ff22;
+    }
+    .stpads-volume {
+      grid-column:1/-1;
+      grid-row:3;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:stretch;
+      gap:8px;
+      min-height:0;
+    }
+    .stpad-volume-control {
+      display:flex;
+      flex:1 1 auto;
+      min-width:0;
+      min-height:0;
+      flex-direction:row;
+      align-items:center;
+      justify-content:stretch;
+      gap:6px;
+    }
+    .stpad-volume-control input {
+      width:100%;
+      min-width:0;
+      height:20px;
+      margin:0;
+      appearance:none;
+      -webkit-appearance:none;
+      background:transparent;
+      writing-mode:horizontal-tb;
+      direction:ltr;
+      cursor:ew-resize;
+    }
+    .stpad-volume-control input::-webkit-slider-runnable-track {
+      width:100%;
+      height:6px;
+      border:1px solid #29313a;
+      border-radius:999px;
+      background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+      box-shadow:inset 0 1px 3px #000b;
+    }
+    .stpad-volume-control input::-webkit-slider-thumb {
+      width:22px;
+      height:18px;
+      margin-top:-6px;
+      border:1px solid #738191;
+      border-radius:6px;
+      background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+      box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+      -webkit-appearance:none;
+    }
+    .stpad-volume-control input::-moz-range-track {
+      width:100%;
+      height:6px;
+      border:1px solid #29313a;
+      border-radius:999px;
+      background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+      box-shadow:inset 0 1px 3px #000b;
+    }
+    .stpad-volume-control input::-moz-range-thumb {
+      width:22px;
+      height:18px;
+      border:1px solid #738191;
+      border-radius:6px;
+      background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+      box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+    }
+    .stpad-volume-control output {
+      color:#e8eef1;
+      font:900 10px/1 var(--ft);
+    }
+    .stpads-volume .stpadstop {
+      width:30px;
+      height:28px;
+      flex:none;
+      box-sizing:border-box;
+      padding:0;
+      display:grid;
+      place-items:center;
+    }
+    .stpadstop {
+      display:grid;
+      place-items:center;
+      width:80px;
+      height:80px;
+      flex:none;
+      padding:0;
+      border:1px solid #414849;
+      border-radius:12px;
+      background:linear-gradient(145deg,#25292a,#101213);
+      color:#d5dde0;
+      box-shadow:0 5px 10px #0009,inset 0 1px 0 #ffffff17;
+    }
+    .stpadstop::after {content:none}
+    .stpadstop svg {display:block;width:18px;height:18px}
+    .stpadstop:active {transform:translateY(2px);box-shadow:0 2px 5px #0009}
+  }
+
+  @media (min-width:761px) and (orientation:landscape) {
+    .stage.on {
+      --sbg:#203958;
+      --stile:#111a27;
+      --sedge:#526c8d;
+      border:3px solid #637b99;
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 13px 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+        radial-gradient(circle at calc(100% - 13px) 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+        radial-gradient(circle at 13px calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+        radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+        repeating-linear-gradient(90deg,#ffffff06 0 1px,#00000006 1px 3px),
+        linear-gradient(145deg,#293f5d,#192d47 52%,#101a2a);
+      box-shadow:inset 0 1px 2px #ffffff55,inset 0 0 0 5px #0d1624,0 14px 34px #000b;
+    }
+    .stage.on .sthead {
+      border:1px solid #344760;
+      border-radius:8px;
+      background:linear-gradient(180deg,#131d2e,#090e17);
+      box-shadow:0 3px 12px #0008;
+    }
+    .stage.on .stbrand-stage .wordmark {color:#e5edf8}
+    .stage.on .stbrand-stage .wordmark b {color:#83d8ff}
+    .stage.on .sthead .stbtn {
+      border-color:#405570;
+      border-radius:6px;
+      background:linear-gradient(180deg,#26374e,#121c2b);
+      box-shadow:inset 0 1px #ffffff1c,0 2px 4px #0005;
+    }
+    .stage.on .sthead .stbtn:hover,
+    .stage.on .sthead .stbtn:focus-visible {
+      border-color:#75e1ff;
+      background:linear-gradient(180deg,#304967,#182a40);
+      color:#eafaff;
+    }
+    .stage.on .sthead .stnav-controls .stbtn.on {
+      border-color:#75e1ff;
+      background:linear-gradient(180deg,#9cecff,#48bce3);
+      color:#07101e;
+      box-shadow:inset 0 1px #ffffffb3,0 3px 6px #0007;
+    }
+    .stage.on .stcurrent {
+      border:1px solid #607c99;
+      border-radius:9px;
+      background:linear-gradient(145deg,#06131d,#0b202b 48%,#08131d);
+      box-shadow:inset 0 0 0 2px #02070c,inset 0 0 18px #42c8ee18,0 4px 8px #0009;
+    }
+    .stage.on .stpreset-meta {color:#73dfff}
+    .stage.on .stpreset-status {color:#a7f2bd}
+    .stage.on .stname {color:#d8fff2;text-shadow:0 0 12px #63d7c433,0 2px 4px #000}
+    .stage.on .stbanks {
+      position:relative;
+      height:100%;
+      align-self:stretch;
+      grid-template-rows:repeat(3,minmax(0,1fr));
+      align-content:center;
+      padding:5px;
+      border:1px solid #657c98;
+      border-radius:9px;
+      background:linear-gradient(145deg,#0b1521,#111d2c 55%,#080d14);
+      box-shadow:inset 0 2px 7px #000c,0 3px 6px #0008;
+    }
+    .stage.on .stpresets {
+      grid-column:2;
+      grid-row:2/4;
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:minmax(0,1fr);
+    }
+    .stage.on .stmaster {
+      grid-column:3;
+      grid-row:2/6;
+    }
+    .stage.on .stbank {
+      border:1px solid #53667d;
+      border-radius:5px;
+      background:linear-gradient(180deg,#28374a,#111b29 55%,#080e16);
+      box-shadow:inset 0 1px #ffffff24,inset 0 -2px 2px #000b,0 2px 3px #0009;
+      color:#d5dfed;
+    }
+    .stage.on .stbank.on {
+      border-color:#9aeaff;
+      background:linear-gradient(180deg,#267b9b,#14506e 55%,#0a2b40);
+      color:#f1fcff;
+      box-shadow:inset 0 1px #ffffff65,0 0 10px #39bcf566,0 2px 3px #0009;
+    }
+    .stage.on .stmaster {
+      border-color:#77889c;
+      border-radius:9px;
+      background:
+        radial-gradient(circle at 7px 7px,#111 0 1.5px,#aab5c2 2px 3px,transparent 3.5px),
+        radial-gradient(circle at calc(100% - 7px) 7px,#111 0 1.5px,#aab5c2 2px 3px,transparent 3.5px),
+        linear-gradient(145deg,#131a22,#080b10 65%,#1c242c);
+      box-shadow:inset 0 1px 0 #ffffff55,inset 0 0 0 2px #000b,0 5px 9px #000a;
+    }
+    .stage.on .stmaster-treadle {
+      border-color:#758396;
+      border-radius:13px;
+      background:
+        linear-gradient(145deg,#343e4a 0%,#1a222d 42%,#080d14 100%);
+      box-shadow:inset 0 2px 3px #ffffff38,inset 0 -4px 5px #000d,0 8px 6px #000b;
+    }
+    .stage.on .stmaster-pedal.is-pressed .stmaster-treadle {
+      transform:translateY(3px) rotateX(calc(var(--stmaster-angle,0deg) + 4deg)) scaleY(.985);
+      box-shadow:inset 0 2px 3px #ffffff38,inset 0 -2px 3px #000e,0 2px 2px #000c;
+      transition-duration:80ms;
+    }
+    .stage.on .stmaster-pedal {
+      --stmaster-angle:6deg;
+    }
+    .stage.on .stmaster-pedal::before {
+      background:linear-gradient(145deg,#475361,#202a36 72%,#0b1118);
+    }
+    .stage.on .stmaster-treadle-pattern path {
+      stroke:#aab8c7;
+    }
+    .stage.on .stmaster-treadle-pattern .groove {
+      stroke:#485463;
+    }
+    .stage.on .stmaster-brand {color:#edf3fa}
+    .stage.on .stpreset,
+    .stage.on .stscene {
+      border-color:#617994;
+      background:linear-gradient(155deg,#243d5e,#122640 68%,#0b1728);
+      box-shadow:inset 0 1px 0 #ffffff21,inset 0 -3px 0 #0007,0 4px 7px #0008;
+    }
+    .stage.on .stpreset.on {
+      border-color:#8ce5ff;
+      background:linear-gradient(150deg,#2d7290,#15445f 60%,#0d293e);
+      box-shadow:inset 0 2px 0 #b5f2ff7a,0 0 12px #4dcaff55,0 4px 7px #0008;
+    }
+    .stage.on .stscene {
+      border-color:#72859c;
+      border-radius:8px;
+      background:linear-gradient(180deg,#30455f,#17263b 44%,#0d1726);
+      box-shadow:inset 0 1px 0 #ffffff30,inset 0 -3px 0 #0009,0 4px 8px #0009;
+    }
+    .stage.on .stscene.on {
+      border-color:#91e7ff;
+      background:linear-gradient(180deg,#27627e,#173d57 55%,#10253b);
+      box-shadow:inset 0 1px 0 #d9faff90,inset 0 -3px 0 #0009,0 0 12px #47c9ff55,0 4px 8px #0009;
+    }
+    .stage.on .stscene::after {
+      border-color:#d4dde7;
+      box-shadow:0 0 0 4px #101a27,0 0 0 6px #6d8299,inset 0 3px 6px #fff9,inset 0 -5px 8px #46546a,0 6px 9px #000b;
+    }
+    .stage.on .stpads {
+      border:1px solid #5b7390;
+      border-radius:9px;
+      background:linear-gradient(145deg,#29466b,#1a3455 58%,#102541);
+      box-shadow:inset 0 1px 1px #ffffff50,inset 0 -4px 6px #0009,0 4px 8px #0009;
+    }
+    .stage.on .stpadkey {
+      border-color:#617c9e;
+      border-radius:5px;
+      background:linear-gradient(145deg,#16263b,#0c1726 65%,#080f19);
+      box-shadow:inset 0 1px 0 #ffffff1f,inset 0 -2px 2px #000b,0 2px 3px #0008;
+    }
+    .stage.on .stpadkey.selected,
+    .stage.on .stpadkey.on,
+    .stage.on .stpadkey.drop-target {
+      border-color:#8deaff;
+      background:linear-gradient(145deg,#226783,#12405b 65%,#0b263e);
+      box-shadow:inset 0 1px 0 #d9faff77,0 0 9px #3acaff55,0 2px 3px #0008;
+    }
+    .stage.on .stpadstop {
+      border-color:#a55860;
+      border-radius:6px;
+      background:linear-gradient(145deg,#782e3e,#3b1725 58%,#1b111b);
+      box-shadow:inset 0 1px 0 #ffffff47,inset 0 -3px 3px #000a,0 3px 5px #0009;
+    }
+    .stage.on .stchips {
+      grid-column:1/3;
+      border-color:#667f9c;
+      border-radius:9px;
+      background:linear-gradient(155deg,#101923,#080d14 70%,#1a2838);
+      box-shadow:inset 0 2px 8px #000c,0 3px 6px #0009;
+    }
+    .stage.on .stbanks,
+    .stage.on .stchips {
+      border:0;
+      box-shadow:none;
+    }
+    .stage.on .stbanks {
+      background:transparent;
+    }
+    .stage.on .stbanks {padding:2px}
+    .stage.on .stchips {
+      background:
+        radial-gradient(circle at 1px 1px,#ffffff12 .8px,transparent 1.2px) 0 0/16px 16px,
+        repeating-linear-gradient(0deg,#ffffff04 0 1px,transparent 1px 4px),
+        linear-gradient(145deg,#111c2c,#0a121e);
+    }
+    .stage.on .stmaster {
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+    }
+    .stage.on .stchip {
+      z-index:1;
+      border-radius:8px !important;
+      box-shadow:inset 0 4px 0 var(--cc),inset 1px 0 0 #ffffff38,inset -2px -4px 0 #0009,0 5px 8px #000a;
+    }
+    .stage.on .stchip-link {
+      position:relative;
+      z-index:0;
+      display:block;
+      flex:0 0 28px;
+      width:28px;
+      height:28px;
+      align-self:center;
+      margin:0 -7px;
+      pointer-events:none;
+    }
+    .stage.on .stchip-link svg {
+      display:block;
+      width:100%;
+      height:100%;
+      overflow:visible;
+    }
+    .stage.on .stchip-link .cable-shadow {
+      fill:none;
+      stroke:#03070b;
+      stroke-width:8;
+      stroke-linecap:round;
+    }
+    .stage.on .stchip-link .cable {
+      fill:none;
+      stroke:#242c35;
+      stroke-width:5;
+      stroke-linecap:round;
+    }
+    .stage.on .stchip-link .cable-highlight {
+      fill:none;
+      stroke:#8996a3;
+      stroke-opacity:.75;
+      stroke-width:1;
+      stroke-linecap:round;
+    }
+    .stage.on .stchip-link .plug {
+      fill:#303b48;
+      stroke:#c1ccd5;
+      stroke-width:1.4;
+    }
+    .stage.on .stchip-link .plug-core {
+      fill:#0d141c;
+      stroke:#8593a1;
+      stroke-width:.8;
+    }
+    .stage.on .stchip:not(.off) .stchip-led {
+      background:#ff3434;
+      box-shadow:0 0 3px #ffb0a6,0 0 8px #ff2020,0 0 14px #f00b;
+    }
+    .stage.on .stchip-switch {
+      box-shadow:0 0 0 2px #101923,inset 0 0 0 2px #344258,0 2px 4px #000b;
+    }
+    .stage.on .stchip-dial {
+      position:absolute;
+      left:50%;
+      top:76px;
+      width:44px;
+      height:44px;
+      transform:translateX(-50%);
+      border-radius:50%;
+      padding:4px;
+      background:conic-gradient(from 225deg,var(--cc) 0deg,rgba(255,255,255,.55) 270deg,#344257 270deg);
+      box-shadow:0 5px 8px #0009;
+    }
+    .stage.on .stchip-dialcore {
+      position:relative;
+      display:block;
+      width:100%;
+      height:100%;
+      border:2px solid #3f4c61;
+      border-radius:50%;
+      background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);
+      box-shadow:inset 0 0 4px #000,0 3px 6px #0009;
+    }
+    .stage.on .stchip-dialcore i {
+      position:absolute;
+      left:calc(50% - 2px);
+      top:4px;
+      width:4px;
+      height:14px;
+      border-radius:3px;
+      background:#f3f8ff;
+      box-shadow:0 0 4px #0008;
+    }
+    .stage.on .stchip-name {
+      top:43px;
+      left:24px;
+      right:24px;
+      min-height:22px;
+      height:22px;
+      padding:4px 3px;
+      font:900 13px/1 var(--fd);
+      text-align:center;
+      background:#263b5a;
+      border:1px solid #52658a;
+      border-radius:3px;
+    }
+    .stage.on .stchip-icon,
+    .stage.on .stchip-state,
+    .stage.on .stchip-type {display:none}
+    .stage.on .stchip-switch {
+      display:block;
+      position:absolute;
+      left:50%;
+      right:auto;
+      bottom:7px;
+      width:32px;
+      height:32px;
+      transform:translateX(-50%);
+      border:1px solid #07101b;
+      border-radius:50%;
+      background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);
+      box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--cc),0 5px 8px #0008;
+    }
+    .stage.on .stchip-switch::before {
+      content:"";
+      position:absolute;
+      inset:5px;
+      border-radius:50%;
+      border:1px solid #697a8f;
+      background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%);
+      box-shadow:inset 0 2px 3px #fff8,inset 0 -3px 3px #536078;
+    }
+    .stage.on .stchip-knobs {top:19px;left:50%;right:auto;transform:translateX(-50%);justify-content:center;gap:6px}
+    .stage.on .stchip-knob {width:12px;height:12px}
+    .stage.on .stchip-led {top:8px;right:8px;width:7px;height:7px}
+    body.st-amoled .stage.on {
+      --sbg:#000;
+      --stile:#000;
+      --sedge:#26302e;
+      border-color:#394743;
+      background:
+        radial-gradient(circle at 13px 13px,#000 0 2px,#7b8985 2.5px 4px,#18211f 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at calc(100% - 13px) 13px,#000 0 2px,#7b8985 2.5px 4px,#18211f 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at 13px calc(100% - 13px),#000 0 2px,#7b8985 2.5px 4px,#18211f 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#000 0 2px,#7b8985 2.5px 4px,#18211f 4.5px 6px,transparent 6.5px),
+        #000;
+    }
+    body.st-amoled .stage.on .stcurrent,
+    body.st-amoled .stage.on .stbanks,
+    body.st-amoled .stage.on .stmaster,
+    body.st-amoled .stage.on .stpads,
+    body.st-amoled .stage.on .stchips {
+      border-color:#26302e;
+      background:#000;
+    }
+    body.st-amoled .stage.on .stbank,
+    body.st-amoled .stage.on .stpreset,
+    body.st-amoled .stage.on .stscene,
+    body.st-amoled .stage.on .stpadkey {
+      border-color:#26302e;
+      background:#000;
+      color:#e2ebe8;
+    }
+    body.st-amoled .stage.on .stbank.on,
+    body.st-amoled .stage.on .stpreset.on,
+    body.st-amoled .stage.on .stscene.on,
+    body.st-amoled .stage.on .stpadkey.selected,
+    body.st-amoled .stage.on .stpadkey.on {
+      border-color:#b9f4e4;
+      background:#000;
+      color:#b9f4e4;
+      box-shadow:inset 0 0 0 2px #b9f4e466,0 0 12px #b9f4e433;
+    }
+    body.st-mono .stage.on {
+      --sbg:#000;
+      --stile:#000;
+      --sedge:#555;
+      border-color:#888;
+      background:
+        radial-gradient(circle at 13px 13px,#000 0 2px,#bbb 2.5px 4px,#333 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at calc(100% - 13px) 13px,#000 0 2px,#bbb 2.5px 4px,#333 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at 13px calc(100% - 13px),#000 0 2px,#bbb 2.5px 4px,#333 4.5px 6px,transparent 6.5px),
+        radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#000 0 2px,#bbb 2.5px 4px,#333 4.5px 6px,transparent 6.5px),
+        #000;
+    }
+    body.st-mono .stage.on .stcurrent,
+    body.st-mono .stage.on .stbanks,
+    body.st-mono .stage.on .stmaster,
+    body.st-mono .stage.on .stpads,
+    body.st-mono .stage.on .stchips {
+      border-color:#444;
+      background:#000;
+    }
+    body.st-mono .stage.on .stbank,
+    body.st-mono .stage.on .stpreset,
+    body.st-mono .stage.on .stscene,
+    body.st-mono .stage.on .stpadkey {
+      border-color:#555;
+      background:#000;
+      color:#ddd;
+    }
+    body.st-mono .stage.on .stbank.on,
+    body.st-mono .stage.on .stpreset.on,
+    body.st-mono .stage.on .stscene.on,
+    body.st-mono .stage.on .stpadkey.selected,
+    body.st-mono .stage.on .stpadkey.on {
+      border-color:#fff;
+      background:#000;
+      color:#fff;
+      box-shadow:inset 0 0 0 2px #fff8,0 0 12px #fff4;
+    }
+  }
+</style>
+<style id="stagetone-edit-theme">
+body:not(.staging) {
+  --bg:#080c14;
+  --bg2:#101725;
+  --panel:#111a27;
+  --panel2:#192538;
+  --line:#2e4058;
+  --line2:#465d78;
+  --text:#edf4fc;
+  --dim:#a7b8cc;
+  --faint:#8da2b9;
+  --gold:#e4b85e;
+  --gold2:#f6d486;
+  --rig:#75e1ff;
+  --field:#355d85;
+  --alpha:#75e1ff;
+  --shadow:0 12px 30px #0009;
+  --wire:#7288a2;
+  background:
+    radial-gradient(ellipse at 12% -10%,#1a2b47 0,transparent 48%),
+    radial-gradient(ellipse at 96% 100%,#19182d 0,transparent 38%),
+    #080c14 !important;
+}
+body:not(.staging) .top {
+  background:linear-gradient(180deg,#131d2e,#090e17) !important;
+  border-bottom-color:#344760;
+  box-shadow:0 3px 12px #0008;
+}
+body:not(.staging) .top .brand {
+  align-items:center;
+  gap:10px;
+  letter-spacing:0;
+}
+body:not(.staging) .top .brand .mark {
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  flex:none;
+  border-radius:9px;
+  color:#07101e;
+  background:linear-gradient(135deg,#6ce2ff,#7362ff);
+  box-shadow:0 0 22px #5acbff25;
+}
+body:not(.staging) .top .brand .mark svg {width:22px;height:22px}
+body:not(.staging) .top .brand .wordmark {
+  display:block;
+  color:#e5edf8;
+  font:950 16px/1 var(--fd);
+  letter-spacing:-.3px;
+}
+body:not(.staging) .top .brand .wordmark b {
+  color:#83d8ff;
+  font:inherit;
+}
+body:not(.staging) .top .brand .wordmark small {
+  display:block;
+  margin-top:4px;
+  color:#a2b0c6;
+  font:800 7px/1 var(--ft);
+  letter-spacing:1.5px;
+  white-space:nowrap;
+}
+body:not(.staging) .brand b i {color:var(--rig)}
+body:not(.staging) .brand .alpha {
+  color:#07101e;
+  background:linear-gradient(145deg,#9cecff,#4db9df);
+  box-shadow:inset 0 1px #ffffff99,0 2px 4px #0007;
+}
+body:not(.staging) .btn {
+  border:1px solid #405570;
+  background:linear-gradient(180deg,#26374e,#121c2b);
+  box-shadow:inset 0 1px #ffffff1c,0 2px 4px #0005;
+}
+body:not(.staging) .btn:hover:not(:disabled) {
+  border-color:#75e1ff;
+  background:linear-gradient(180deg,#304967,#182a40);
+  color:#eafaff;
+}
+body:not(.staging) .btn.primary {
+  border:1px solid #75e1ff;
+  color:#07101e;
+  background:linear-gradient(180deg,#9cecff,#48bce3);
+  box-shadow:inset 0 1px #ffffffb3,0 3px 6px #0007;
+}
+body:not(.staging) .btn.primary:hover:not(:disabled) {
+  color:#07101e;
+  background:linear-gradient(180deg,#b2f1ff,#62cbed);
+}
+body:not(.staging) .demobar {
+  border-color:#52708f;
+  background:linear-gradient(145deg,#14243a,#0c1523);
+  color:#d9e8f7;
+}
+body:not(.staging) .dmtag {color:#07101e;background:#75e1ff}
+body:not(.staging) .demobar .dmq {border-color:#59718d;color:#d9e8f7}
+@media (min-width:761px) and (orientation:landscape) {
+  body:not(.staging) .board {
+    position:relative;
+    border:3px solid #637b99 !important;
+    border-radius:16px !important;
+    background:
+      radial-gradient(circle at 13px 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+      radial-gradient(circle at calc(100% - 13px) 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+      radial-gradient(circle at 13px calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+      radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+      repeating-linear-gradient(90deg,#ffffff06 0 1px,#00000006 1px 3px),
+      linear-gradient(145deg,#293f5d,#192d47 52%,#101a2a) !important;
+    box-shadow:inset 0 1px 2px #ffffff55,inset 0 0 0 5px #0d1624,0 14px 34px #000b !important;
+  }
+  body:not(.staging) .chain {
+    padding:24px 16px;
+    border:1px solid #435b78;
+    border-radius:11px !important;
+    background:
+      radial-gradient(circle at 1px 1px,#ffffff16 .8px,transparent 1.2px) 0 0/16px 16px,
+      repeating-linear-gradient(0deg,#ffffff04 0 1px,transparent 1px 4px),
+      linear-gradient(145deg,#111c2c,#0a121e);
+    box-shadow:inset 0 1px #ffffff20,inset 0 -5px 10px #0009,0 2px 4px #0006 !important;
+  }
+  body:not(.staging) .chain .wires .m {
+    stroke:#8398b1;
+    stroke-width:3.5;
+    filter:drop-shadow(0 2px 1px #000b);
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) {
+    overflow:hidden;
+    border:1px solid color-mix(in srgb,var(--c) 60%,#c5d7e9) !important;
+    border-radius:10px !important;
+    background:
+      linear-gradient(180deg,color-mix(in srgb,var(--c) 84%,#e9f4ff 16%) 0 4px,transparent 4px),
+      radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--c) 24%,transparent),transparent 78%),
+      linear-gradient(150deg,#2b3d55,#18263a 55%,#0c1421) !important;
+    box-shadow:inset 0 4px 0 color-mix(in srgb,var(--c) 82%,#eaf5ff),inset 1px 0 #ffffff38,inset -2px -4px 0 #000a,
+      0 5px 0 #050a12,0 14px 22px #0009 !important;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd).off {
+    background:
+      linear-gradient(180deg,color-mix(in srgb,var(--c) 42%,#415064) 0 4px,transparent 4px),
+      linear-gradient(150deg,#1c2838,#111b29 55%,#0a111c) !important;
+    box-shadow:inset 0 4px 0 color-mix(in srgb,var(--c) 38%,#58677a),inset 0 1px #ffffff12,inset 0 -4px #0009,
+      0 5px 0 #050a12,0 14px 22px #0009 !important;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .nm {
+    border:1px solid color-mix(in srgb,var(--c) 42%,#71849b);
+    border-radius:4px !important;
+    background:linear-gradient(180deg,#0c1725e8,#07101be8);
+    color:#edf5ff !important;
+    text-shadow:0 1px 2px #000;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .mk {
+    border:1px solid #9aabba;
+    background:radial-gradient(circle at 35% 28%,#73869a,#29384a 48%,#101721 78%);
+    box-shadow:inset 0 1px 2px #ffffff75,inset 0 -2px 3px #000c,0 2px 3px #0009;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .mk::after {
+    background:#e9f5ff;
+    box-shadow:0 0 2px #fff;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .led {
+    box-shadow:0 0 0 2px #101a28,0 0 9px #ff4b3e !important;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd).off .led {
+    box-shadow:0 0 0 2px #101a28 !important;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .fsb {
+    border:1px solid #c5d1dc;
+    background:radial-gradient(circle at 35% 28%,#ffffff,#bbc8d5 44%,#59687b 78%,#273345) !important;
+    box-shadow:inset 0 0 0 4px #7f91a4,inset 0 2px 3px #ffffffaa,0 3px 0 #060b12,0 5px 7px #0009 !important;
+  }
+  body:not(.staging) .blk:not(.cab):not(.ahd) .fsb:active {
+    transform:translateY(2px);
+    box-shadow:inset 0 0 0 4px #7f91a4,inset 0 2px 3px #ffffffaa,0 1px 0 #060b12 !important;
+  }
+  body:not(.staging) .blk.sel,
+  body:not(.staging) .amp.sel {
+    outline:2px solid #75e1ff !important;
+    outline-offset:4px;
+    filter:drop-shadow(0 0 9px #49c9fa66);
+  }
+  body:not(.staging) .jack div {
+    border-color:#6f849d !important;
+    background:radial-gradient(circle at 35% 30%,#bfcbd8,#596a7e 55%,#131c29 78%) !important;
+    box-shadow:inset 0 2px 3px #ffffff70,0 2px 4px #000a !important;
+  }
+  body:not(.staging) .board .perf > button:not(.stsw) {
+    border:1px solid #4d6581;
+    border-radius:7px !important;
+    background:linear-gradient(180deg,#2c405b,#111b2b);
+    box-shadow:inset 0 1px #ffffff28,0 3px 6px #0008;
+    color:#dcecff;
+  }
+  body:not(.staging) .board .perf > button:not(.stsw):hover {
+    border-color:#75e1ff;
+    color:#f1fbff;
+  }
+  body:not(.staging) .board .perf .tap {
+    border-color:#e4b85e;
+    background:linear-gradient(180deg,#f6d486,#b98935);
+    color:#1b1720;
+  }
+  body:not(.staging) .board .perf .stageBtn {
+    border-color:#75e1ff;
+    background:linear-gradient(180deg,#9cecff,#48bce3);
+    color:#07101e;
+    box-shadow:inset 0 1px #ffffffaa,0 3px 6px #0008;
+  }
+}
+@media (max-width:760px) {
+  body:not(.staging) .top .brand .mark {
+    width:54px;
+    height:54px;
+    border-radius:18px;
+  }
+  body:not(.staging) .top .brand .mark svg {width:30px;height:30px}
+  body:not(.staging) .top .brand .wordmark {font-size:19px}
+  body:not(.staging) .top .brand .wordmark small {
+    margin-top:5px;
+    font-size:9px;
+    letter-spacing:2px;
+  }
+}
+body:not(.staging) .top .brand .wordmark .creditline,
+body.staging .stbrand-stage .wordmark .creditline {
+  display:block;
+  margin-top:3px;
+  color:#8295af;
+  font:700 6px/1.1 var(--ft);
+  letter-spacing:.45px;
+  white-space:nowrap;
+}
+</style>
 </head>
 <body>
 <!-- alfa 10: la app de Android, la primera vez: elegir el idioma (LANG_ASK). Los nombres van cada uno en su idioma: no se traducen -->
 <div class="langpick" id="langPick" role="dialog" aria-label="Language / Idioma" hidden><div class="lpbox"><h2>Language / Idioma</h2>
   <button type="button" class="btn primary" data-lang="en" lang="en">English</button><button type="button" class="btn primary" data-lang="es" lang="es">Español</button></div></div>
 <div class="top" role="banner"><h1 class="sr-only">UltraRig control</h1>
-  <div class="brand"><b>Ultra<i>Rig</i></b><span class="rel"><span class="alpha">Alpha</span><span class="relno" id="relNo" data-noi18n></span></span></div>
+  <div class="brand stbrand-edit" aria-label="StageTone">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
+    <span class="wordmark">Stage<b>Tone</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+  </div>
   <div class="grow"></div>
   <span id="meterHome" hidden></span><div class="meters" id="meters" title="Levels. Click to set gain" tabindex="0">
     <div class="meter"><div class="lbl"><span>IN</span><span id="inDb">–</span></div><div class="bar"><i id="inBar"></i></div></div><span class="clip" id="inClip" title="Input clipping"></span>
@@ -2692,7 +5077,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <button class="fmchip" id="fmChip" type="button" hidden data-noi18n title="Click to switch Preset / Live"></button>
     <div class="snaps" id="snaps" role="group" aria-label="Scenes: each preset has 4 (the same blocks, with their own on/off and knob settings)"></div>
     <button class="btn mini ico" id="snapSave" title="Save scene" aria-label="Save scene"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5V4Zm3 0v5h7V4M8 20v-6h8v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
-    <button class="btn mainlive" id="mainLive" type="button" title="Stage view">Live</button>
   </div>
   <div class="board">
     <div class="chain" id="chain"></div>
@@ -2704,7 +5088,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <button class="tap" id="tap" title="Tap to the beat (the spacebar works too)">TAP</button>
       <button class="tunerBtn" id="tunerBtn" title="Tuner (T key)">TUNER</button>
       <button class="fswBtn" id="fswBtn" title="Footswitches and lights"><span class="fswdots" id="fswDots"><i></i><i></i><i></i><i></i></span>FOOTSWITCHES</button>
-      <button class="stageBtn" id="stageBtn" title="Stage view"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 14h2M11 14h2M15 14h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tx">STAGE</span></button>
+      <button class="stageBtn" id="stageBtn" title="Live view"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 14h2M11 14h2M15 14h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tx">Live</span></button>
     </div>
     <div class="savebar" id="saveBar" role="status" aria-live="polite" hidden><span class="sbdot" aria-hidden="true"></span><span class="sbt" id="saveTxt"></span><button class="btn mini" id="saveDiscard">Discard</button><button class="btn primary mini" id="saveGo">Save…</button></div>
   </div>
@@ -2818,25 +5202,84 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <button class="btn" id="tuClose">Close (Esc)</button>
   </div>
 </div></div>
-<div class="stage" id="stage" role="dialog" aria-label="Stage view" aria-hidden="true">
+<div class="stage" id="stage" role="dialog" aria-label="Live view" aria-hidden="true">
   <div class="sthead">
-    <div class="stnav-controls"><button class="stbtn" id="stEdit" type="button">Edit</button>
-    <button class="stbtn on" id="stLiveTab" type="button" aria-pressed="true">Live</button></div>
+    <div class="stbrand-stage" aria-label="StageTone">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
+      <span class="wordmark">Stage<b>Tone</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+    </div>
     <div class="stage-meters" id="stageMeters"></div>
     <span class="grow"></span>
     <span class="stbpm" title="Tempo"><i id="stBeat"></i><b id="stBpm">120</b><small>BPM</small></span>
     <button class="stbtn" id="stMode" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg><span class="tx" id="stModeTx">Color</span></button>
     <button class="stbtn" id="stTuner" type="button" aria-label="Tuner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17a8 8 0 1 1 16 0M12 17l4-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tx">Tuner</span></button>
     <button class="stbtn" id="stLock" type="button" aria-label="Lock the screen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path id="stLockPath" d="M8 11V8a4 4 0 0 1 7.5-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tx" id="stLockTx" hidden>Locked</span><i class="hold" id="stHold"></i></button>
-    <button class="stbtn ico" id="stClose" type="button" aria-label="Close the stage view (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="stnav-controls"><button class="stbtn" id="stEdit" type="button">Edit</button>
+    <button class="stbtn on" id="stLiveTab" type="button" aria-pressed="true">Live</button></div>
   </div>
   <div class="stnav">
-    <div class="stcurrent"><span class="stbadge" id="stBadge">–</span><span class="stname" id="stName">No preset</span></div>
+    <div class="stcurrent">
+      <span class="stpreset-meta" id="stPresetMeta">– · PRESET 1</span>
+      <span class="stpreset-status" id="stPresetStatus">ACTIVE</span>
+      <span class="stbadge" id="stBadge">–</span>
+      <span class="stname" id="stName">No preset</span>
+      <span class="stpreset-bottom"><span id="stPresetSlot">PRESET –</span><span>Selected patch</span></span>
+    </div>
   </div>
   <div class="stsection" aria-hidden="true">Presets</div>
-  <div class="stpresets" id="stPresets" role="group" aria-label="Preset banks 1A through 8D"></div>
+  <div class="stpresets" id="stPresets">
+    <div class="stbanks" id="stBanks" role="group" aria-label="Presets"></div>
+  </div>
+  <aside class="stmaster" aria-label="Master output gain for the pedal and continuous pad audio">
+    <button class="stmaster-mute" id="stMasterMute" type="button" aria-pressed="false" aria-label="Set pedal OUTPUT to minimum and mute continuous pad audio" title="The pedal OUTPUT control bottoms out at -30 dB; continuous pad audio is fully muted.">MUTE</button>
+    <button class="stmaster-focus" id="stMasterFocus" type="button" aria-label="Focus master volume slider">VOLUME</button>
+    <h2 class="stmaster-title">MASTER</h2>
+    <label class="stmaster-pedal" for="stMasterVolume">
+      <span class="stmaster-treadle" aria-hidden="true">
+        <svg class="stmaster-treadle-pattern" viewBox="0 0 100 300" preserveAspectRatio="none" focusable="false">
+          <path class="groove" d="M12 18H88V68L55 98 88 128V282H12V226L45 192 12 158V88L42 114 70 88 42 60 12 88M17 22H83V66L50 98 83 130V278H17V228L40 192 17 156V94L42 118 75 88 42 54 17 82"/>
+          <path d="M22 30H78V62L45 96 78 132V270H22V222L53 190 22 162V104L42 124 64 102 42 76 22 96M22 146L45 169 68 146M22 208L45 184 68 208M32 263V226L52 204 68 220V263"/>
+        </svg>
+        <span class="stmaster-brand">STAGETONE</span><span class="stmaster-heel">HEEL ↔ TOE</span>
+      </span>
+      <input id="stMasterVolume" type="range" min="0" max="100" value="100" aria-label="Pedal output gain from minus 30 to plus 12 decibels">
+    </label>
+    <output class="stmaster-readout" id="stMasterValue" for="stMasterVolume">OUT · +12 dB</output>
+  </aside>
+  <div class="ststage-slots" id="stStageSlots"></div>
   <div class="stsection" aria-hidden="true">Scenes</div>
   <div class="stscenes" id="stScenes" role="group" aria-label="Scenes"></div>
+  <div class="stpads" role="group" aria-label="Continuous pad">
+    <div class="stpads-head">
+      <span class="stpads-title">Continuous Pad · Warm</span>
+      <span class="stpads-status" id="stPadsStatus">Pads stopped</span>
+    </div>
+    <input id="stPadFile" type="file" accept=".mp3,audio/mpeg" hidden>
+      <div class="stpadkeys" id="stPadKeys">
+        <button type="button" class="stpadkey selected" data-note="C" aria-label="C pad. Click to import or play; drop an MP3 to assign">C</button>
+        <button type="button" class="stpadkey" data-note="C#" aria-label="C sharp pad. Click to import or play; drop an MP3 to assign">C#</button>
+        <button type="button" class="stpadkey" data-note="D" aria-label="D pad. Click to import or play; drop an MP3 to assign">D</button>
+        <button type="button" class="stpadkey" data-note="D#" aria-label="D sharp pad. Click to import or play; drop an MP3 to assign">D#</button>
+        <button type="button" class="stpadkey" data-note="E" aria-label="E pad. Click to import or play; drop an MP3 to assign">E</button>
+        <button type="button" class="stpadkey" data-note="F" aria-label="F pad. Click to import or play; drop an MP3 to assign">F</button>
+        <button type="button" class="stpadkey" data-note="F#" aria-label="F sharp pad. Click to import or play; drop an MP3 to assign">F#</button>
+        <button type="button" class="stpadkey" data-note="G" aria-label="G pad. Click to import or play; drop an MP3 to assign">G</button>
+        <button type="button" class="stpadkey" data-note="G#" aria-label="G sharp pad. Click to import or play; drop an MP3 to assign">G#</button>
+        <button type="button" class="stpadkey" data-note="A" aria-label="A pad. Click to import or play; drop an MP3 to assign">A</button>
+        <button type="button" class="stpadkey" data-note="A#" aria-label="A sharp pad. Click to import or play; drop an MP3 to assign">A#</button>
+        <button type="button" class="stpadkey" data-note="B" aria-label="B pad. Click to import or play; drop an MP3 to assign">B</button>
+      </div>
+    <div class="stpads-volume">
+      <label class="stpad-volume-control" for="stPadVolume">
+        <input id="stPadVolume" type="range" min="0" max="100" value="27" aria-label="Continuous pad volume">
+        <output id="stPadVolumeValue" for="stPadVolume">27%</output>
+      </label>
+      <button type="button" class="stpadstop" id="stPadStop" aria-label="Stop continuous pad">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+        <span class="sr-only">STOP</span>
+      </button>
+    </div>
+  </div>
   <div class="stfs" id="stFs" hidden></div>
   <div class="stsection" aria-hidden="true">Effects</div>
   <div class="stchips" id="stChips" role="group" aria-label="Effects"></div>
@@ -3140,10 +5583,12 @@ const I18N_ES = {
   "input": "entrada",
   "Mute output": "Silenciar la salida",
   "Stage view": "Escenario",
+  "Live view": "Vista en vivo",
   "Tempo": "Tempo",
   "Lock the screen": "Bloquear la pantalla",
   "Locked": "Bloqueada",
   "Close the stage view (Esc)": "Cerrar el escenario (Esc)",
+  "Close the live view (Esc)": "Cerrar la vista en vivo (Esc)",
   "Screen locked. Hold the lock to unlock": "Pantalla bloqueada. Mantené el candado para desbloquear",
   "The stage view comes back as soon as the pedal reconnects.": "El escenario vuelve apenas el pedal se reconecta.",
   "Footswitches and lights": "Botones y luces",
@@ -3549,6 +5994,9 @@ const I18N_ES = {
   "Save": "Guardar",
   "This pedal firmware can't name scenes: update UltraRig": "El firmware de este pedal no puede nombrar escenas: actualizá UltraRig",
   "Rename preset {slot}": "Renombrar el preset {slot}",
+  "Rename bank {n}": "Renombrar el banco {n}",
+  "Rename bank (double-click or F2)": "Renombrar banco (doble clic o F2)",
+  "Couldn't save the bank title on this device.": "No se pudo guardar el nombre del banco en este dispositivo.",
   "Rename scene {n}": "Renombrar la escena {n}",
   "Update UltraRig on the pedal to rename presets.": "Actualizá UltraRig en el pedal para renombrar presets.",
   "Click: load · Double-click: rename": "Clic: cargar · Doble clic: renombrar",
@@ -4522,10 +6970,19 @@ function i18nWatch(d) {
 if (I18N[LANG]) { try { document.documentElement.lang = LANG; document.title = I18N[LANG]["UltraRig for Tank-G and Tank-B"] || document.title; } catch (e) { /* DOM falso */ } i18nApply(document.body); i18nWatch(I18N[LANG]); }
 /* la primera vez en la app (LANG_ASK): la pantalla de elegir idioma tapa todo; elegir guarda y recarga (o sigue, si eligió el que ya se ve) */
 if (LANG_ASK) { const lp = document.getElementById("langPick"); if (lp) { lp.hidden = false; lp.querySelectorAll("[data-lang]").forEach(b => { b.onclick = () => { setLang(b.dataset.lang); lp.hidden = true; }; }); } }
-/* Standalone static page: keep diagnostics in memory instead of sending them to the host. */
+/* ============================================================ registro (Log)
+ * Eventos de la web y del pedal -> POST /log (scripts/tankg_web.py los agrega a logs/AAAA-MM-DD.jsonl). Sin ese servidor
+ * queda solo un anillo en memoria, que baja el botón "Download session log" (y lee "Copy diagnostics"). Nunca debe romper la página.
+ * Modo público (la página servida como estática: GitHub Pages, `python -m http.server`, file://): el primer POST contesta con un
+ * HTTP que no es 500 (http.server: 501; GitHub Pages: 405; otro: 404) -> okSrv = false y no se vuelve a intentar (un solo aviso del
+ * navegador en la consola, en vez de uno cada 30 s). Con file:// ni se intenta. Un error de red (ni respuesta) se reintenta con
+ * espera creciente (30 s, 60 s, ...; tope 5 min) y, si el servidor nunca contestó, se abandona al 3.er fallo; si ya había contestado
+ * (tankg_web.py se reinició) sigue probando: el desarrollo no cambia. ok() dice true/false/null (sin saber todavía); probe() se
+ * resuelve con lo mismo cuando terminó el primer intento (ctl.json espera eso antes de preguntar: ver ctlPoll / readCtl). */
 const Log = (() => {
   const sid = Math.random().toString(36).slice(2, 8), tw0 = Date.now() - performance.now(), RING = 5000, QUIET = /^(LVL|FXS|TUNE|EVT|LDB|IRB)\b/;
-  let buf = [], ring = [], okSrv = false, nextTry = 0, fails = 0, sending = false, last = null, st = null, lastSk = null, lastSkT = 0;
+  let buf = [], ring = [], okSrv = null, nextTry = 0, fails = 0, sending = false, last = null, st = null, lastSk = null, lastSkT = 0;
+  if (typeof location !== "undefined" && location.protocol === "file:") okSrv = false;   /* abierta como archivo: no hay a quién mandar */
   let probeRes = null;
   const probeP = new Promise(r => { probeRes = r; });
   const probeDone = () => { if (probeRes) { probeRes(okSrv); probeRes = null; } };
@@ -4535,7 +6992,7 @@ const Log = (() => {
     try {
       const s = JSON.stringify({ ...data, t: new Date(wall).toISOString(), ms: Math.round(wall - tw0), sid, kind });
       ring.push(s); if (ring.length > RING + 500) ring.splice(0, 500);
-      if (okSrv !== false) { buf.push(s); if (buf.length > RING) buf.splice(0, buf.length - RING); }
+      buf.push(s); if (buf.length > RING) buf.splice(0, buf.length - RING);
     } catch (e) {}
   }
   const ev = (kind, data) => evAt(Date.now(), kind, data);
@@ -5134,7 +7591,6 @@ async function bleAuthMac(subtle, keyHex, nonceHex) {
   return Array.from(sig.subarray(0, 16), b => b.toString(16).padStart(2, "0")).join("");
 }
 /*BLEPAIR-END*/
-const requestWebPedal = () => navigator.bluetooth.requestDevice({ filters: [{ namePrefix: "UltraRig" }, { services: [NUS.svc] }], optionalServices: [NUS.svc] });
 const capBle = () => APP && window.Capacitor.Plugins ? window.Capacitor.Plugins.BluetoothLe || null : null;
 const hex2u8 = h => { if (h instanceof DataView) return new Uint8Array(h.buffer, h.byteOffset, h.byteLength); const s = String(h || "").replace(/[^0-9a-f]/gi, ""), u = new Uint8Array(s.length >> 1); for (let i = 0; i < u.length; i++) u[i] = parseInt(s.substr(i * 2, 2), 16); return u; };
 const u82hex = u => Array.from(u, b => b.toString(16).padStart(2, "0")).join("");
@@ -5201,7 +7657,7 @@ const BleTransport = {
       return;
     }
     /* issue #50 (Mac): con solo el filtro por servicio la lista de Chrome en macOS salía vacía (como la del Samsung en la app): también por nombre */
-    const d = known && known.gatt ? known : await requestWebPedal();
+    const d = known && known.gatt ? known : await navigator.bluetooth.requestDevice({ filters: [{ namePrefix: "UltraRig" }, { services: [NUS.svc] }], optionalServices: [NUS.svc] });
     d.addEventListener("gattserverdisconnected", this._gone = () => this.lost());
     /* issue #50: en macOS gatt.connect() podía no volver nunca (el enlace arriba, sin un byte de ATT) y el pedal quedaba ocupado hasta cerrar el navegador.
      * Tope de 15 s por paso; al vencer, el catch de abajo corta (gatt.disconnect) y el pedal queda libre */
@@ -10913,10 +13369,28 @@ document.addEventListener("keydown", e => {
  * Bloqueo: un toque bloquea la pantalla (los toques no hacen nada, salvo un aviso); mantener el candado 1 s la desbloquea. Pantalla siempre prendida
  * mientras está abierta (Wake Lock, donde exista). Los cambios de snapshot, preset y tempo llegan por el empuje de LVL (LVLSUB) como en el resto de la página. */
 const ST_MODES = ["color", "amoled", "mono"], ST_LABEL = { color: "Color", amoled: "AMOLED", mono: "Mono" }, ST_KEY = "tankg.stage";
-const ST_HOLD_MS = 1000, ST_DOUBLE_MS = 300, ST_UNLOCK_MS = 1000;
+const ST_HOLD_MS = 1000, ST_DOUBLE_MS = 300, ST_UNLOCK_MS = 1000, ST_BANK_NAMES_KEY = "tankg.stage.bank-names";
 let stOpen = false, stLocked = false, stFull = false, stWake = null, stLastFs = null, stFsReady = false, stFsLoading = false, stSig = "", stUnlockT = 0, stToastT = 0, stUnlockedAt = 0;
 let stSwitching = false, stFxBusy = false, stPresetSig = "", stScenesSig = "", stBank = 0, stBankPreset = -2;
 const stGest = [{}, {}, {}, {}];
+function stBankNamesLoad() {
+  const names = Array(8).fill("");
+  try {
+    const saved = JSON.parse(localStorage.getItem(ST_BANK_NAMES_KEY) || "null");
+    if (Array.isArray(saved)) for (let i = 0; i < names.length; i++) if (typeof saved[i] === "string") names[i] = saved[i].trim().slice(0, 24);
+  } catch (e) { console.warn("Could not load StageTone bank titles; using defaults.", e); }
+  return names;
+}
+let stBankNames = stBankNamesLoad();
+function stBankRename(bank, name) {
+  const names = stBankNames.slice();
+  names[bank] = name;
+  try { localStorage.setItem(ST_BANK_NAMES_KEY, JSON.stringify(names)); }
+  catch (e) { toast("Couldn't save the bank title on this device.", "err"); return; }
+  stBankNames = names;
+  stPresetSig = "";
+  stRender();
+}
 let stMode = (() => { try { const v = localStorage.getItem(ST_KEY); return ST_MODES.includes(v) ? v : "color"; } catch (e) { return "color"; } })();
 const stHex = rgb => "#" + rgb.map(v => Math.max(0, Math.min(255, v | 0)).toString(16).padStart(2, "0")).join("");
 /* color de la tarjeta: el del anillo de LEDs de esa pedalera (el propio si lo tiene, si no el automático de su acción), llevado a brillo pleno */
@@ -10967,33 +13441,40 @@ function stActive(f) {
 }
 function stRender() {
   if (!stOpen) return;
-  if (!stFsReady && !stFsLoading && (S.connected || DEMO)) { stFsLoading = true; fsLoad().catch(() => {}).finally(() => { stFsLoading = false; }); }   /* el mapa de pedaleras de ESTE pedal (al abrir y al reconectar) */
   const st = $("stage"), tab = fsTab || fsDefault();
   st.classList.toggle("nopedal", !S.connected && !DEMO);
   if (!S.connected && !DEMO) { barSet($("inBar"), 0); barSet($("outBar"), 0); txtSet($("inDb"), "–"); txtSet($("outDb"), "–"); }
   { const fs = $("stFs"), np = !S.connected && !DEMO; if (fs) { if (np && fs.contains(document.activeElement) && $("stClose")) $("stClose").focus(); fs.inert = np; } }   /* 2026-10-28 (WCAG 2.4.11) */
   const cp = curPreset >= 0 ? plist.find(q => q[0] === curPreset) : null;
   $("stBadge").textContent = curPreset >= 0 ? `${Math.floor(curPreset / 4) + 1}${SLOT(curPreset % 4)}` : "–";
+  if ($("stPresetMeta")) {
+    const metaBank = curPreset >= 0 ? Math.floor(curPreset / 4) : stBank;
+    const metaName = stBankNames[metaBank] || `${T("Preset")} ${metaBank + 1}`;
+    $("stPresetMeta").textContent = `${String.fromCharCode(65 + metaBank)} ${metaName}`;
+  }
+  if ($("stPresetStatus")) $("stPresetStatus").textContent = cp ? "ACTIVE" : "INACTIVE";
+  if ($("stPresetSlot")) $("stPresetSlot").textContent = curPreset >= 0 ? `PRESET ${$("stBadge").textContent}` : "PRESET –";
   const nm = cp ? cp[1] : curPreset >= 0 ? "Empty slot" : "No preset", sn = S.snap >= 0 && S.snaps[S.snap] ? snapLabel(S.snap) : "";
-  const available = S.connected || DEMO, presets = $("stPresets");
+  const available = S.connected || DEMO, banksHost = $("stBanks"), slotsHost = $("stStageSlots");
   if (curPreset !== stBankPreset) {
     stBankPreset = curPreset;
     if (curPreset >= 0 && curPreset < 32) stBank = Math.floor(curPreset / 4);
   }
-  const presetSig = JSON.stringify([plist.map(p => [p[0], p[1]]), curPreset, stBank, available, stSwitching, LANG]);
+  const presetSig = JSON.stringify([plist.map(p => [p[0], p[1]]), stBankNames, curPreset, stBank, available, stSwitching, LANG]);
   if (presetSig !== stPresetSig) {
     stPresetSig = presetSig;
     const banks = Array.from({ length: 8 }, (_, bank) => {
-      const label = `${T("Preset")} ${bank + 1}`;
-      return `<button type="button" class="stbank${bank === stBank ? " on" : ""}" data-bank="${bank}" aria-pressed="${bank === stBank}"${stSwitching ? " disabled" : ""}>${esc(label)}</button>`;
+      const custom = stBankNames[bank], label = custom || `${T("Preset")} ${bank + 1}`;
+      return `<button type="button" class="stbank${bank === stBank ? " on" : ""}" data-bank="${bank}" title="${esc(T("Rename bank (double-click or F2)"))}" aria-label="${esc(label)}" aria-pressed="${bank === stBank}"${stSwitching ? " disabled" : ""}><span class="stbank-label"${custom ? " data-noi18n" : ""}>${esc(label)}</span></button>`;
     }).join("");
     const slots = Array.from({ length: 4 }, (_, letter) => {
       const index = stBank * 4 + letter, preset = plist.find(p => p[0] === index);
-      const slot = `${stBank + 1}${SLOT(letter)}`, name = preset ? String(preset[1] || "") : T("empty");
+      const slot = SLOT(letter), name = preset ? String(preset[1] || "") : T("empty");
       const active = !!preset && index === curPreset, label = `${slot} - ${name}`;
       return `<button type="button" class="stpreset${active ? " on" : ""}${preset ? "" : " empty"}"${preset ? ` data-preset="${index}"` : ""} title="${esc(label)}" aria-label="${esc(label)}" aria-pressed="${active}"${!preset || !available || stSwitching ? " disabled" : ""}><span class="stpreset-slot" data-noi18n>${slot}</span><span class="stpreset-name"${preset ? " data-noi18n" : ""}>${esc(name)}</span></button>`;
     }).join("");
-    presets.innerHTML = `<div class="stbanks" role="group" aria-label="${esc(T("Presets"))}">${banks}</div><div class="stslots" role="group" aria-label="${esc(T("Bank {n}", { n: stBank + 1 }))}">${slots}</div>`;
+    banksHost.innerHTML = banks + slots;
+    slotsHost.innerHTML = `<div class="stslots" role="group" aria-label="${esc(T("Bank {n}", { n: stBank + 1 }))}">${slots}</div>`;
   }
   const scenesSig = JSON.stringify([S.snaps, S.snapNames, S.snap, available, stSwitching, LANG]);
   if (scenesSig !== stScenesSig) {
@@ -11017,8 +13498,8 @@ function stRender() {
     const A = stAct(tab[f][0][0] ? tab[f][0] : [0, 0, 0]), lit = act[f] || fsAuto(tab[f][0][0] ? tab[f][0] : tab[f][1]).st === 2;
     return { f, A, lit, act: act[f], c: stColor(f), dbl: stShort(tab[f][2]), hold: stShort(tab[f][1]), dx: tab[f][2], hx: tab[f][1], empty: !tab[f][0][0] };
   });
-  const stageBlock = b => [lookOf(b.type).name, lookOf(b.type).c, b.on, b.id, pedalParams(b).slice(0, 3).map(p => { const [v, r] = pFace(b, p); return knobDeg(r, v); })];
-  const chain = [...S.chain.P.map(stageBlock), ...(S.ampPresent ? [["Amp", "#d9a441", S.amp !== 0, "amp", []]] : []), ...S.chain.Q.map(stageBlock)];
+  const stageBlock = b => [lookOf(b.type).name, lookOf(b.type).c, b.on, b.id, pedalParams(b).slice(0, 3).map(p => { const [v, r] = pFace(b, p); return knobDeg(r, v); }), b.type];
+  const chain = [...S.chain.P.map(stageBlock), ...(S.ampPresent ? [["Amp", "#d9a441", S.amp !== 0, "amp", [], ""]] : []), ...S.chain.Q.map(stageBlock)];
   const sig = JSON.stringify([nm, sn, tiles, chain, stLocked, available, stSwitching, stFxBusy]);
   $("stName").innerHTML = cp ? `<span data-noi18n>${esc(nm)}</span>` : esc(nm);   /* (I4) el nombre del preset y de la escena no se traducen */
   if (sig === stSig) return;
@@ -11027,9 +13508,9 @@ function stRender() {
     + `<span class="r1"><span class="stled"></span><span class="num">${t.f + 1}</span>${t.act ? `<span class="play">${(fsTab || fsDefault())[t.f][0][0] === 2 ? "Loaded" : (fsTab || fsDefault())[t.f][0][0] === 9 ? "On" : "Playing"}</span>` : ""}</span>`
     + `<span class="big">${stTx(t.A.big, t.A.nm)}</span><span class="sub">${stTx(t.A.sub, t.A.nm)}</span><span class="gap"></span>`
     + `<span class="row"><i>2× tap</i><span>${stRowH(t.dx, t.dbl)}</span></span><span class="row"><i>Hold</i><span>${stRowH(t.hx, t.hold)}</span></span></button>`).join("");
-  $("stChips").innerHTML = `<span class="lbl">${sn ? "In " + esc(sn) : "On now"}</span>` + chain.map(c => {
-    const name = T(c[0]), state = T(c[2] ? "On" : "Off");
-    return `<button type="button" class="stchip${c[2] ? "" : " off"}" data-effect="${esc(String(c[3]))}" style="--cc:${c[1]}" aria-label="${esc(name)}" aria-pressed="${!!c[2]}"${!available || stSwitching || stFxBusy ? " disabled" : ""}><span class="stchip-knobs" aria-hidden="true">${c[4].map(a => `<i class="stchip-knob" style="--a:${a}deg"></i>`).join("")}</span><span class="stchip-led" aria-hidden="true"></span><span class="stchip-name">${esc(name)}</span><span class="stchip-switch" aria-hidden="true"></span><span class="stchip-state">${esc(state)}</span></button>`;
+  $("stChips").innerHTML = chain.map((c,i) => {
+    const name=T(c[0]),on=c[2],color=c[1];
+   return `<button type="button" class="stchip liveEffectCard${on?" on":" off"}" data-effect="${esc(String(c[3]))}" style="--cc:${color}" aria-label="${esc(name)}" aria-pressed="${!!on}"${!available||stSwitching||stFxBusy?" disabled":""}><i class="liveEffectLed" aria-hidden="true"></i><span class="liveEffectName">${esc(name)}</span><span class="liveEffectState">${on?"ON":"OFF"}</span></button>`;
   }).join("");
 }
 async function stDo(x) {
@@ -11117,6 +13598,8 @@ function stWakeOff() { const n = stNative(); if (n) { try { n.keepScreenOn(false
 async function stageOpen() {
   if (stOpen) return;
   stOpen = true; stSig = ""; stBank = curPreset >= 0 ? Math.floor(curPreset / 4) : 0; stBankPreset = curPreset; stPresetSig = "";
+  stMasterUserAdjusted = false;
+  if (!stMasterMuted) stMasterSyncFromOutput();
   if (resCur) resClose(false);                  /* (revisión 50: el desglose de CPU / MEM no queda abierto detrás de Stage) */
   $("stageMeters").appendChild($("meters"));
   document.body.classList.add("staging", "st-" + stMode);
@@ -11148,8 +13631,7 @@ function stageClose() {
 }
 function stCycle() { const i = ST_MODES.indexOf(stMode); document.body.classList.remove("st-" + stMode); stMode = ST_MODES[(i + 1) % ST_MODES.length]; document.body.classList.add("st-" + stMode); try { localStorage.setItem(ST_KEY, stMode); } catch (e) {} Log.act("stage_mode", { mode: stMode }); stRender(); }
 $("stageBtn").onclick = () => stageOpen();
-$("mainLive").onclick = () => stageOpen();
-$("stClose").onclick = () => stageClose();
+if ($("stClose")) $("stClose").onclick = () => stageClose();
 $("stMode").onclick = () => stCycle();
 $("stTuner").onclick = () => { if (tuOpen) tunerClose(); else tunerOpen(); };
 $("stEdit").onclick = () => stageClose();
@@ -11162,9 +13644,39 @@ async function stSwitch(kind, n) {
     if (kind === "preset" && plist.some(p => p[0] === n)) await loadPreset(n);
     else if (kind === "scene" && n >= 0 && n < 4 && S.snaps[n]) await goSnap(n);
   } catch (e) { toast("Couldn't do that: " + e.message, "err"); }
-  finally { stSwitching = false; stRender(); }
+  finally {
+    stSwitching = false;
+    if (stMasterMuted || stMasterUserAdjusted) stMasterSetOutput();
+    else stMasterSyncFromOutput();
+    stRender();
+  }
 }
-$("stPresets").onclick = e => { const bank = e.target.closest("button[data-bank]"); if (bank) { stBank = +bank.dataset.bank; stRender(); return; } const preset = e.target.closest("button[data-preset]"); if (preset) stSwitch("preset", +preset.dataset.preset); };
+$("stPresets").onclick = e => {
+  const preset = e.target.closest("button[data-preset]");
+  if (preset) { stSwitch("preset", +preset.dataset.preset); return; }
+  const bank = e.target.closest("button[data-bank]");
+  if (bank) { stBank = +bank.dataset.bank; stRender(); }
+};
+function stBankEdit(e) {
+  const button = e.target.closest("#stBanks button[data-bank]");
+  if (!button) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const bank = +button.dataset.bank;
+  const value = stBankNames[bank] || `${T("Preset")} ${bank + 1}`;
+  inlineEdit(() => document.querySelector(`#stBanks button[data-bank="${bank}"] .stbank-label`), {
+    value,
+    max:24,
+    empty:true,
+    label:T("Rename bank {n}", { n:bank + 1 }),
+    clean:v => v.trim().replace(/\s+/g, " ").slice(0, 24),
+    save:v => stBankRename(bank, v)
+  });
+}
+$("stBanks").addEventListener("dblclick", stBankEdit);
+$("stBanks").addEventListener("contextmenu", stBankEdit);
+$("stBanks").addEventListener("keydown", e => { if (e.key === "F2") stBankEdit(e); });
+$("stStageSlots").onclick = e => { const preset = e.target.closest("button[data-preset]"); if (preset) stSwitch("preset", +preset.dataset.preset); };
 $("stScenes").onclick = e => { const b = e.target.closest("button[data-scene]"); if (b) stSwitch("scene", +b.dataset.scene); };
 $("stChips").onclick = async e => {
   const button = e.target.closest("button[data-effect]");
@@ -11497,7 +14009,8 @@ $("fmChip").onclick = () => { if (S.fm) fmSetMode(!S.fm.live); };
 function applyMeters(d) {
   barSet($("inBar"), dbBar(d.i)); barSet($("outBar"), dbBar(d.o));
   txtSet($("inDb"), d.i <= -1400 ? "–∞" : numL((d.i / 10).toFixed(1))); txtSet($("outDb"), d.o <= -1400 ? "–∞" : numL((d.o / 10).toFixed(1)));
-  S.inDb10 = d.i;
+  S.inDb10 = d.i; S.outDb10 = d.o;
+  stMasterSignalUpdate(d.o);
   if (Date.now() - (S.lvlFullT || 0) > 250) { $("inClip").classList.toggle("on", false); $("outClip").classList.toggle("on", false); }   /* un recorte nuevo sube g: lo prende el LVL entero */
   $("outLim").classList.toggle("on", d.lr < 0); { const t = T("Output limiter: {db} dB", { db: numL((d.lr / 10).toFixed(1)) }); if ($("outLim").title !== t) $("outLim").title = t; }
   S.cpu = [d.fu, d.fb]; S.eng = [d.e, d.lim]; engSeen();
@@ -11505,6 +14018,13 @@ function applyMeters(d) {
   if (sg !== mtrSig) { mtrSig = sg; renderRes("cpu"); }
 }
 let lvlTicking = false;
+let gainSendCurrent = null;
+function gainApply(i, v, markDirty = true) {
+  S.gain[i] = v; S.gainT = Date.now();
+  if (markDirty) edMark("on");
+  if (i === 1 && markDirty && stOpen) stMasterSyncFromOutput();
+  return DEMO ? Promise.resolve() : gainSendCurrent();
+}
 async function lvlTick() {                       /* el temporizador de 250 ms */
   if (!S.connected || DEMO || Pedal.busy || lvlTicking) return;
   lvlTicking = true;
@@ -11536,6 +14056,7 @@ function applyLvl(l) {
     if (differs && !ED.gainN && Date.now() - (S.gainT || 0) > 1000) {
       S.gain = [+m[10], +m[11]]; S.gainRe = false;
       if (S.gainK) S.gainK.forEach((k, i) => k.show(S.gain[i])); else buildGains();   /* (show: sin rearmar la perilla; cancela un envío suyo pendiente) */
+      if (stOpen) stMasterSyncFromOutput();
     } else S.gainRe = differs;                                             /* (la pide lvlTick cuando vence la espera) */
   }
   if (ea) { const a = +ea[1]; S.eng = [+ea[2], +ea[3]]; S.arena = +ea[4]; if (S.amp !== a) { S.amp = a; render(); } engSeen(); }
@@ -11573,7 +14094,9 @@ function applyLvl(l) {
   Log.lvl({ i, o, ci, co, ce, fu, fb, mem, sk, md, und: S.undTot ?? undefined, e: ea ? +ea[2] : 0, lim: ea ? +ea[3] : 0, p: cp ? +cp[2] : null, s: bs ? +bs[2] : null });
   barSet($("inBar"), dbBar(i)); barSet($("outBar"), dbBar(o));
   txtSet($("inDb"), i <= -1400 ? "–∞" : numL((i / 10).toFixed(1))); txtSet($("outDb"), o <= -1400 ? "–∞" : numL((o / 10).toFixed(1)));
-  S.inDb10 = i;                                              /* M5.0: el dibujo del panel de pedaleras con el medidor "Always" */
+  S.inDb10 = i; S.outDb10 = o;
+  stMasterSignalUpdate(o);
+                                                              /* M5.0: el dibujo del panel de pedaleras con el medidor "Always" */
   $("inClip").classList.toggle("on", ci > clipIn); $("outClip").classList.toggle("on", co > clipOut); clipIn = ci; clipOut = co;
   const lm = l.match(/ lim=(-?\d+)/);                       /* limitador de salida: reduccion maxima desde el LVL anterior, dB x10 (<= 0) */
   $("outLim").classList.toggle("on", !!lm && +lm[1] < 0); if (lm) $("outLim").title = T("Output limiter: {db} dB", { db: numL((+lm[1] / 10).toFixed(1)) });
@@ -11704,13 +14227,8 @@ async function connect(known, opt = {}) {    /* opt.auto: apertura automática a
   let pong = "";   /* el primer paquete después de abrir el COM a veces se pierde */
   try {             /* (I3) S.connecting dura hasta el final del PING: antes bajaba al abrir y el temporizador de la reconexión volvía a abrir en medio del PING */
   try {
-    if (!opt.auto && !kn && Pedal.tr === BleTransport && !capBle()) {
-      known = await requestWebPedal();
-      kn = Pedal.tr.isKnown(known);
-      if (!kn) throw new Error("Bluetooth device is unavailable.");
-    }
     if (!opt.auto && await Tabs.take()) {             /* Connect a mano con el pedal tomado por otra pestaña: esa lo suelta y se usa el puerto ya autorizado */
-      const p = kn ? known : await Pedal.tr.known(loadPortInfo()); if (p) { known = p; kn = true; }
+      const p = await Pedal.tr.known(loadPortInfo()); if (p) { known = p; kn = true; }
     }
     await Pedal.connect(kn ? known : undefined, { auto: !!opt.auto });
   }
@@ -11872,7 +14390,7 @@ function setLock() {                         /* sin pedal no se puede tocar nada
   $("firstUse").hidden = !(S.firstUse || noSerial);
   fwHintShow(S.firstUse && !noSerial, ble ? "ble" : "usb");   /* alfa 9.1: Connect no encontró el pedal: el aviso del firmware de fábrica */
   if (!fuTxt && $("fuB") && $("fuC")) fuTxt = [$("fuB").innerHTML, $("fuC").innerHTML];
-  if (fuTxt) $("fuB").innerHTML = ble ? (APP || /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ? "Turn Bluetooth on." : "Use Chrome or Edge with Bluetooth on.") : fuTxt[0];
+  if (fuTxt) $("fuB").innerHTML = ble ? (APP ? "Turn Bluetooth on." : "Use Chrome or Edge with Bluetooth on.") : fuTxt[0];
   if (fuTxt) $("fuC").innerHTML = ble ? "Switch the pedal on and tap Connect." : fuTxt[1];
   { const gl = $("guideLink"), g = guideLink("02"); if (gl && g && gl.getAttribute("href") !== g.href) gl.setAttribute("href", g.href); }   /* (2026-11-11: la guía del paquete al lado; si no, la página de descarga) */
   document.querySelector(".lockbox").classList.toggle("term", term);
@@ -13321,7 +15839,8 @@ function buildGains() {
   $("gIn").innerHTML = ""; $("gOut").innerHTML = "";
   const send = () => { ED.onT = Infinity; ED.gainN = (ED.gainN || 0) + 1; const done = () => { if (--ED.gainN <= 0) { ED.gainN = 0; if (ED.onT === Infinity) ED.onT = Date.now(); } };   /* (edFootReload: en vuelo cuenta como de después, hasta la última respuesta) */
     return Pedal.cmd(`GAIN ${S.gain[0]} ${S.gain[1]}`, "GAIN").then(lines => { const r = reply(lines, "GAIN"); if (!/^GAIN in=-?\d+ out=-?\d+/.test(r)) throw new Error(r || "No response to GAIN"); }).catch(e => { S.gainT = 0; S.lvlFull = true; throw e; }).finally(done); };
-  const change = (i, v) => { S.gain[i] = v; S.gainT = Date.now(); edMark("on"); return DEMO ? Promise.resolve() : send(); };
+  gainSendCurrent = send;
+  const change = (i, v) => gainApply(i, v);
   S.gainK = [knob($("gIn"), { min: -30, max: 12, val: S.gain[0], def: 0, unit: "dB", label: "Input", onChange: v => change(0, v) }),     /* las ganancias van en el snapshot */
   knob($("gOut"), { min: -30, max: 12, val: S.gain[1], def: 0, unit: "dB", label: "Output", onChange: v => change(1, v) })];
   document.querySelectorAll(".gainrow .knob").forEach(k => k.classList.add("small"));
@@ -16441,6 +18960,209 @@ Tabs.init(); bootOpen();                      /* recargar conectada: vuelve a ab
 demoExitFocus();                              /* revisión 55: al salir del demo, el foco en Connect */
 tourReturn();                                 /* alfa 9: de vuelta del demo del recorrido, los ajustes como estaban (o el foco en Connect) */
 updBoot();                                    /* 2026-11-01: aviso de versión nueva (lo guardado enseguida; la pregunta, una por día, más tarde: bloque UPDATE) */
+/* Each pad key owns one locally imported MP3. */
+const stPadFiles = new Map();
+const ST_MASTER_MIN_DB = -30, ST_MASTER_MAX_DB = 12;
+const stMasterDb = volume => Math.round(ST_MASTER_MIN_DB + volume * (ST_MASTER_MAX_DB - ST_MASTER_MIN_DB));
+const stMasterLevel = db => (Math.max(ST_MASTER_MIN_DB, Math.min(ST_MASTER_MAX_DB, db)) - ST_MASTER_MIN_DB) / (ST_MASTER_MAX_DB - ST_MASTER_MIN_DB);
+const stMasterAudioLevel = volume => volume <= 0 ? 0 : Math.pow(10, (stMasterDb(volume) - ST_MASTER_MAX_DB) / 20);
+const stMasterDbLabel = db => `${db > 0 ? "+" : ""}${db} dB`;
+let stPadAudio = null, stPadAudioNote = "", stPadTargetNote = "", stPadVolume = 0.27, stMasterVolume = stMasterLevel(S.gain[1]), stMasterUnmutedVolume = stMasterVolume, stMasterMuted = false, stMasterUserAdjusted = false, stMasterGainTimer = 0;
+function stMasterSignalUpdate(db10) {
+  const meter = $("stMasterLineMeter");
+  if (!meter) return;
+  const db = Number.isFinite(db10) ? db10 / 10 : -60;
+  const level = db <= -140 ? 0 : Math.max(0, Math.min(100, (db + 60) / 60 * 100));
+  meter.style.setProperty("--stmaster-level", `${level.toFixed(1)}%`);
+  meter.setAttribute("aria-valuenow", db.toFixed(1));
+}
+function stMasterSyncFromOutput() {
+  if (stMasterMuted) return;
+  stMasterVolume = stMasterLevel(S.gain[1]);
+  stMasterUnmutedVolume = stMasterVolume;
+  stMasterUserAdjusted = false;
+  stMasterApply();
+}
+function stMasterSetOutput() {
+  if (!S.connected && !DEMO) return false;
+  if (!S.gainK || !S.gainK[1]) buildGains();
+  const db = stMasterMuted ? ST_MASTER_MIN_DB : stMasterDb(stMasterVolume);
+  stMasterUserAdjusted = true;
+  S.gainK[1].show(db);
+  clearTimeout(stMasterGainTimer);
+  if (S.gain[1] !== db) {
+    stMasterGainTimer = setTimeout(() => {
+      stMasterGainTimer = 0;
+      gainApply(1, db, false).catch(e => { if (S.connected) toast("Couldn't set pedal OUTPUT gain: " + errText(String((e && e.message) || e)), "err"); });
+    }, 70);
+  }
+  return true;
+}
+function stMasterApply() {
+  if (stPadAudio) stPadAudio.volume = stMasterMuted ? 0 : stPadVolume * stMasterAudioLevel(stMasterVolume);
+  $("stMasterVolume").value = String(Math.round(stMasterVolume * 100));
+  const pedal = document.querySelector(".stmaster-pedal");
+  if (pedal) pedal.style.setProperty("--stmaster-angle", `${((stMasterVolume - 0.5) * 20).toFixed(1)}deg`);
+  $("stMasterValue").textContent = stMasterMuted ? `MUTED · ${stMasterDbLabel(ST_MASTER_MIN_DB)}` : `OUT · ${stMasterDbLabel(stMasterDb(stMasterVolume))}`;
+  $("stMasterMute").textContent = stMasterMuted ? "MUTED" : "MUTE";
+  $("stMasterMute").setAttribute("aria-pressed", String(stMasterMuted));
+  $("stMasterMute").setAttribute("aria-label", stMasterMuted ? "Restore pedal OUTPUT gain and unmute continuous pad audio" : "Set pedal OUTPUT to minimum and mute continuous pad audio");
+}
+stMasterApply();
+$("stMasterVolume").addEventListener("input", event => {
+  stMasterVolume = Number(event.target.value) / 100;
+  if (stMasterMuted) stMasterUnmutedVolume = stMasterVolume;
+  stMasterApply();
+  if (!stMasterMuted) stMasterSetOutput();
+});
+$("stMasterVolume").addEventListener("change", () => {
+  if (!S.connected && !DEMO) toast("Connect the pedal to control its OUTPUT gain.", "warn");
+});
+const stMasterPedal = document.querySelector(".stmaster-pedal");
+const stMasterPedalRelease = () => stMasterPedal.classList.remove("is-pressed");
+$("stMasterVolume").addEventListener("pointerdown", () => stMasterPedal.classList.add("is-pressed"));
+$("stMasterVolume").addEventListener("keydown", event => {
+  if (["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End", "PageDown", "PageUp"].includes(event.key)) stMasterPedal.classList.add("is-pressed");
+});
+window.addEventListener("pointerup", stMasterPedalRelease);
+window.addEventListener("pointercancel", stMasterPedalRelease);
+window.addEventListener("keyup", stMasterPedalRelease);
+window.addEventListener("blur", stMasterPedalRelease);
+$("stMasterMute").addEventListener("click", () => {
+  if (stMasterMuted) {
+    stMasterMuted = false;
+    stMasterVolume = stMasterUnmutedVolume;
+  } else {
+    stMasterUnmutedVolume = stMasterVolume;
+    stMasterMuted = true;
+  }
+  stMasterApply();
+  if (!stMasterSetOutput()) toast("Connect the pedal to control its OUTPUT gain.", "warn");
+});
+$("stMasterFocus").addEventListener("click", () => $("stMasterVolume").focus());
+function stPadStop() {
+  const audio = stPadAudio;
+  stPadAudio = null;
+  stPadAudioNote = "";
+  if (audio) {
+    const url = audio.src;
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
+    if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+  }
+  document.querySelectorAll(".stpadkey").forEach(button => button.classList.remove("on"));
+  const status = $("stPadsStatus");
+  if (status) status.textContent = stPadFiles.size ? "Pad stopped" : "Pads stopped";
+}
+function stPadSelect(note) {
+  document.querySelectorAll(".stpadkey").forEach(button => button.classList.toggle("selected", button.dataset.note === note));
+}
+function stPadAssign(note, file) {
+  if (!file) return;
+  if (!/\.mp3$/i.test(file.name) && !/^audio\/mpeg$/i.test(file.type)) {
+    $("stPadsStatus").textContent = "Choose an MP3 file for this pad.";
+    return;
+  }
+  if (!file.size) {
+    $("stPadsStatus").textContent = `${file.name} is empty. Choose another MP3.`;
+    return;
+  }
+  if (stPadAudioNote === note) stPadStop();
+  stPadSelect(note);
+  stPadFiles.set(note, file);
+  const button = document.querySelector(`.stpadkey[data-note="${note}"]`);
+  if (button) {
+    button.classList.add("loaded");
+    button.title = `${file.name}. Click to play; drop another MP3 to replace.`;
+    button.setAttribute("aria-label", `${note} pad loaded with ${file.name}. Click to play or drop an MP3 to replace.`);
+  }
+  $("stPadsStatus").textContent = `${note} pad loaded · ${file.name}`;
+}
+async function stPadStart(note) {
+  const file = stPadFiles.get(note);
+  if (!file) throw Error(`Import or drop an MP3 onto ${note} first.`);
+  stPadSelect(note);
+  stPadStop();
+  const audio = new Audio();
+  audio.preload = "none";
+  audio.loop = true;
+  audio.volume = stMasterMuted ? 0 : stPadVolume * stMasterAudioLevel(stMasterVolume);
+  audio.src = URL.createObjectURL(file);
+  stPadAudio = audio;
+  stPadAudioNote = note;
+  audio.addEventListener("error", () => {
+    if (stPadAudio === audio) {
+      stPadAudio = null;
+      stPadAudioNote = "";
+      URL.revokeObjectURL(audio.src);
+      document.querySelectorAll(".stpadkey").forEach(button => button.classList.remove("on"));
+      $("stPadsStatus").textContent = `Could not play the MP3 assigned to ${note}.`;
+    }
+  });
+  try {
+    await audio.play();
+  } catch (error) {
+    if (stPadAudio !== audio) return;
+    const url = audio.src;
+    stPadAudio = null;
+    stPadAudioNote = "";
+    URL.revokeObjectURL(url);
+    throw Error(`Could not play this pad: ${error.message || "audio playback failed"}`);
+  }
+  if (stPadAudio !== audio) return;
+  document.querySelectorAll(".stpadkey").forEach(button => button.classList.toggle("on", button.dataset.note === note));
+  $("stPadsStatus").textContent = `${note} · MP3 playing`;
+}
+$("stPadFile").addEventListener("change", event => {
+  const file = event.target.files && event.target.files[0];
+  event.target.value = "";
+  if (stPadTargetNote && file) stPadAssign(stPadTargetNote, file);
+  stPadTargetNote = "";
+});
+$("stPadVolume").addEventListener("input", event => {
+  stPadVolume = Number(event.target.value) / 100;
+  stMasterApply();
+  $("stPadVolumeValue").textContent = `${Math.round(stPadVolume * 100)}%`;
+});
+document.addEventListener("click", e => {
+  const key = e.target.closest(".stpadkey");
+  if (key) {
+    stPadSelect(key.dataset.note);
+    if (stPadFiles.has(key.dataset.note)) stPadStart(key.dataset.note).catch(error => {
+      const status = $("stPadsStatus"); if (status) status.textContent = `Pad error: ${error.message}`;
+    });
+    else {
+      stPadTargetNote = key.dataset.note;
+      $("stPadFile").value = "";
+      $("stPadFile").click();
+    }
+  }
+  if (e.target.closest("#stPadStop")) stPadStop();
+  if (e.target.closest("#stClose")) stPadStop();
+});
+document.addEventListener("dragover", e => {
+  const key = e.target.closest(".stpadkey");
+  if (key) {
+    e.preventDefault();
+    key.classList.add("drop-target");
+  } else if (Array.from(e.dataTransfer?.types || []).includes("Files")) e.preventDefault();
+});
+document.addEventListener("dragleave", e => {
+  const key = e.target.closest(".stpadkey");
+  if (key && (!e.relatedTarget || !key.contains(e.relatedTarget))) key.classList.remove("drop-target");
+});
+document.addEventListener("drop", e => {
+  const hasFiles = Array.from(e.dataTransfer?.types || []).includes("Files");
+  if (hasFiles) e.preventDefault();
+  const key = e.target.closest(".stpadkey");
+  if (key) {
+    key.classList.remove("drop-target");
+    stPadSelect(key.dataset.note);
+    stPadAssign(key.dataset.note, e.dataTransfer?.files?.[0]);
+  }
+});
+document.addEventListener("dragend", () => document.querySelectorAll(".stpadkey.drop-target").forEach(button => button.classList.remove("drop-target")));
 window.__urOk = true;                         /* la guardia del arranque (en <head>): la página terminó de arrancar */
 </script>
 </body>
