@@ -2211,6 +2211,18 @@ body.ph .chain > .amp.vrow + .vwire { margin-top: -2px; }
 body.ph .chain > .vwire + .amp.vrow { margin-top: 0; }
 /* mientras se arrastra, el hueco que se abre en la lista también lleva el cable */
 body.ph .chain > .slot.open { background: linear-gradient(var(--gold), var(--gold)) center / 3px 100% no-repeat, rgba(217,178,106,.08); }
+.stage.on .stpreset-bottom {display:none!important}
+.stage.on .stmaster-pedal input {left:-18px!important;right:-18px!important;width:calc(100% + 36px)!important}
+.stage.on { min-width:0; min-height:0 }
+.stage.on * {box-sizing:border-box}
+@media (min-width:761px) and (orientation:landscape) {
+  .stage.on {grid-template-columns:minmax(170px,24%) minmax(0,1fr) clamp(72px,8vw,110px);grid-template-rows:auto clamp(82px,12vh,98px) minmax(0,1fr) clamp(72px,10vh,82px) clamp(120px,18vh,150px);min-height:0;overflow:hidden}
+  .stnav {height:auto;min-height:82px}.stcurrent{min-height:82px}.stpresets{min-width:0}.stbanks{gap:6px}.stmaster{width:100%;max-width:110px;justify-self:end}.stmaster-pedal{width:min(100%,72px)}.stscenes{min-width:0}.stpads{min-width:0}.stpadkeys{min-width:0}.stchips{min-width:0;overflow-x:auto}
+}
+@media (min-width:761px) and (max-width:1050px) and (orientation:landscape) {
+  .stage.on {grid-template-columns:minmax(150px,21%) minmax(0,1fr) 72px;grid-template-rows:auto 82px minmax(0,1fr) 72px 120px;gap:6px;padding:6px}
+  .stbrand-stage{min-width:150px}.stmaster{padding:5px 4px;gap:3px}.stmaster-mute,.stmaster-focus{width:68%;max-width:82px}.stpreset-name{font-size:10px!important}.stscene{font-size:11px;padding-left:42px}.stpadkey{font-size:14px!important}
+}
 .stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,
 .stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,
 .stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
@@ -3201,7 +3213,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       letter-spacing:-.4px;
       text-shadow:0 2px 6px #0009;
     }
-    .stpreset-bottom {grid-area:bottom;display:flex;justify-content:space-between;gap:8px;color:#91bfd0;font:800 8px/1.1 var(--ft)}
+    .stpreset-bottom {display:none!important}
     .stpresets {
       grid-column:2;
       grid-row:2/4;
@@ -3401,8 +3413,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .stmaster-heel {color:#9dabbc;font-size:5px}
     .stmaster-pedal input {
       position:absolute;
-      inset:0;
-      width:100%;
+      inset:0 -18px;
+      width:calc(100% + 36px);
       height:100%;
       min-height:0;
       margin:0;
@@ -5223,7 +5235,6 @@ body.staging .stbrand-stage .wordmark .creditline {
       <span class="stpreset-status" id="stPresetStatus">ACTIVE</span>
       <span class="stbadge" id="stBadge">–</span>
       <span class="stname" id="stName">No preset</span>
-      <span class="stpreset-bottom"><span id="stPresetSlot">PRESET –</span><span>Selected patch</span></span>
     </div>
   </div>
   <div class="stsection" aria-hidden="true">Presets</div>
