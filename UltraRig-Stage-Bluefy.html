@@ -2213,84 +2213,17 @@ body.ph .chain > .vwire + .amp.vrow { margin-top: 0; }
 body.ph .chain > .slot.open { background: linear-gradient(var(--gold), var(--gold)) center / 3px 100% no-repeat, rgba(217,178,106,.08); }
 .stage.on .stpreset-bottom {display:none!important}
 .stage.on .stmaster-pedal input {left:-18px!important;right:-18px!important;width:calc(100% + 36px)!important}
-.stage.on { min-width:0; min-height:0 }
-.stage.on * {box-sizing:border-box}
-@media (min-width:761px) and (orientation:landscape) {
-  .stage.on {grid-template-columns:minmax(170px,24%) minmax(0,1fr) clamp(72px,8vw,110px);grid-template-rows:auto clamp(82px,12vh,98px) minmax(0,1fr) clamp(72px,10vh,82px) clamp(120px,18vh,150px);min-height:0;overflow:hidden}
-  .stnav {height:auto;min-height:82px}.stcurrent{min-height:82px}.stpresets{min-width:0}.stbanks{gap:6px}.stmaster{width:100%;max-width:110px;justify-self:end}.stmaster-pedal{width:min(100%,72px)}.stscenes{min-width:0}.stpads{min-width:0}.stpadkeys{min-width:0}.stchips{min-width:0;overflow-x:auto}
-}
-@media (min-width:761px) and (max-width:1050px) and (orientation:landscape) {
-  .stage.on {grid-template-columns:minmax(150px,21%) minmax(0,1fr) 72px;grid-template-rows:auto 82px minmax(0,1fr) 72px 120px;gap:6px;padding:6px}
-  .stbrand-stage{min-width:150px}.stmaster{padding:5px 4px;gap:3px}.stmaster-mute,.stmaster-focus{width:68%;max-width:82px}.stpreset-name{font-size:10px!important}.stscene{font-size:11px;padding-left:42px}.stpadkey{font-size:14px!important}
-}
-.stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,
-.stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,
-.stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
+.stage.on {min-width:0;min-height:0}.stage.on *{box-sizing:border-box}
+@media(min-width:761px) and (orientation:landscape){.stage.on{grid-template-columns:minmax(170px,24%) minmax(0,1fr) clamp(72px,8vw,110px);grid-template-rows:auto clamp(82px,12vh,98px) minmax(0,1fr) clamp(72px,10vh,82px) clamp(120px,18vh,150px);min-height:0;overflow:hidden}.stnav{height:auto;min-height:82px}.stcurrent{min-height:82px}.stpresets,.stscenes,.stpads,.stpadkeys,.stchips{min-width:0}.stmaster{width:100%;max-width:110px;justify-self:end}.stmaster-pedal{width:min(100%,72px)}}
+@media(min-width:761px) and (max-width:1050px) and (orientation:landscape){.stage.on{grid-template-columns:minmax(150px,21%) minmax(0,1fr) 72px;grid-template-rows:auto 82px minmax(0,1fr) 72px 120px;gap:6px;padding:6px}.stbrand-stage{min-width:150px}.stmaster{padding:5px 4px;gap:3px}.stmaster-mute,.stmaster-focus{width:68%;max-width:82px}.stpreset-name{font-size:10px!important}.stscene{font-size:11px;padding-left:42px}.stpadkey{font-size:14px!important}}
 .stage.on .stpadkey::after {display:none!important;content:none!important}
-.stage.on .stpadkey::after {display:none!important;content:none!important}
-.stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,
-.stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,
-.stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
+.stage .stcurrent,.stage .stbanks,.stage .stbank,.stage .stpreset,.stage .stscenes,.stage .stscene,.stage .stmaster,.stage .stpads,.stage .stpadkey,.stage .stchips,.stage .stchip,.stage .sthead,.stage .stnav,.stage .sttile {border-radius:14px!important}
 .stage.on .stpadkey {font-size:24px!important;font-weight:950!important}
 .stage.on .stpadkey::after {font-size:10px!important;font-weight:900!important}
- .stage.on .stchips .liveEffectCard {
-   flex:0 0 130px;width:130px;min-width:130px;height:82px;min-height:82px;max-height:82px;
-   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
-   padding:10px;border:1px solid color-mix(in srgb,var(--cc) 55%,#526072);
-   border-radius:10px!important;background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 18%,#192438),#111827);
-   box-shadow:inset 0 3px 0 var(--cc),0 5px 10px #0007;color:#f4f7ff;
- }
- .stage.on .stchips .liveEffectCard.off {filter:grayscale(.25);opacity:.72}
- .stage.on .liveEffectName {max-width:100%;font:900 15px/1.05 var(--fd);text-align:center;text-transform:uppercase}
- .stage.on .liveEffectState {font:800 8px/1 var(--ft);letter-spacing:1.2px;color:var(--cc)}
- .stage.on .liveEffectLed {position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;border:1px solid #3a1214;background:#42161a;box-shadow:inset 0 1px 2px #000}
- .stage.on .liveEffectCard.on .liveEffectLed {background:#ff3434;border-color:#ffc2c2;box-shadow:0 0 4px #ff6b6b,0 0 9px #f00,0 0 14px #f008,inset 0 1px 2px #ffe0e0}
-.steditchain {display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;min-height:170px;overflow-x:auto;padding:8px}
-.steditlane {display:grid;grid-template-columns:repeat(2,minmax(112px,112px));grid-auto-flow:column;grid-template-rows:repeat(2,82px);gap:6px 10px;position:relative}
-.steditlane b {position:absolute;left:-12px;top:-8px;font-size:12px;color:#75e1ff}
-.steditlane .stchip.block {grid-row:auto!important;width:112px!important;height:82px!important;min-height:82px!important;max-height:82px!important;padding:5px!important}
-.steditlane .stchip.block .dial {width:34px!important;height:34px!important}
-.steditlane .stchip.block .pedalControl {margin-top:0!important}
-.steditlane .stchip.block .name {font-size:9px!important;min-height:10px!important}
-.steditlane .stchip.block .mini,.steditlane .stchip.block .switchCaption {display:none!important}
-.steditamp {width:180px;height:82px;display:grid;place-items:center;position:relative;border-radius:12px;background:linear-gradient(145deg,#d3a34a,#7f5b27);color:#10131a;border:1px solid #e0bd73;box-shadow:0 8px 14px #0008}
-.steditamp span {position:absolute;top:8px;font-size:11px;font-weight:950}
-.steditamp strong {margin-top:12px;font-size:16px;text-align:center;padding:0 8px}
-.steditamp small {position:absolute;bottom:8px;font-size:9px;font-weight:900}
-.steditamp i {position:absolute;right:-5px;top:30px;width:10px;height:10px;border-radius:50%;background:#ff4b3e}
-.steditio {width:70px;height:70px;display:grid;place-items:center;position:relative;color:#75e1ff;font-size:12px}
-.steditio i {width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#eef6fa,#8997a5 35%,#26394d 65%,#101923 72%)}
-.steditwire {width:42px;height:5px;background:#6b879c;border-radius:5px}
- .stage.on .stchips .stchip.block {
-   --fx:var(--cc); flex:0 0 112px; width:112px; min-width:112px; height:140px; min-height:140px; max-height:140px;
-   display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:3px;
-   overflow:hidden; padding:8px 7px 7px; border-radius:14px!important;
-   border:1px solid rgba(var(--fx-rgb),.55);
-   background:radial-gradient(ellipse at 30% 0%,rgba(var(--fx-rgb),.28),transparent 82%),linear-gradient(150deg,#1b2537,#0e1624);
-   box-shadow:inset 0 5px 0 var(--fx),inset 1px 0 0 #ffffff30,inset -2px -4px 0 #0008,0 8px 12px #0009;
-   text-align:center;
- }
- .stage.on .stchip.block > span:first-child {width:100%; display:grid; gap:2px}
- .stage.on .stchip.block .pedalTop {display:flex;align-items:center;justify-content:space-between;width:100%}
- .stage.on .stchip.block .pedalIcon {width:18px;height:18px;padding:3px;border-radius:5px;background:rgba(var(--fx-rgb),.14);border:1px solid rgba(var(--fx-rgb),.35);color:var(--fx)}
- .stage.on .stchip.block .pedalIcon svg {width:100%;height:100%}
- .stage.on .stchip.block .ledLabel {font-size:6px;letter-spacing:.4px}
- .stage.on .stchip.block .led {width:5px;height:5px}
- .stage.on .stchip.block .type {font-size:6px;margin-top:3px;color:var(--fx);letter-spacing:.8px}
- .stage.on .stchip.block .name {font-size:11px;line-height:1;min-height:14px;margin-top:2px;color:#f6faff;font-weight:900}
- .stage.on .stchip.block .pedalControl {display:grid;justify-items:center;gap:1px;margin-top:1px}
- .stage.on .stchip.block .dial {width:44px;height:44px;padding:3px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(from 225deg,var(--fx) 0deg,rgba(var(--fx-rgb),.8) calc(var(--amount)*270deg),#344257 calc(var(--amount)*270deg) 270deg,transparent 270deg)}
- .stage.on .stchip.block .dialCore {position:relative;width:100%;height:100%;border:2px solid #3f4c61;border-radius:50%;background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);box-shadow:inset 0 0 4px #000,0 3px 6px #0009}
- .stage.on .stchip.block .knobCap {position:relative;display:block;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 32% 25%,#596777,#263344 48%,#111b29 80%)}
- .stage.on .stchip.block .knobCap:before {content:"";position:absolute;top:2px;left:calc(50% - 1.5px);width:3px;height:10px;border-radius:3px;background:#f3f8ff}
- .stage.on .stchip.block .controlLabel {display:none}
- .stage.on .stchip.block .mini {display:block;position:absolute;left:50%;bottom:5px;width:32px;height:32px;transform:translateX(-50%)}
- .stage.on .stchip.block .liveBlockSwitch {display:block;width:32px;height:32px;border-radius:50%;background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);border:1px solid #07101b;box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--fx),0 5px 8px #0008}
- .stage.on .stchip.block .liveBlockSwitch:before {content:"";display:block;width:20px;height:20px;margin:5px;border-radius:50%;border:1px solid #697a8f;background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%)}
- .stage.on .stchip.block .switchCaption {position:absolute;bottom:1px;font-size:5px}
- .stage.on .stchip.block .screw {position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:#8e9aae}
- .stage.on .stchip.block .screw.left {left:6px}
- .stage.on .stchip.block .screw.right {right:6px}
+ .stage.on .stchips .liveEffectCard{flex:0 0 130px;width:130px;min-width:130px;height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:10px;border:1px solid color-mix(in srgb,var(--cc) 55%,#526072);border-radius:10px!important;background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 18%,#192438),#111827);box-shadow:inset 0 3px 0 var(--cc),0 5px 10px #0007;color:#f4f7ff}.stage.on .stchips .liveEffectCard.off{filter:grayscale(.25);opacity:.72}.stage.on .liveEffectName{font:900 15px/1.05 var(--fd);text-align:center;text-transform:uppercase}.stage.on .liveEffectState{font:800 8px/1 var(--ft);letter-spacing:1.2px;color:var(--cc)}.stage.on .liveEffectLed{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;border:1px solid #3a1214;background:#42161a;box-shadow:inset 0 1px 2px #000}.stage.on .liveEffectCard.on .liveEffectLed{background:#ff3434;border-color:#ffc2c2;box-shadow:0 0 4px #ff6b6b,0 0 9px #f00,0 0 14px #f008,inset 0 1px 2px #ffe0e0}
+ .steditchain {display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;min-height:170px;overflow-x:auto;padding:8px}.steditlane{display:grid;grid-template-columns:repeat(2,112px);grid-auto-flow:column;grid-template-rows:repeat(2,82px);gap:6px 10px;position:relative}.steditlane b{position:absolute;left:-12px;top:-8px;font-size:12px;color:#75e1ff}.steditlane .stchip.block{width:112px!important;height:82px!important;min-height:82px!important;max-height:82px!important;padding:5px!important}.steditlane .stchip.block .dial{width:34px!important;height:34px!important}.steditlane .stchip.block .pedalControl{margin-top:0!important}.steditlane .stchip.block .name{font-size:9px!important}.steditlane .stchip.block .mini,.steditlane .stchip.block .switchCaption{display:none!important}.steditamp{width:180px;height:82px;display:grid;place-items:center;position:relative;border-radius:12px;background:linear-gradient(145deg,#d3a34a,#7f5b27);color:#10131a;border:1px solid #e0bd73}.steditamp span{position:absolute;top:8px;font-size:11px;font-weight:950}.steditamp strong{font-size:16px;text-align:center}.steditamp small{position:absolute;bottom:8px;font-size:9px}.steditamp i{position:absolute;right:-5px;top:30px;width:10px;height:10px;border-radius:50%;background:#ff4b3e}.steditio{width:70px;height:70px;display:grid;place-items:center;color:#75e1ff}.steditio i{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#eef6fa,#8997a5 35%,#26394d 65%,#101923 72%)}.steditwire{width:42px;height:5px;background:#6b879c;border-radius:5px}
+ .stage.on .stchips .stchip.block {--fx:var(--cc);flex:0 0 112px;width:112px;min-width:112px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;overflow:hidden;padding:8px 7px 7px;border-radius:14px!important;border:1px solid rgba(var(--fx-rgb),.55);background:radial-gradient(ellipse at 30% 0%,rgba(var(--fx-rgb),.28),transparent 82%),linear-gradient(150deg,#1b2537,#0e1624);box-shadow:inset 0 5px 0 var(--fx),inset 1px 0 0 #ffffff30,inset -2px -4px 0 #0008,0 8px 12px #0009;text-align:center}
+ .stage.on .stchip.block>span:first-child{width:100%;display:grid;gap:2px}.stage.on .stchip.block .pedalTop{display:flex;align-items:center;justify-content:space-between;width:100%}.stage.on .stchip.block .pedalIcon{width:18px;height:18px;padding:3px;border-radius:5px;background:rgba(var(--fx-rgb),.14);border:1px solid rgba(var(--fx-rgb),.35);color:var(--fx)}.stage.on .stchip.block .pedalIcon svg{width:100%;height:100%}.stage.on .stchip.block .ledLabel{font-size:6px;letter-spacing:.4px}.stage.on .stchip.block .led{width:5px;height:5px}.stage.on .stchip.block .type{font-size:6px;margin-top:3px;color:var(--fx);letter-spacing:.8px}.stage.on .stchip.block .name{font-size:11px;line-height:1;min-height:14px;margin-top:2px;color:#f6faff;font-weight:900}.stage.on .stchip.block .pedalControl{display:grid;justify-items:center;gap:1px;margin-top:1px}.stage.on .stchip.block .dial{width:44px;height:44px;padding:3px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(from 225deg,var(--fx) 0deg,rgba(var(--fx-rgb),.8) calc(var(--amount)*270deg),#344257 calc(var(--amount)*270deg) 270deg,transparent 270deg)}.stage.on .stchip.block .dialCore{position:relative;width:100%;height:100%;border:2px solid #3f4c61;border-radius:50%;background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);box-shadow:inset 0 0 4px #000,0 3px 6px #0009}.stage.on .stchip.block .knobCap{position:relative;display:block;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 32% 25%,#596777,#263344 48%,#111b29 80%)}.stage.on .stchip.block .knobCap:before{content:"";position:absolute;top:2px;left:calc(50% - 1.5px);width:3px;height:10px;border-radius:3px;background:#f3f8ff}.stage.on .stchip.block .controlLabel{display:none}.stage.on .stchip.block .mini{display:block;position:absolute;left:50%;bottom:5px;width:32px;height:32px;transform:translateX(-50%)}.stage.on .stchip.block .liveBlockSwitch{display:block;width:32px;height:32px;border-radius:50%;background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);border:1px solid #07101b;box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--fx),0 5px 8px #0008}.stage.on .stchip.block .liveBlockSwitch:before{content:"";display:block;width:20px;height:20px;margin:5px;border-radius:50%;border:1px solid #697a8f;background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%)}.stage.on .stchip.block .switchCaption{position:absolute;bottom:1px;font-size:5px}.stage.on .stchip.block .screw{position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:#8e9aae}.stage.on .stchip.block .screw.left{left:6px}.stage.on .stchip.block .screw.right{right:6px}
 </style>
 <script>
 /* alfa 11 (2026-11-12, un usuario con la página en blanco): la guardia del arranque, en JavaScript viejo (ES5) para que corra en cualquier navegador.
@@ -2887,7 +2820,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   .stpreset-name {
     position:relative;
     z-index:1;
-    min-height:38px;
+    min-height:25px;
     display:grid;
     place-items:center;
     width:100%;
@@ -2896,7 +2829,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     background:linear-gradient(145deg,#30455d,#172238);
     border:1px solid #3f526b;
     color:#edf4ff;
-    font:800 18px/1 var(--fd);
+    font:800 13px/1 var(--fd);
   }
   .stpreset.on .stpreset-name {
     border-color:#75e1ff;
@@ -3016,34 +2949,20 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   }
   .stpads-title {
     display:block;
-    font:900 14px/1 var(--ft);
-    letter-spacing:1.4px;
+    font:900 11px/1 var(--ft);
+    letter-spacing:1.2px;
     text-transform:uppercase;
   }
   .stpads-status {
     display:block;
     margin-top:6px;
     color:#a2b0c6;
-    font:700 12px/1.2 var(--ft);
+    font:700 10px/1.2 var(--ft);
   }
   .stpadkeys {
     display:grid;
     grid-template-columns:repeat(12,minmax(34px,1fr));
     gap:5px;
-  }
-  .stpad-card {
-    grid-column:1/-1;
-    grid-row:2;
-    min-width:0;
-    min-height:0;
-    padding:8px;
-    border:1px solid #34445f;
-    border-radius:12px;
-    background:linear-gradient(145deg,#182438ee,#0c1422f5);
-    box-shadow:inset 0 1px 0 #ffffff0b,0 4px 10px #0006;
-  }
-  .stpad-card .stpadkeys {
-    height:100%;
   }
   .stpadkey {
     display:flex;
@@ -3056,14 +2975,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     border-radius:10px;
     background:linear-gradient(145deg,#23324a,#111a29);
     color:#eef4ff;
-    font:850 24px/1 var(--fd);
+    font:850 11px/1 var(--fd);
     cursor:pointer;
   }
   .stpadkey::after {
     content:"DROP MP3";
     color:#91a2bc;
-    font:800 10px/1 var(--ft);
-    letter-spacing:.35px;
+    font:800 6px/1 var(--ft);
+    letter-spacing:.25px;
   }
   .stpadkey.loaded::after {content:"READY";color:#87f4b4}
   .stpadkey.on::after {content:"PLAYING";color:#9df4ff}
@@ -3092,13 +3011,33 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   }
   .stpadstop::after {content:"STOP"}
   .stpadstop svg {display:none}
+  .stpadoutput {
+    display:grid;
+    place-items:center;
+    width:30px;
+    height:28px;
+    flex:none;
+    padding:0;
+    border:1px solid #416878;
+    border-radius:8px;
+    background:linear-gradient(145deg,#193a48,#10232c);
+    color:#b8efff;
+  }
+  .stpadoutput svg {width:18px;height:18px}
+  .stpadoutput.selected {
+    border-color:#75e1ff;
+    background:linear-gradient(145deg,#1d6e78,#12303d);
+    box-shadow:0 0 10px #75e1ff44;
+  }
   .stpads-volume {
     grid-column:3;
     display:flex;
     align-items:stretch;
     justify-content:center;
+    gap:4px;
     width:100%;
   }
+  .stpads-volume .stpadstop {width:30px;height:28px;flex:none}
   .stpad-volume-control {display:none}
   .stbrand-stage {display:none}
   @media (min-width:761px) and (orientation:landscape) {
@@ -3213,7 +3152,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       letter-spacing:-.4px;
       text-shadow:0 2px 6px #0009;
     }
-    .stpreset-bottom {display:none!important}
+    .stpreset-bottom {grid-area:bottom;display:flex;justify-content:space-between;gap:8px;color:#91bfd0;font:800 8px/1.1 var(--ft)}
     .stpresets {
       grid-column:2;
       grid-row:2/4;
@@ -3311,8 +3250,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       z-index:0;
       clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
       border:1px solid #69798b;
-      background:
-        linear-gradient(90deg,#0a0d12 0,#394553 8%,#1b242d 16%,#090d12 100%);
+      background:linear-gradient(90deg,#0a0d12 0,#394553 8%,#1b242d 16%,#090d12 100%);
       filter:drop-shadow(0 7px 7px #000c);
       pointer-events:none;
     }
@@ -3347,11 +3285,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         radial-gradient(circle at 50% 13%,#98a5b333 0 2px,transparent 3px),
         radial-gradient(circle at 50% 87%,#98a5b333 0 2px,transparent 3px),
         repeating-linear-gradient(0deg,#303945 0,#303945 4px,#171d24 5px,#171d24 9px);
-      box-shadow:
-        inset 3px 3px 5px #a9b4c033,
-        inset -4px -5px 7px #05080d,
-        inset 0 0 0 5px #1a222b,
-        0 3px 5px #000c;
+      box-shadow:inset 3px 3px 5px #a9b4c033,inset -4px -5px 7px #05080d,inset 0 0 0 5px #1a222b,0 3px 5px #000c;
       transform:rotateX(var(--stmaster-angle,0deg));
       transform-origin:50% 94%;
       transform-style:preserve-3d;
@@ -3413,8 +3347,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .stmaster-heel {color:#9dabbc;font-size:5px}
     .stmaster-pedal input {
       position:absolute;
-      inset:0 -18px;
-      width:calc(100% + 36px);
+      inset:0;
+      width:100%;
       height:100%;
       min-height:0;
       margin:0;
@@ -3454,149 +3388,41 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       cursor:ns-resize;
     }
     .stmaster-pedal.stmaster-analog-fader {
-      display:grid;
-      grid-template-columns:54px;
-      align-items:stretch;
-      justify-content:center;
-      justify-self:center;
-      gap:0;
-      width:54px;
-      max-width:100%;
-      perspective:none;
+      display:grid;grid-template-columns:54px;align-items:stretch;justify-content:center;justify-self:center;
+      gap:0;width:54px;max-width:100%;perspective:none;
     }
-    .stmaster-pedal.stmaster-analog-fader .stmaster-analog-scale {
-      display:none;
-    }
+    .stmaster-pedal.stmaster-analog-fader .stmaster-analog-scale {display:none}
     .stmaster-pedal.stmaster-analog-fader::before,
     .stmaster-pedal.stmaster-analog-fader::after,
-    .stmaster-pedal.stmaster-analog-fader .stmaster-treadle {
-      display:none;
-    }
+    .stmaster-pedal.stmaster-analog-fader .stmaster-treadle {display:none}
     .stmaster-analog-scale {
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      align-items:flex-end;
-      height:calc(100% - 16px);
-      margin:8px 0;
-      color:#aab9c8;
-      font:800 7px/1 var(--ft);
-      letter-spacing:.1px;
+      display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;
+      height:calc(100% - 16px);margin:8px 0;color:#aab9c8;font:800 7px/1 var(--ft);letter-spacing:.1px;
     }
-    .stmaster-analog-scale i {
-      position:relative;
-      display:block;
-      min-height:8px;
-      padding-right:7px;
-      font-style:normal;
-    }
-    .stmaster-analog-scale i::after {
-      content:"";
-      position:absolute;
-      right:0;
-      top:50%;
-      width:5px;
-      height:1px;
-      background:#b2bfcc;
-    }
+    .stmaster-analog-scale i {position:relative;display:block;min-height:8px;padding-right:7px;font-style:normal}
+    .stmaster-analog-scale i::after {content:"";position:absolute;right:0;top:50%;width:5px;height:1px;background:#b2bfcc}
     .stmaster-analog-track {
-      position:relative;
-      height:100%;
-      min-height:92px;
-      width:54px;
-      border:0;
-      border-radius:0;
-      background:transparent;
-      box-shadow:none;
+      position:relative;height:100%;min-height:92px;width:54px;border:0;border-radius:0;
+      background:transparent;box-shadow:none;
     }
-    .stmaster-analog-track::before {
-      content:"";
-      position:absolute;
-      z-index:1;
-      left:calc(50% - 4px);
-      top:8px;
-      bottom:8px;
-      width:8px;
-      border:1px solid #05070a;
-      border-radius:4px;
-      background:linear-gradient(90deg,#07090b,#29313a 38%,#11151a 62%,#050608);
-      box-shadow:0 0 5px #000,inset 1px 0 1px #69717a,inset -1px 0 1px #000;
-    }
-    .stmaster-line-meter {
-      position:absolute;
-      z-index:2;
-      left:calc(50% - 1.5px);
-      top:11px;
-      bottom:11px;
-      width:3px;
-      border-radius:3px;
-      overflow:hidden;
-      pointer-events:none;
-    }
-    .stmaster-line-meter i {
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      height:var(--stmaster-level,0%);
-      min-height:0;
-      border-radius:3px;
-      background:
-        repeating-linear-gradient(0deg,#50dc8a 0 3px,#0b2e22 3px 5px),
-        linear-gradient(0deg,#50dc8a,#c8ef68 70%,#ffcf56 88%,#ff7777);
-      box-shadow:0 0 7px #58e1a088;
-      transition:height 70ms linear;
-    }
+    .stmaster-analog-track::before {content:"";position:absolute;z-index:1;left:calc(50% - 4px);top:8px;bottom:8px;width:8px;border:1px solid #05070a;border-radius:4px;background:linear-gradient(90deg,#07090b,#29313a 38%,#11151a 62%,#050608);box-shadow:0 0 5px #000,inset 1px 0 1px #69717a,inset -1px 0 1px #000}
     .stmaster-pedal.stmaster-analog-fader input {
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      z-index:3;
-      margin:0;
-      border:0;
-      border-radius:5px;
-      appearance:none;
-      -webkit-appearance:none;
-      writing-mode:vertical-lr;
-      direction:rtl;
-      background:transparent;
-      cursor:ns-resize;
-      clip-path:none;
+      position:absolute;inset:0;width:100%;height:100%;z-index:3;margin:0;border:0;border-radius:5px;
+      appearance:none;-webkit-appearance:none;writing-mode:vertical-lr;direction:rtl;
+      background:transparent;cursor:ns-resize;clip-path:none;
     }
-    .stmaster-pedal.stmaster-analog-fader input::-webkit-slider-runnable-track {
-      width:100%;
-      height:100%;
-      background:transparent;
-    }
+    .stmaster-pedal.stmaster-analog-fader input::-webkit-slider-runnable-track {width:100%;height:100%;background:transparent}
     .stmaster-pedal.stmaster-analog-fader input::-webkit-slider-thumb {
-      width:54px;
-      height:74px;
-      margin-left:0;
-      border:1px solid #737c84;
-      border-radius:5px;
-      appearance:none;
-      -webkit-appearance:none;
-      background:
-        repeating-linear-gradient(0deg,transparent 0 5px,#1d2228 6px 9px,#69717a 10px 12px,transparent 13px 15px),
-        linear-gradient(180deg,#aeb5ba 0%,#7e878e 13%,#667078 25%,#9da5aa 38%,#69737a 50%,#a5acae 62%,#6a7379 74%,#1f252a 100%);
-      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;
-      cursor:ns-resize;
-    }
-    .stmaster-pedal.stmaster-analog-fader input::-moz-range-track {
-      width:100%;
-      height:100%;
-      border:0;
-      background:transparent;
-    }
-    .stmaster-pedal.stmaster-analog-fader input::-moz-range-thumb {
-      width:54px;
-      height:74px;
-      border:1px solid #737c84;
-      border-radius:5px;
+      width:54px;height:74px;margin-left:0;border:1px solid #737c84;border-radius:5px;
+      appearance:none;-webkit-appearance:none;
       background:repeating-linear-gradient(0deg,transparent 0 5px,#1d2228 6px 9px,#69717a 10px 12px,transparent 13px 15px),linear-gradient(180deg,#aeb5ba 0%,#7e878e 13%,#667078 25%,#9da5aa 38%,#69737a 50%,#a5acae 62%,#6a7379 74%,#1f252a 100%);
-      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;
-      cursor:ns-resize;
+      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;cursor:ns-resize;
+    }
+    .stmaster-pedal.stmaster-analog-fader input::-moz-range-track {width:100%;height:100%;border:0;background:transparent}
+    .stmaster-pedal.stmaster-analog-fader input::-moz-range-thumb {
+      width:54px;height:74px;border:1px solid #737c84;border-radius:5px;
+      background:repeating-linear-gradient(0deg,transparent 0 5px,#1d2228 6px 9px,#69717a 10px 12px,transparent 13px 15px),linear-gradient(180deg,#aeb5ba 0%,#7e878e 13%,#667078 25%,#9da5aa 38%,#69737a 50%,#a5acae 62%,#6a7379 74%,#1f252a 100%);
+      box-shadow:0 8px 12px #000c,inset 0 2px 2px #d3d7d9,inset 0 -3px 4px #15191d;cursor:ns-resize;
     }
     .stmaster-readout {
       color:#8bdfff;
@@ -3628,11 +3454,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .stpreset-slot {
       top:38%;
       left:50%;
-      display:grid;
-      place-items:center;
       width:72px;
       height:72px;
       transform:translate(-50%,-50%);
+      display:grid;
+      place-items:center;
       border:0;
       border-radius:0;
       color:#91bfd0;
@@ -3782,8 +3608,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       gap:5px;
       height:100%;
     }
-    .stpadkey {height:auto;min-height:0;font-size:14px}
-    .stpadkey::after {font-size:7px}
+    .stpadkey {height:auto;min-height:0;font-size:10px}
+    .stpadkey::after {font-size:5px}
     .stpadkey.selected,
     .stpadkey.on,
     .stpadkey.drop-target {
@@ -3815,9 +3641,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       min-height:0;
       min-width:0;
       align-items:center;
-      justify-content:flex-start;
-      gap:14px;
-      padding:12px 14px;
+      justify-content:safe center;
+      gap:7px;
+      padding:7px;
       background:radial-gradient(ellipse at 18% 0%,#26364b66,transparent 58%),linear-gradient(145deg,#101720,#090d13);
       border-color:#29343e;
       border-radius:10px;
@@ -3826,16 +3652,16 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       flex:0 0 112px;
       width:112px;
       min-width:112px;
-      height:160px;
-      max-height:160px;
+      height:140px;
+      max-height:140px;
       align-self:center;
-      padding:7px 8px 9px;
+      padding:7px;
       overflow:hidden;
-      border:2px solid color-mix(in srgb,var(--cc) 62%,#526072);
-      border-radius:14px !important;
+      border:1px solid color-mix(in srgb,var(--cc) 62%,#526072);
+      border-radius:10px !important;
       background:radial-gradient(ellipse at 30% 0%,color-mix(in srgb,var(--cc) 23%,transparent),transparent 76%),linear-gradient(150deg,#303947,#171f2b 52%,#0c121d);
       color:#f2f6ff;
-      box-shadow:inset 0 7px 0 var(--cc),inset 1px 0 0 #ffffff30,inset -3px -5px 0 #0009,0 8px 12px #000a;
+      box-shadow:inset 0 4px 0 var(--cc),inset 1px 0 0 #ffffff30,inset -2px -4px 0 #0009,0 7px 11px #000a;
       text-align:left;
       transition:border-color .15s,box-shadow .15s,transform .15s;
     }
@@ -3845,7 +3671,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       box-shadow:inset 0 4px 0 var(--cc),inset 1px 0 0 #ffffff38,inset -2px -4px 0 #0009,0 9px 14px #000b,0 0 12px color-mix(in srgb,var(--cc) 18%,transparent);
     }
     .stchip::before {
-      content:"";
+      content:"FOOTSWITCH";
       display:block;
       left:6px;
       bottom:8px;
@@ -4628,80 +4454,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .stage.on .stchip-switch {
       box-shadow:0 0 0 2px #101923,inset 0 0 0 2px #344258,0 2px 4px #000b;
     }
-    .stage.on .stchip-dial {
-      position:absolute;
-      left:50%;
-      top:76px;
-      width:44px;
-      height:44px;
-      transform:translateX(-50%);
-      border-radius:50%;
-      padding:4px;
-      background:conic-gradient(from 225deg,var(--cc) 0deg,rgba(255,255,255,.55) 270deg,#344257 270deg);
-      box-shadow:0 5px 8px #0009;
-    }
-    .stage.on .stchip-dialcore {
-      position:relative;
-      display:block;
-      width:100%;
-      height:100%;
-      border:2px solid #3f4c61;
-      border-radius:50%;
-      background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);
-      box-shadow:inset 0 0 4px #000,0 3px 6px #0009;
-    }
-    .stage.on .stchip-dialcore i {
-      position:absolute;
-      left:calc(50% - 2px);
-      top:4px;
-      width:4px;
-      height:14px;
-      border-radius:3px;
-      background:#f3f8ff;
-      box-shadow:0 0 4px #0008;
-    }
-    .stage.on .stchip-name {
-      top:43px;
-      left:24px;
-      right:24px;
-      min-height:22px;
-      height:22px;
-      padding:4px 3px;
-      font:900 13px/1 var(--fd);
-      text-align:center;
-      background:#263b5a;
-      border:1px solid #52658a;
-      border-radius:3px;
-    }
-    .stage.on .stchip-icon,
-    .stage.on .stchip-state,
-    .stage.on .stchip-type {display:none}
-    .stage.on .stchip-switch {
-      display:block;
-      position:absolute;
-      left:50%;
-      right:auto;
-      bottom:7px;
-      width:32px;
-      height:32px;
-      transform:translateX(-50%);
-      border:1px solid #07101b;
-      border-radius:50%;
-      background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);
-      box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--cc),0 5px 8px #0008;
-    }
-    .stage.on .stchip-switch::before {
-      content:"";
-      position:absolute;
-      inset:5px;
-      border-radius:50%;
-      border:1px solid #697a8f;
-      background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%);
-      box-shadow:inset 0 2px 3px #fff8,inset 0 -3px 3px #536078;
-    }
+    .stage.on .stchip-dial {position:absolute;left:50%;top:76px;width:44px;height:44px;transform:translateX(-50%);border-radius:50%;padding:4px;background:conic-gradient(from 225deg,var(--cc) 0deg,rgba(255,255,255,.55) 270deg,#344257 270deg);box-shadow:0 5px 8px #0009}
+    .stage.on .stchip-dialcore {position:relative;display:block;width:100%;height:100%;border:2px solid #3f4c61;border-radius:50%;background:repeating-conic-gradient(from 0deg,#0b111a 0deg 9deg,#263041 9deg 14deg,#0b111a 14deg 18deg);box-shadow:inset 0 0 4px #000,0 3px 6px #0009}
+    .stage.on .stchip-dialcore i {position:absolute;left:calc(50% - 2px);top:4px;width:4px;height:14px;border-radius:3px;background:#f3f8ff;box-shadow:0 0 4px #0008}
+    .stage.on .stchip-name {top:43px;left:24px;right:24px;min-height:22px;height:22px;padding:4px 3px;font:900 13px/1 var(--fd);text-align:center;background:#263b5a;border:1px solid #52658a;border-radius:3px}
+    .stage.on .stchip-icon,.stage.on .stchip-state,.stage.on .stchip-type {display:none}
+    .stage.on .stchip-switch {display:block;position:absolute;left:50%;right:auto;bottom:7px;width:32px;height:32px;transform:translateX(-50%);border:1px solid #07101b;border-radius:50%;background:conic-gradient(#e2e7ee,#737e8e,#edf2f7,#657081,#d9e1e9);box-shadow:0 0 0 3px #121c29,0 0 0 4px var(--cc),0 5px 8px #0008}
+    .stage.on .stchip-switch::before {content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid #697a8f;background:radial-gradient(ellipse at 30% 20%,#f3f6f8,#b5beca 48%,#586a81 95%);box-shadow:inset 0 2px 3px #fff8,inset 0 -3px 3px #536078}
     .stage.on .stchip-knobs {top:19px;left:50%;right:auto;transform:translateX(-50%);justify-content:center;gap:6px}
     .stage.on .stchip-knob {width:12px;height:12px}
-    .stage.on .stchip-led {top:8px;right:8px;width:7px;height:7px}
     body.st-amoled .stage.on {
       --sbg:#000;
       --stile:#000;
@@ -5012,6 +4773,1210 @@ body.staging .stbrand-stage .wordmark .creditline {
   white-space:nowrap;
 }
 </style>
+<style id="stagetone-responsive-stage">
+@media (min-width:600px) and (max-width:760px), (min-width:600px) and (orientation:portrait) {
+  .stage.on {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:clamp(6px,1.2vh,10px);
+    padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+  .stage.on > .sthead {order:0;min-height:0}
+  .stage.on > .stnav {
+    order:1;
+    grid-template-columns:minmax(0,min(52vw,376px)) minmax(0,1fr);
+    height:auto;
+    min-height:0;
+  }
+  .stage.on .stname {font-size:clamp(20px,4vw,30px)}
+  .stage.on .stpreset-meta,
+  .stage.on .stpreset-status {font-size:clamp(9px,1.4vw,12px)}
+  .stage.on > .stsection:nth-child(3) {order:2}
+  .stage.on > .stpresets {order:3;grid-template-rows:auto;min-width:0}
+  .stage.on .stbanks {
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(34px,1fr)) minmax(clamp(88px,14vh,112px),auto);
+    gap:clamp(4px,1vw,8px);
+    height:auto;
+  }
+  .stage.on .stbank {min-width:0;min-height:34px;font-size:clamp(10px,1.6vw,14px)}
+  .stage.on .stpreset {min-width:0;min-height:clamp(88px,14vh,112px)}
+  .stage.on .stpreset-name {font-size:clamp(12px,1.8vw,18px)}
+  .stage.on > .stsection:nth-child(7) {order:4}
+  .stage.on .stscenes {
+    order:5;
+    flex:0 0 auto;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:minmax(84px,auto);
+    gap:clamp(5px,1vw,9px);
+    min-height:0;
+  }
+  .stage.on .stscene {
+    min-width:0;
+    min-height:84px;
+    padding:clamp(8px,1.5vw,12px) clamp(8px,1.5vw,12px) clamp(8px,1.5vw,12px) clamp(58px,10vw,78px);
+    font-size:clamp(12px,1.8vw,18px);
+  }
+  .stage.on .stscene::after {
+    left:clamp(6px,1.8vw,14px);
+    width:clamp(30px,6.8vw,52px);
+    height:clamp(30px,6.8vw,52px);
+  }
+  .stage.on .stmaster {
+    order:6;
+    display:grid;
+    grid-template-columns:auto auto minmax(0,1fr) minmax(48px,72px);
+    grid-template-rows:auto auto;
+    align-items:center;
+    justify-items:stretch;
+    gap:6px;
+    width:100%;
+    height:auto;
+    min-width:0;
+    min-height:clamp(72px,12vh,90px);
+    padding:8px;
+    border:1px solid #394553;
+    border-radius:14px;
+    background:linear-gradient(150deg,#171e28,#0c1016 62%,#141a22);
+    box-shadow:inset 0 1px #ffffff20,inset 0 0 0 2px #0006,0 4px 9px #0009;
+  }
+  .stage.on .stmaster-mute,
+  .stage.on .stmaster-focus {
+    width:auto;
+    min-height:30px;
+    padding:4px 7px;
+    border:1px solid #536375;
+    border-radius:6px;
+    background:linear-gradient(#394451 0%,#202832 22%,#121820 54%,#080c11 100%);
+    color:#e7edf5;
+    box-shadow:inset 0 1px 2px #ffffff3b,inset 0 -2px 3px #000a,0 3px 5px #000a;
+    font-weight:900;
+    font-size:clamp(8px,1.2vw,10px);
+    letter-spacing:.6px;
+  }
+  .stage.on .stmaster-mute[aria-pressed="true"] {border-color:#ff717d;background:linear-gradient(#78343b,#3a171d);color:#fff}
+  .stage.on .stmaster-focus {border-color:#3385b1;background:linear-gradient(#3189ba,#135279 45%,#09263b);color:#e4f6ff}
+  .stage.on .stmaster-mute {grid-column:1;grid-row:1;min-width:55px}
+  .stage.on .stmaster-focus {grid-column:2;grid-row:1;min-width:64px}
+  .stage.on .stmaster-title {grid-column:3;grid-row:1;margin:0;font-size:clamp(9px,1.3vw,12px)}
+  .stage.on .stmaster-pedal {
+    position:relative;
+    display:block;
+    grid-column:4;
+    grid-row:1/3;
+    justify-self:center;
+    width:min(100%,58px);
+    height:70px;
+    min-height:64px;
+    overflow:visible;
+    touch-action:none;
+    perspective:500px;
+  }
+  .stage.on .stmaster-pedal::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+    border:1px solid #69798b;
+    background:linear-gradient(90deg,#0a0d12 0,#394553 8%,#1b242d 16%,#090d12 100%);
+    filter:drop-shadow(0 7px 7px #000c);
+    pointer-events:none;
+  }
+  .stage.on .stmaster-pedal::after {
+    content:"";
+    position:absolute;
+    z-index:0;
+    left:17%;
+    right:2%;
+    bottom:2%;
+    height:8px;
+    border-radius:5px;
+    background:linear-gradient(#1b222d,#b3bcc9 42%,#333c49 70%,#090d13);
+    box-shadow:0 2px 3px #000b;
+    pointer-events:none;
+  }
+  .stage.on .stmaster-treadle {
+    position:absolute;
+    inset:2px;
+    z-index:1;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    justify-items:center;
+    align-items:center;
+    gap:4px;
+    min-height:0;
+    padding:8px 4px 6px;
+    border:2px solid #667686;
+    border-radius:12px;
+    clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+    background:radial-gradient(circle at 50% 13%,#98a5b333 0 2px,transparent 3px),radial-gradient(circle at 50% 87%,#98a5b333 0 2px,transparent 3px),repeating-linear-gradient(0deg,#303945 0,#303945 4px,#171d24 5px,#171d24 9px);
+    box-shadow:inset 3px 3px 5px #a9b4c033,inset -4px -5px 7px #05080d,inset 0 0 0 5px #1a222b,0 3px 5px #000c;
+    transform:rotateX(var(--stmaster-angle,0deg));
+    transform-origin:50% 94%;
+    transform-style:preserve-3d;
+    pointer-events:none;
+  }
+  .stage.on .stmaster-treadle-pattern {position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);z-index:0;filter:drop-shadow(0 1px 0 #05080d)}
+  .stage.on .stmaster-treadle-pattern path {fill:none;stroke:#9caabb;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .stage.on .stmaster-treadle-pattern .groove {stroke:#3f4a58;stroke-width:3.4}
+  .stage.on .stmaster-brand,
+  .stage.on .stmaster-heel {position:relative;z-index:1;color:#d7e0eb;font:900 5px/1 var(--ft);letter-spacing:.35px}
+  .stage.on .stmaster-heel {color:#9dabbc}
+  .stage.on .stmaster-pedal input {
+    position:absolute;
+    inset:0 -18px;
+    z-index:2;
+    width:calc(100% + 36px);
+    height:100%;
+    min-height:0;
+    margin:0;
+    padding:0;
+    border:0;
+    appearance:none;
+    -webkit-appearance:none;
+    clip-path:polygon(6% 0,100% 0,100% 100%,5% 100%,5% 58%,0 58%,0 5%);
+    writing-mode:vertical-lr;
+    direction:rtl;
+    background:transparent;
+    cursor:ns-resize;
+    touch-action:none;
+  }
+  .stage.on .stmaster-readout {grid-column:1/4;grid-row:2;justify-self:start;font-size:clamp(8px,1.1vw,10px)}
+  .stage.on .stpads {
+    order:7;
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:auto;
+    min-width:0;
+    min-height:76px;
+    grid-template-columns:minmax(100px,clamp(100px,20vw,170px)) minmax(0,1fr) clamp(48px,8vw,74px);
+    gap:6px;
+    padding:8px;
+  }
+  .stage.on .stpadkeys {min-width:0;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(1px,.5vw,4px)}
+  .stage.on .stpadkey {min-width:0;height:clamp(38px,7vh,52px);font-size:clamp(14px,2.4vw,24px)}
+  .stage.on .stpadkey::after {font-size:clamp(4px,.85vw,8px);letter-spacing:0}
+  .stage.on > .stsection:nth-child(11) {order:8}
+  .stage.on .stchips {order:9;min-width:0;height:clamp(112px,18vh,154px)}
+  .stage.on .stchip {min-width:clamp(82px,13vw,105px);flex-basis:clamp(82px,13vw,105px)}
+}
+@media (orientation: portrait) {
+  .stage.on {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    height:100%;
+    min-height:100dvh;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    gap:clamp(8px,1.2vh,12px);
+  }
+  .stage.on > .sthead {order:0;min-height:0}
+  .stage.on > .stnav {
+    order:1;
+    display:block;
+    width:100%;
+    min-width:0;
+    height:auto;
+  }
+  .stage.on .stcurrent {
+    width:100%;
+    height:auto;
+    min-height:clamp(104px,12vh,132px);
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  .stage.on > .stsection:nth-child(3) {order:2;display:flex}
+  .stage.on > .stpresets {
+    order:3;
+    display:grid;
+    width:100%;
+    grid-template-rows:auto;
+    min-width:0;
+  }
+  .stage.on .stbanks {
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(44px,auto)) minmax(clamp(88px,12vh,112px),auto);
+    gap:clamp(5px,1vw,8px);
+    height:auto;
+  }
+  .stage.on .stbank {min-width:0;min-height:44px;font-size:clamp(10px,1.6vw,14px)}
+  .stage.on .stpreset {min-width:0;min-height:clamp(88px,12vh,112px)}
+  .stage.on .stpreset-name {font-size:clamp(12px,1.8vw,18px)}
+  .stage.on > .stsection:nth-child(7) {order:4;display:flex}
+  .stage.on .stscenes {
+    order:5;
+    display:grid;
+    flex:none;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(88px,auto));
+    gap:clamp(6px,1vw,10px);
+    min-height:0;
+  }
+  .stage.on .stscene {
+    min-width:0;
+    min-height:88px;
+    padding:10px 10px 10px clamp(48px,8vw,72px);
+    font-size:clamp(12px,1.8vw,18px);
+  }
+  .stage.on .stscene::after {
+    left:clamp(6px,1.8vw,14px);
+    width:clamp(30px,6.8vw,52px);
+    height:clamp(30px,6.8vw,52px);
+  }
+  .stage.on .stmaster {
+    order:6;
+    display:grid;
+    grid-template-columns:auto auto minmax(0,1fr) 54px;
+    grid-template-rows:auto auto;
+    align-items:center;
+    justify-items:stretch;
+    gap:6px;
+    width:100%;
+    height:auto;
+    min-width:0;
+    min-height:76px;
+    padding:8px;
+    border:1px solid #394553;
+    border-radius:14px;
+    background:linear-gradient(150deg,#171e28,#0c1016 62%,#141a22);
+    box-shadow:inset 0 1px #ffffff20,inset 0 0 0 2px #0006,0 4px 9px #0009;
+  }
+  .stage.on .stmaster-mute,
+  .stage.on .stmaster-focus {
+    width:auto;
+    min-width:52px;
+    min-height:44px;
+    padding:4px 7px;
+    border:1px solid #536375;
+    border-radius:6px;
+    background:linear-gradient(#394451 0%,#202832 22%,#121820 54%,#080c11 100%);
+    color:#e7edf5;
+    box-shadow:inset 0 1px 2px #ffffff3b,inset 0 -2px 3px #000a,0 3px 5px #000a;
+    font-weight:900;
+    font-size:clamp(8px,1.2vw,10px);
+    letter-spacing:.6px;
+  }
+  .stage.on .stmaster-mute[aria-pressed="true"] {border-color:#ff717d;background:linear-gradient(#78343b,#3a171d);color:#fff}
+  .stage.on .stmaster-focus {border-color:#3385b1;background:linear-gradient(#3189ba,#135279 45%,#09263b);color:#e4f6ff}
+  .stage.on .stmaster-mute {grid-column:1;grid-row:1}
+  .stage.on .stmaster-focus {grid-column:2;grid-row:1}
+  .stage.on .stmaster-title {grid-column:3;grid-row:1;margin:0;font-size:clamp(9px,1.3vw,12px)}
+  .stage.on .stmaster-pedal {
+    position:relative;
+    display:block;
+    grid-column:4;
+    grid-row:1/3;
+    justify-self:center;
+    width:48px;
+    height:64px;
+    min-height:64px;
+    overflow:visible;
+    touch-action:none;
+  }
+  .stage.on .stmaster-pedal::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    border:1px solid #69798b;
+    background:linear-gradient(90deg,#0a0d12,#394553 12%,#1b242d 32%,#090d12);
+    clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+    filter:drop-shadow(0 4px 4px #000b);
+  }
+  .stage.on .stmaster-treadle {
+    position:absolute;
+    inset:2px;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    justify-items:center;
+    align-items:center;
+    padding:7px 3px;
+    border:2px solid #667686;
+    border-radius:10px;
+    clip-path:polygon(6% 0,100% 0,100% 100%,20% 100%,20% 68%,0 58%,0 5%);
+    background:repeating-linear-gradient(0deg,#303945 0,#303945 4px,#171d24 5px,#171d24 9px);
+    pointer-events:none;
+  }
+  .stage.on .stmaster-treadle-pattern {position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px)}
+  .stage.on .stmaster-treadle-pattern path {fill:none;stroke:#9caabb;stroke-width:2.2}
+  .stage.on .stmaster-treadle-pattern .groove {stroke:#3f4a58;stroke-width:3.4}
+  .stage.on .stmaster-brand,
+  .stage.on .stmaster-heel {position:relative;z-index:1;color:#d7e0eb;font:900 5px/1 var(--ft)}
+  .stage.on .stmaster-heel {color:#9dabbc}
+  .stage.on .stmaster-pedal input {
+    position:absolute;
+    inset:0 -3px;
+    z-index:2;
+    width:calc(100% + 6px);
+    height:100%;
+    min-height:0;
+    margin:0;
+    padding:0;
+    border:0;
+    appearance:none;
+    -webkit-appearance:none;
+    writing-mode:vertical-lr;
+    direction:rtl;
+    background:transparent;
+    cursor:ns-resize;
+    touch-action:none;
+    left:-3px !important;
+    right:-3px !important;
+    width:calc(100% + 6px) !important;
+  }
+  .stage.on .stmaster-readout {grid-column:1/4;grid-row:2;justify-self:start;font-size:clamp(8px,1.1vw,10px)}
+  .stage.on .stpads {
+    order:7;
+    position:relative;
+    inset:auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto auto auto;
+    width:100%;
+    height:auto;
+    min-width:0;
+    min-height:0;
+    gap:8px;
+    padding:10px;
+  }
+  .stage.on .stpads-head {grid-column:1;grid-row:1;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .stage.on .stpads-title {font-size:clamp(10px,1.6vw,13px)}
+  .stage.on .stpads-status {margin:0;text-align:right;white-space:nowrap}
+  .stage.on .stpadkeys {
+    grid-column:1;
+    grid-row:2;
+    min-width:0;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:clamp(4px,1vw,8px);
+  }
+  .stage.on .stpadkey {min-width:0;height:clamp(44px,7vh,56px);font-size:clamp(16px,2.4vw,24px)}
+  .stage.on .stpads-volume {grid-column:1;grid-row:3;min-width:0}
+  .stage.on .stpad-volume-control {display:flex;flex:1 1 auto;min-width:0}
+  .stage.on .stpad-volume-control input {width:100%;min-width:0}
+  .stage.on > .stsection:nth-child(11) {order:8;display:flex}
+  .stage.on .stchips {
+    order:9;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));
+    align-items:stretch;
+    height:auto;
+    min-height:0;
+    min-width:0;
+    overflow:visible;
+    gap:clamp(6px,1vw,10px);
+  }
+  .stage.on .stchips .liveEffectCard {
+    flex:none;
+    width:auto;
+    min-width:0;
+    height:clamp(76px,10vh,96px);
+  }
+  .stage.on .stmaster {
+    grid-template-columns:auto auto minmax(0,1fr) auto;
+    grid-template-rows:auto auto;
+    min-height:92px;
+  }
+  .stage.on .stmaster-pedal {
+    grid-column:1/-1;
+    grid-row:2;
+    display:flex;
+    align-items:center;
+    justify-self:stretch;
+    width:auto;
+    height:24px;
+    min-height:0;
+    max-width:none;
+    overflow:visible;
+    perspective:none;
+  }
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after,
+  .stage.on .stmaster-treadle {display:none}
+  .stage.on #stMasterVolume {
+    position:static !important;
+    inset:auto !important;
+    width:100% !important;
+    height:20px !important;
+    min-height:20px !important;
+    margin:0;
+    padding:0;
+    border:0;
+    appearance:none;
+    -webkit-appearance:none;
+    clip-path:none !important;
+    writing-mode:horizontal-tb;
+    direction:ltr;
+    background:transparent;
+    cursor:ew-resize;
+    touch-action:pan-x;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    width:100%;
+    height:6px;
+    border:1px solid #29313a;
+    border-radius:999px;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+    box-shadow:inset 0 1px 3px #000b;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    width:22px;
+    height:18px;
+    margin-top:-6px;
+    border:1px solid #738191;
+    border-radius:6px;
+    appearance:none;
+    -webkit-appearance:none;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+  }
+  .stage.on #stMasterVolume::-moz-range-track {
+    width:100%;
+    height:6px;
+    border:1px solid #29313a;
+    border-radius:999px;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+    box-shadow:inset 0 1px 3px #000b;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:22px;
+    height:18px;
+    border:1px solid #738191;
+    border-radius:6px;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+  }
+  .stage.on .stmaster-readout {
+    grid-column:4;
+    grid-row:1;
+    justify-self:end;
+    white-space:nowrap;
+  }
+}
+@media (max-width: 599px) and (orientation: portrait) {
+  .stage.on {padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+  .stage.on > .sthead {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(40px,1fr)) minmax(40px,1fr) minmax(40px,1fr);
+    grid-template-areas:"brand brand brand bpm bpm" "mode tuner lock nav nav" "meters meters meters meters meters";
+    gap:6px;
+    padding:6px;
+  }
+  .stage.on .stbrand-stage {grid-area:brand;display:flex;gap:7px;min-width:0;margin:0}
+  .stage.on .stbrand-stage .mark {width:38px;height:38px;border-radius:12px}
+  .stage.on .stbrand-stage .mark svg {width:22px;height:22px}
+  .stage.on .stbrand-stage .wordmark {font-size:14px}
+  .stage.on .stbrand-stage small {margin-top:3px;font-size:7px;letter-spacing:1px}
+  .stage.on .stbrand-stage .creditline {display:none}
+  .stage.on .stage-meters {grid-area:meters;display:block;width:100%;max-width:none;min-width:0}
+  .stage.on .sthead .grow {display:none}
+  .stage.on .stbpm {grid-area:bpm;justify-content:center}
+  .stage.on .stbpm,
+  .stage.on #stMode,
+  .stage.on #stTuner,
+  .stage.on #stLock {display:inline-flex}
+  .stage.on .stbpm b {font-size:24px}
+  .stage.on #stMode {grid-area:mode}
+  .stage.on #stTuner {grid-area:tuner}
+  .stage.on #stLock {grid-area:lock}
+  .stage.on #stMode .tx,
+  .stage.on #stTuner .tx {display:none}
+  .stage.on .sthead .stnav-controls {grid-area:nav;display:flex;width:100%;gap:4px}
+  .stage.on .sthead > .stbtn,
+  .stage.on .stnav-controls .stbtn {display:inline-flex;width:100%;min-width:0;min-height:40px;padding:0 6px}
+  .stage.on .stnav-controls .stbtn {flex:1;font-size:10px}
+  .stage.on .sthead .meters {width:100%;min-width:0}
+  .stage.on > .stpresets,
+  .stage.on > .stmaster,
+  .stage.on > .stscenes,
+  .stage.on > .stchips {display:grid !important}
+  .stage.on > .stsection {display:flex !important}
+  .stage.on .stmaster {grid-template-columns:auto auto minmax(0,1fr) auto}
+  .stage.on .stpresets {grid-template-rows:auto}
+  .stage.on .stchips {grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+  .stage.on .stbanks {
+    grid-template-rows:repeat(2,minmax(44px,auto)) repeat(2,minmax(clamp(104px,14vh,128px),auto));
+  }
+  .stage.on .stbanks .stpreset {grid-column:span 2}
+}
+.stage.on .stbanks .stpreset {
+  justify-content:center;
+  gap:8px;
+  padding:8px;
+}
+.stage.on .stbanks .stpreset-slot {
+  position:relative;
+  top:auto;
+  left:auto;
+  width:auto;
+  height:auto;
+  transform:none;
+  border:0;
+  border-radius:0;
+  color:inherit;
+  background:transparent;
+  box-shadow:none;
+  font:950 clamp(26px,min(5vw,7vh),52px)/.9 var(--fd);
+  letter-spacing:0;
+}
+.stage.on .stbanks .stpreset-slot::after {display:none;content:none}
+.stage.on .stbanks .stpreset.on .stpreset-slot {
+  color:inherit;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+.stage.on .stpads {
+  grid-template-rows:auto minmax(0,1fr) auto;
+  align-content:stretch;
+  row-gap:4px;
+}
+.stage.on .stpadkeys {
+  grid-template-rows:none;
+  grid-auto-rows:minmax(0,1fr);
+  align-content:stretch;
+}
+.stage.on .stpadkey {
+  height:auto;
+  min-height:clamp(38px,7vh,56px);
+}
+body:not(.staging) .board {
+  position:relative;
+  border:3px solid #637b99!important;
+  border-radius:16px!important;
+  background:
+    radial-gradient(circle at 13px 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at calc(100% - 13px) 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at 13px calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    repeating-linear-gradient(90deg,#ffffff06 0 1px,#00000006 1px 3px),
+    linear-gradient(145deg,#293f5d,#192d47 52%,#101a2a)!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  box-shadow:inset 0 1px 2px #ffffff55,inset 0 0 0 5px #0d1624,0 14px 34px #000b!important;
+}
+body:not(.staging) .chain {
+  border:1px solid #435b78;
+  border-radius:11px!important;
+  background:
+    radial-gradient(circle at 1px 1px,#ffffff16 .8px,transparent 1.2px) 0 0/16px 16px,
+    repeating-linear-gradient(0deg,#ffffff04 0 1px,transparent 1px 4px),
+    linear-gradient(145deg,#111c2c,#0a121e);
+  box-shadow:inset 0 1px #ffffff20,inset 0 -5px 10px #0009,0 2px 4px #0006!important;
+}
+body:not(.staging) .chain .wires .m {stroke:#8398b1;stroke-width:3.5;filter:drop-shadow(0 2px 1px #000b)}
+body:not(.staging) .blk:not(.cab):not(.ahd) {
+  border:1px solid color-mix(in srgb,var(--c) 60%,#c5d7e9)!important;
+  border-radius:10px!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--c) 84%,#e9f4ff 16%) 0 4px,transparent 4px),
+    radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--c) 24%,transparent),transparent 78%),
+    linear-gradient(150deg,#2b3d55,#18263a 55%,#0c1421)!important;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--c) 82%,#eaf5ff),inset 1px 0 #ffffff38,inset -2px -4px 0 #000a,
+    0 5px 0 #050a12,0 14px 22px #0009!important;
+}
+body:not(.staging) .blk:not(.cab):not(.ahd).off {
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--c) 42%,#415064) 0 4px,transparent 4px),
+    linear-gradient(150deg,#1c2838,#111b29 55%,#0a111c)!important;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--c) 38%,#58677a),inset 0 1px #ffffff12,inset 0 -4px #0009,
+    0 5px 0 #050a12,0 14px 22px #0009!important;
+}
+body:not(.staging) .blk:not(.cab):not(.ahd) .nm {
+  border:1px solid color-mix(in srgb,var(--c) 42%,#71849b);
+  border-radius:4px!important;
+  background:linear-gradient(180deg,#0c1725e8,#07101be8);
+  color:#edf5ff!important;
+  text-shadow:0 1px 2px #000;
+}
+body:not(.staging) .blk:not(.cab):not(.ahd) .mk {
+  border:1px solid #9aabba;
+  background:radial-gradient(circle at 35% 28%,#73869a,#29384a 48%,#101721 78%);
+  box-shadow:inset 0 1px 2px #ffffff75,inset 0 -2px 3px #000c,0 2px 3px #0009;
+}
+body:not(.staging) .blk:not(.cab):not(.ahd) .mk::after {background:#e9f5ff;box-shadow:0 0 2px #fff}
+body:not(.staging) .blk:not(.cab):not(.ahd) .led {box-shadow:0 0 0 2px #101a28,0 0 9px #ff4b3e!important}
+body:not(.staging) .blk:not(.cab):not(.ahd).off .led {box-shadow:0 0 0 2px #101a28!important}
+body:not(.staging) .blk:not(.cab):not(.ahd) .fsb {
+  border:1px solid #c5d1dc;
+  background:radial-gradient(circle at 35% 28%,#fff,#bbc8d5 44%,#59687b 78%,#273345)!important;
+  box-shadow:inset 0 0 0 4px #7f91a4,inset 0 2px 3px #ffffffaa,0 3px 0 #060b12,0 5px 7px #0009!important;
+}
+body:not(.staging) .blk:not(.cab):not(.ahd) .fsb:active {
+  transform:translateY(2px);
+  box-shadow:inset 0 0 0 4px #7f91a4,inset 0 2px 3px #ffffffaa,0 1px 0 #060b12!important;
+}
+body:not(.staging) .jack div {
+  border-color:#6f849d!important;
+  background:radial-gradient(circle at 35% 30%,#bfcbd8,#596a7e 55%,#131c29 78%)!important;
+  box-shadow:inset 0 2px 3px #ffffff70,0 2px 4px #000a!important;
+}
+body:not(.staging) .board .perf > button:not(.stsw) {
+  border:1px solid #4d6581;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,#2c405b,#111b2b);
+  box-shadow:inset 0 1px #ffffff28,0 3px 6px #0008;
+  color:#dcecff;
+}
+body:not(.staging) .board .perf > button:not(.stsw):hover {border-color:#75e1ff;color:#f1fbff}
+body:not(.staging) .board .perf .tap {
+  border-color:#e4b85e;
+  background:linear-gradient(180deg,#f6d486,#b98935);
+  color:#1b1720;
+}
+body:not(.staging) .board .perf .stageBtn {
+  border-color:#75e1ff;
+  background:linear-gradient(180deg,#9cecff,#48bce3);
+  color:#07101e;
+  box-shadow:inset 0 1px #ffffffaa,0 3px 6px #0008;
+}
+body:not(.staging) .blk.sel {
+  outline:2px solid #75e1ff!important;
+  outline-offset:4px;
+  filter:drop-shadow(0 0 9px #49c9fa66);
+}
+body.ph .blk.vrow.ahd {background:var(--tol)!important}
+body.ph .blk.vrow.ahd.off {background:var(--tol)!important}
+body.ph .blk.vrow.cab {
+  background:#2a1d14!important;
+  border-radius:6px!important;
+  box-shadow:0 6px 0 #120c08,0 14px 22px rgba(0,0,0,.45)!important;
+}
+body.ph .blk.vrow.cab.off {
+  background:#1c1612!important;
+  box-shadow:0 6px 0 #0c0806,0 14px 22px rgba(0,0,0,.45)!important;
+}
+body.ph .blk.vrow.cab .nm {background:none!important;color:#f3e7cc!important}
+body.ph .blk.vrow.sel {outline-offset:2px}
+body.ph .amp.vrow {
+  border:1px solid #5a4a30!important;
+  background:linear-gradient(180deg,#e1b547 0 8px,transparent 8px),linear-gradient(180deg,#2b2620,#1c1915)!important;
+  box-shadow:0 6px 0 #120e09,0 14px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+body.ph .amp.vrow::before {
+  display:block!important;
+  inset:auto 8px 7px;
+  height:20px;
+  border:1px solid #3b3226;
+  border-radius:4px;
+}
+.stage.on .stscene {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:0;
+  padding:clamp(6px,1vw,10px)!important;
+  text-align:center;
+}
+.stage.on .stscene-number {
+  position:relative;
+  z-index:1;
+  max-width:100%;
+  font:800 clamp(16px,1.5vw,22px)/1.05 var(--ft);
+  white-space:nowrap;
+}
+.stage.on .stscene small {
+  position:relative;
+  z-index:1;
+  display:block;
+  max-width:100%;
+  margin:0;
+  overflow:hidden;
+  font:700 clamp(14px,1.3vw,19px)/1.05 var(--ft);
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  text-align:center;
+}
+.stage.on .stscene::before,
+.stage.on .stscene::after {display:none!important;content:none!important}
+@media (orientation:portrait) {
+  .stage.on .stcurrent {
+    border:1px solid #607c99;
+    border-radius:12px!important;
+    background:linear-gradient(145deg,#06131d,#0b202b 48%,#08131d);
+    box-shadow:inset 0 0 0 2px #02070c,inset 0 0 18px #42c8ee18,0 4px 8px #0009;
+  }
+  .stage.on .stpreset-meta {color:#73dfff}
+  .stage.on .stpreset-status {color:#a7f2bd}
+  .stage.on .stname {color:#d8fff2;text-shadow:0 0 12px #63d7c433,0 2px 4px #000}
+}
+.stage {
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on {
+  --sbg:#080c14;
+  --stx:#edf4fc;
+  --sdim:#a7b8cc;
+  --sedge:#2e4058;
+  --stile:#111a27;
+  --sbtn:#192538;
+  --rig:#75e1ff;
+  --gold:#e4b85e;
+  --gold2:#f6d486;
+  box-sizing:border-box;
+  border:3px solid #637b99!important;
+  border-radius:16px!important;
+  background:
+    radial-gradient(circle at 13px 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at calc(100% - 13px) 13px,#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at 13px calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    radial-gradient(circle at calc(100% - 13px) calc(100% - 13px),#121a26 0 1.5px,#b7c5d5 2px 3.5px,#3d526e 4px 5.5px,transparent 6px),
+    repeating-linear-gradient(90deg,#ffffff06 0 1px,#00000006 1px 3px),
+    linear-gradient(145deg,#293f5d,#192d47 52%,#101a2a)!important;
+  box-shadow:inset 0 1px 2px #ffffff55,inset 0 0 0 5px #0d1624,0 14px 34px #000b!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sthead {
+  border-color:#344760!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,#131d2e,#090e17)!important;
+  box-shadow:inset 0 1px #ffffff20,0 3px 12px #0008!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stcurrent {
+  border-color:#465d78!important;
+  border-radius:10px!important;
+  background:linear-gradient(145deg,#26374e,#111a27)!important;
+  box-shadow:inset 0 1px #ffffff1c,0 3px 6px #0008!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpresets,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscenes,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stmaster,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpads,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stchips {
+  border:1px solid #435b78!important;
+  border-radius:11px!important;
+  background:
+    radial-gradient(circle at 1px 1px,#ffffff16 .8px,transparent 1.2px) 0 0/16px 16px,
+    repeating-linear-gradient(0deg,#ffffff04 0 1px,transparent 1px 4px),
+    linear-gradient(145deg,#111c2c,#0a121e)!important;
+  box-shadow:inset 0 1px #ffffff20,inset 0 -5px 10px #0009,0 2px 4px #0006!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbanks,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpadkeys,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stfs,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .ststage-slots,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stslots {
+  border:1px solid #354b68!important;
+  border-radius:8px!important;
+  background:
+    radial-gradient(circle at 1px 1px,#ffffff12 .8px,transparent 1.2px) 0 0/16px 16px,
+    linear-gradient(145deg,#0f1a2a,#0a121e)!important;
+  box-shadow:inset 0 1px #ffffff12,inset 0 -3px 8px #0008!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbank,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpadkey,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbtn {
+  border:1px solid #465d78!important;
+  border-radius:8px!important;
+  background:linear-gradient(145deg,#26374e,#121c2b)!important;
+  box-shadow:inset 0 1px #ffffff1c,0 3px 6px #0008!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbank.on {
+  position:relative;
+  border-color:#465d78!important;
+  background:linear-gradient(145deg,color-mix(in srgb,#e4b85e 9%,#26374e),color-mix(in srgb,#e4b85e 9%,#111a27))!important;
+  box-shadow:inset 0 1px #ffffff1c,0 3px 6px #0008!important;
+  color:#f6d486!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbank.on::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:3px;
+  border-radius:0 3px 3px 0;
+  background:#e4b85e;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset::before,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene::before {background:#75e1ff!important}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset.on {
+  border-color:#e4b85e!important;
+  background:linear-gradient(145deg,#26374e,#121c2b)!important;
+  color:#f6d486!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset.on::before {
+  left:0;
+  right:auto;
+  top:8px;
+  bottom:8px;
+  width:3px;
+  height:auto;
+  border-radius:0 3px 3px 0;
+  background:#e4b85e!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset-name {
+  display:block;
+  width:auto;
+  min-height:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent!important;
+  color:#edf4fc!important;
+  font:600 clamp(12px,1.3vw,16px)/1.1 var(--ft);
+  text-align:center;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpreset.empty .stpreset-name {color:#8da2b9!important}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene.on,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpadkey.selected,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpadkey.on,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stpadkey.drop-target {
+  border-color:#75e1ff!important;
+  background:linear-gradient(145deg,#24435c,#14283d)!important;
+  box-shadow:inset 0 1px 0 #ffffff24,0 0 12px #49c9fa33,0 3px 6px #0008!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene.on::before {background:#75e1ff!important}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene small,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stscene.on small,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile .num,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile .sub,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile .row i {color:#a7b8cc!important}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbadge {
+  border-radius:6px!important;
+  background:linear-gradient(145deg,#9cecff,#4db9df)!important;
+  box-shadow:inset 0 1px #ffffff99,0 2px 4px #0007!important;
+  color:#07101e!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbtn {
+  border-radius:7px!important;
+  background:linear-gradient(180deg,#26374e,#121c2b)!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbtn.locked,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stnav-controls .stbtn.on {
+  border-color:#75e1ff!important;
+  background:linear-gradient(180deg,#9cecff,#48bce3)!important;
+  box-shadow:inset 0 1px #ffffffb3,0 3px 6px #0007!important;
+  color:#07101e!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stbtn.locked {
+  border-color:#e4b85e!important;
+  background:linear-gradient(180deg,#f6d486,#b98935)!important;
+  color:#1b1720!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stchip {
+  border:1px solid color-mix(in srgb,var(--cc) 60%,#c5d7e9)!important;
+  border-radius:10px!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--cc) 84%,#e9f4ff 16%) 0 4px,transparent 4px),
+    radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--cc) 24%,transparent),transparent 78%),
+    linear-gradient(150deg,#2b3d55,#18263a 55%,#0c1421)!important;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--cc) 82%,#eaf5ff),inset 1px 0 #ffffff38,inset -2px -4px 0 #000a,
+    0 5px 0 #050a12,0 14px 22px #0009!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stchip.off {
+  border-color:color-mix(in srgb,var(--cc) 42%,#71849b)!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--cc) 42%,#415064) 0 4px,transparent 4px),
+    linear-gradient(150deg,#1c2838,#111b29 55%,#0a111c)!important;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--cc) 38%,#58677a),inset 0 1px #ffffff12,inset 0 -4px #0009,
+    0 5px 0 #050a12,0 14px 22px #0009!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .stchip-name {
+  border:1px solid color-mix(in srgb,var(--cc) 42%,#71849b)!important;
+  border-radius:4px!important;
+  background:linear-gradient(180deg,#0c1725e8,#07101be8)!important;
+  color:#edf5ff!important;
+  text-shadow:0 1px 2px #000;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile {
+  border:1px solid #465d78!important;
+  border-radius:10px!important;
+  background:linear-gradient(150deg,#2b3d55,#18263a 55%,#0c1421)!important;
+  box-shadow:inset 0 1px 0 #ffffff1c,inset -2px -4px 0 #0009,0 5px 0 #050a12,0 14px 22px #0009!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act {
+  border-color:color-mix(in srgb,var(--tc) 60%,#c5d7e9)!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--tc) 84%,#e9f4ff 16%) 0 4px,transparent 4px),
+    radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--tc) 24%,transparent),transparent 78%),
+    linear-gradient(150deg,#2b3d55,#18263a 55%,#0c1421)!important;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--tc) 82%,#eaf5ff),inset 1px 0 #ffffff38,inset -2px -4px 0 #000a,
+    0 5px 0 #050a12,0 14px 22px #0009!important;
+  color:#edf4fc!important;
+}
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .num,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .sub,
+body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#a7b8cc!important}
+.stage.on .stscenes {
+  grid-template-rows:none;
+  grid-auto-rows:minmax(clamp(88px,13vh,108px),auto);
+  align-content:start;
+}
+.stage.on #stPresets {
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto auto;
+  gap:clamp(6px,1vw,10px);
+  min-width:0;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.stage.on #stBanks {
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-rows:repeat(2,minmax(clamp(68px,10vh,100px),auto));
+  align-content:stretch;
+  gap:clamp(4px,.8vw,8px);
+  height:auto;
+  min-width:0;
+  padding:clamp(5px,.8vw,8px);
+  border:1px solid var(--sedge);
+  border-radius:9px;
+  background:linear-gradient(145deg,#111c2c,#0a121e);
+  box-shadow:inset 0 1px #ffffff20,inset 0 -4px 8px #0009,0 3px 6px #0008;
+}
+.stage.on #stBanks .stbank {
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  min-height:clamp(68px,10vh,100px);
+  border:1px solid #465d78!important;
+  border-radius:8px!important;
+  background:linear-gradient(145deg,#26374e,#121c2b)!important;
+  box-shadow:inset 0 1px #ffffff1c,0 3px 6px #0008!important;
+  color:#edf4fc!important;
+  font-weight:900;
+}
+.stage.on #stBanks .stbank-label {
+  position:relative;
+  z-index:1;
+  font:900 clamp(12px,1.3vw,16px)/1 var(--fd);
+  letter-spacing:.4px;
+  text-shadow:0 1px 2px #0009;
+  text-transform:uppercase;
+}
+.stage.on #stStageSlots {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  align-content:stretch;
+  min-width:0;
+  min-height:0;
+  padding:clamp(5px,.8vw,8px);
+  border:1px solid var(--sedge);
+  border-radius:9px;
+  background:linear-gradient(145deg,#111c2c,#0a121e);
+  box-shadow:inset 0 1px #ffffff20,inset 0 -4px 8px #0009,0 3px 6px #0008;
+}
+.stage.on #stStageSlots .stslots {
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-content:stretch;
+  gap:clamp(4px,.8vw,8px);
+  height:auto;
+  min-width:0;
+  min-height:0;
+  padding:0;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.stage.on #stStageSlots .stpreset {
+  display:flex;
+  grid-column:auto!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:0;
+  min-height:clamp(72px,10vh,96px);
+  padding:clamp(4px,.8vw,8px);
+  border:1px solid #465d78;
+  border-radius:8px!important;
+  background:linear-gradient(145deg,#26374e,#121c2b);
+  box-shadow:inset 0 1px #ffffff1c,inset 0 -3px #0008,0 3px 6px #0008;
+  color:#edf4fc;
+}
+.stage.on #stStageSlots .stpreset::before {display:none}
+.stage.on #stStageSlots .stpreset-slot {
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  display:block;
+  width:auto!important;
+  height:auto!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:inherit;
+  font:950 clamp(26px,min(5vw,7vh),52px)/.9 var(--fd);
+  letter-spacing:0;
+}
+.stage.on #stStageSlots .stpreset-slot::after {display:none!important;content:none!important}
+.stage.on #stStageSlots .stpreset-name {
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#a7b8cc;
+  font:700 clamp(10px,1.3vw,14px)/1.1 var(--ft);
+  text-align:center;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.stage.on #stStageSlots .stpreset.empty .stpreset-name {color:#8293aa}
+.stage.on #stBanks .stbank.on {
+  border-color:#e4b85e!important;
+  background:linear-gradient(145deg,#302b20,#171b24)!important;
+  box-shadow:inset 0 1px #ffffff28,inset 0 -3px #0008,0 0 10px #e4b85e30,0 3px 6px #0008!important;
+  color:#f6d486!important;
+}
+.stage.on #stStageSlots .stpreset.on {
+  border-color:#e4b85e!important;
+  background:linear-gradient(145deg,#302b20,#171b24)!important;
+  box-shadow:inset 0 1px #ffffff28,inset 0 -3px #0008,0 0 10px #e4b85e30,0 3px 6px #0008!important;
+  color:#f6d486!important;
+}
+.stage.on #stStageSlots .stpreset.on .stpreset-name {color:#e2c47f!important}
+.stage.on .stpads-head {
+  display:flex;
+  min-width:0;
+  align-items:center;
+  gap:8px;
+}
+.stage.on .stpads-title {
+  flex:0 1 auto;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.stage.on .stpads-status {
+  flex:1 1 0;
+  min-width:0;
+  max-width:clamp(0px,45vw,360px);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+@media (min-width:600px) and (max-width:760px) and (orientation:landscape) {
+  .stage.on .stmaster {
+    grid-template-columns:auto auto minmax(0,1fr) auto;
+    grid-template-rows:auto auto;
+    min-height:92px;
+  }
+  .stage.on .stmaster-pedal {
+    position:relative;
+    grid-column:1/-1;
+    grid-row:2;
+    display:flex;
+    align-items:center;
+    justify-self:stretch;
+    width:auto;
+    height:24px;
+    min-height:0;
+    max-width:none;
+    overflow:visible;
+    perspective:none;
+  }
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after,
+  .stage.on .stmaster-treadle {display:none!important}
+  .stage.on #stMasterVolume {
+    position:static!important;
+    inset:auto!important;
+    width:100%!important;
+    height:20px!important;
+    min-height:20px!important;
+    margin:0;
+    padding:0;
+    border:0;
+    appearance:none;
+    -webkit-appearance:none;
+    clip-path:none!important;
+    writing-mode:horizontal-tb;
+    direction:ltr;
+    background:transparent;
+    cursor:ew-resize;
+    touch-action:pan-x;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    width:100%;
+    height:6px;
+    border:1px solid #29313a;
+    border-radius:999px;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+    box-shadow:inset 0 1px 3px #000b;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    width:22px;
+    height:18px;
+    margin-top:-6px;
+    border:1px solid #738191;
+    border-radius:6px;
+    appearance:none;
+    -webkit-appearance:none;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+  }
+  .stage.on #stMasterVolume::-moz-range-track {
+    width:100%;
+    height:6px;
+    border:1px solid #29313a;
+    border-radius:999px;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720);
+    box-shadow:inset 0 1px 3px #000b;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:22px;
+    height:18px;
+    border:1px solid #738191;
+    border-radius:6px;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c);
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b;
+  }
+  .stage.on .stmaster-readout {
+    grid-column:4;
+    grid-row:1;
+    justify-self:end;
+    white-space:nowrap;
+  }
+}
+@media (max-width:760px) {
+  .stage.on > .stnav {position:relative!important;flex:0 0 auto}
+  .stage.on > .stpads {
+    position:relative!important;
+    inset:auto!important;
+    transform:none!important;
+    flex:0 0 auto;
+    margin-top:clamp(12px,1.8vh,16px)!important;
+  }
+}
+@media (min-width:761px) and (orientation:landscape) {
+  .stage.on {
+    grid-template-rows:auto clamp(82px,12vh,98px) minmax(0,1fr) minmax(clamp(88px,13vh,108px),auto) minmax(150px,22vh);
+  }
+}
+@media (min-width:761px) and (orientation:landscape) and (max-height:600px) {
+  .stage.on {
+    grid-template-rows:auto 68px minmax(0,1fr) minmax(clamp(88px,13vh,108px),auto) minmax(78px,16vh);
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- alfa 10: la app de Android, la primera vez: elegir el idioma (LANG_ASK). Los nombres van cada uno en su idioma: no se traducen -->
@@ -5239,7 +6204,8 @@ body.staging .stbrand-stage .wordmark .creditline {
   </div>
   <div class="stsection" aria-hidden="true">Presets</div>
   <div class="stpresets" id="stPresets">
-    <div class="stbanks" id="stBanks" role="group" aria-label="Presets"></div>
+    <div class="stbanks" id="stBanks" role="group" aria-label="Preset banks"></div>
+    <div class="ststage-slots" id="stStageSlots"></div>
   </div>
   <aside class="stmaster" aria-label="Master output gain for the pedal and continuous pad audio">
     <button class="stmaster-mute" id="stMasterMute" type="button" aria-pressed="false" aria-label="Set pedal OUTPUT to minimum and mute continuous pad audio" title="The pedal OUTPUT control bottoms out at -30 dB; continuous pad audio is fully muted.">MUTE</button>
@@ -5257,7 +6223,6 @@ body.staging .stbrand-stage .wordmark .creditline {
     </label>
     <output class="stmaster-readout" id="stMasterValue" for="stMasterVolume">OUT · +12 dB</output>
   </aside>
-  <div class="ststage-slots" id="stStageSlots"></div>
   <div class="stsection" aria-hidden="true">Scenes</div>
   <div class="stscenes" id="stScenes" role="group" aria-label="Scenes"></div>
   <div class="stpads" role="group" aria-label="Continuous pad">
@@ -5266,25 +6231,28 @@ body.staging .stbrand-stage .wordmark .creditline {
       <span class="stpads-status" id="stPadsStatus">Pads stopped</span>
     </div>
     <input id="stPadFile" type="file" accept=".mp3,audio/mpeg" hidden>
-      <div class="stpadkeys" id="stPadKeys">
-        <button type="button" class="stpadkey selected" data-note="C" aria-label="C pad. Click to import or play; drop an MP3 to assign">C</button>
-        <button type="button" class="stpadkey" data-note="C#" aria-label="C sharp pad. Click to import or play; drop an MP3 to assign">C#</button>
-        <button type="button" class="stpadkey" data-note="D" aria-label="D pad. Click to import or play; drop an MP3 to assign">D</button>
-        <button type="button" class="stpadkey" data-note="D#" aria-label="D sharp pad. Click to import or play; drop an MP3 to assign">D#</button>
-        <button type="button" class="stpadkey" data-note="E" aria-label="E pad. Click to import or play; drop an MP3 to assign">E</button>
-        <button type="button" class="stpadkey" data-note="F" aria-label="F pad. Click to import or play; drop an MP3 to assign">F</button>
-        <button type="button" class="stpadkey" data-note="F#" aria-label="F sharp pad. Click to import or play; drop an MP3 to assign">F#</button>
-        <button type="button" class="stpadkey" data-note="G" aria-label="G pad. Click to import or play; drop an MP3 to assign">G</button>
-        <button type="button" class="stpadkey" data-note="G#" aria-label="G sharp pad. Click to import or play; drop an MP3 to assign">G#</button>
-        <button type="button" class="stpadkey" data-note="A" aria-label="A pad. Click to import or play; drop an MP3 to assign">A</button>
-        <button type="button" class="stpadkey" data-note="A#" aria-label="A sharp pad. Click to import or play; drop an MP3 to assign">A#</button>
-        <button type="button" class="stpadkey" data-note="B" aria-label="B pad. Click to import or play; drop an MP3 to assign">B</button>
-      </div>
+    <div class="stpadkeys" id="stPadKeys">
+      <button type="button" class="stpadkey selected" data-note="C" aria-label="C pad. Click to import or play; drop an MP3 to assign">C</button>
+      <button type="button" class="stpadkey" data-note="C#" aria-label="C sharp pad. Click to import or play; drop an MP3 to assign">C#</button>
+      <button type="button" class="stpadkey" data-note="D" aria-label="D pad. Click to import or play; drop an MP3 to assign">D</button>
+      <button type="button" class="stpadkey" data-note="D#" aria-label="D sharp pad. Click to import or play; drop an MP3 to assign">D#</button>
+      <button type="button" class="stpadkey" data-note="E" aria-label="E pad. Click to import or play; drop an MP3 to assign">E</button>
+      <button type="button" class="stpadkey" data-note="F" aria-label="F pad. Click to import or play; drop an MP3 to assign">F</button>
+      <button type="button" class="stpadkey" data-note="F#" aria-label="F sharp pad. Click to import or play; drop an MP3 to assign">F#</button>
+      <button type="button" class="stpadkey" data-note="G" aria-label="G pad. Click to import or play; drop an MP3 to assign">G</button>
+      <button type="button" class="stpadkey" data-note="G#" aria-label="G sharp pad. Click to import or play; drop an MP3 to assign">G#</button>
+      <button type="button" class="stpadkey" data-note="A" aria-label="A pad. Click to import or play; drop an MP3 to assign">A</button>
+      <button type="button" class="stpadkey" data-note="A#" aria-label="A sharp pad. Click to import or play; drop an MP3 to assign">A#</button>
+      <button type="button" class="stpadkey" data-note="B" aria-label="B pad. Click to import or play; drop an MP3 to assign">B</button>
+    </div>
     <div class="stpads-volume">
       <label class="stpad-volume-control" for="stPadVolume">
         <input id="stPadVolume" type="range" min="0" max="100" value="27" aria-label="Continuous pad volume">
         <output id="stPadVolumeValue" for="stPadVolume">27%</output>
       </label>
+      <button type="button" class="stpadoutput" id="stPadOutput" aria-label="Choose Tank-G as pad audio output" title="Choose Tank-G as pad audio output" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6l-5 4H4z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M18.5 6.5a8.5 8.5 0 0 1 0 11"/></svg>
+      </button>
       <button type="button" class="stpadstop" id="stPadStop" aria-label="Stop continuous pad">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
         <span class="sr-only">STOP</span>
@@ -9617,7 +10585,7 @@ function rowEvents(d, it, onPwr, onMenu) {
 }
 function blockRow(it, si) {
   const lk = lookOf(it.type), nm = esc(lk.name);
-  const d = el("div", "blk vrow" + ahdCls(it.type) + (si != null ? " seg" : "") + (it.on ? "" : " off") + (S.sel === it.id ? " sel" : ""));
+  const d = el("div", "blk vrow" + (it.type === "ir" ? " cab" : "") + ahdCls(it.type) + (si != null ? " seg" : "") + (it.on ? "" : " off") + (S.sel === it.id ? " sel" : ""));
   d.style.setProperty("--c", lk.c);
   d.dataset.id = it.id; if (si != null) d.dataset.si = si;
   d.innerHTML = `<span class="grip" role="button" aria-label="Drag to move ${nm}"></span><span class="led"></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${lk.ico}</svg><div class="nm">${nm}</div><div class="tk">${blkPct(it)}</div>`
@@ -13452,6 +14420,7 @@ function stActive(f) {
 }
 function stRender() {
   if (!stOpen) return;
+  if (!stFsReady && !stFsLoading && (S.connected || DEMO)) { stFsLoading = true; fsLoad().catch(() => {}).finally(() => { stFsLoading = false; }); }   /* el mapa de pedaleras de ESTE pedal (al abrir y al reconectar) */
   const st = $("stage"), tab = fsTab || fsDefault();
   st.classList.toggle("nopedal", !S.connected && !DEMO);
   if (!S.connected && !DEMO) { barSet($("inBar"), 0); barSet($("outBar"), 0); txtSet($("inDb"), "–"); txtSet($("outDb"), "–"); }
@@ -13484,7 +14453,7 @@ function stRender() {
       const active = !!preset && index === curPreset, label = `${slot} - ${name}`;
       return `<button type="button" class="stpreset${active ? " on" : ""}${preset ? "" : " empty"}"${preset ? ` data-preset="${index}"` : ""} title="${esc(label)}" aria-label="${esc(label)}" aria-pressed="${active}"${!preset || !available || stSwitching ? " disabled" : ""}><span class="stpreset-slot" data-noi18n>${slot}</span><span class="stpreset-name"${preset ? " data-noi18n" : ""}>${esc(name)}</span></button>`;
     }).join("");
-    banksHost.innerHTML = banks + slots;
+    banksHost.innerHTML = banks;
     slotsHost.innerHTML = `<div class="stslots" role="group" aria-label="${esc(T("Bank {n}", { n: stBank + 1 }))}">${slots}</div>`;
   }
   const scenesSig = JSON.stringify([S.snaps, S.snapNames, S.snap, available, stSwitching, LANG]);
@@ -13492,7 +14461,7 @@ function stRender() {
     stScenesSig = scenesSig;
     $("stScenes").innerHTML = [0, 1, 2, 3].map(k => {
       const has = !!S.snaps[k], name = has && S.snapNames[k];
-      return `<button type="button" class="stscene${has && S.snap === k ? " on" : ""}" data-scene="${k}" aria-pressed="${has && S.snap === k}"${!has || !available || stSwitching ? " disabled" : ""}>${esc(T("Scene {n}", { n: k + 1 }))}${name ? `<small data-noi18n>${esc(name)}</small>` : !has ? `<small>${esc(T("empty"))}</small>` : ""}</button>`;
+      return `<button type="button" class="stscene${has && S.snap === k ? " on" : ""}" data-scene="${k}" aria-pressed="${has && S.snap === k}"${!has || !available || stSwitching ? " disabled" : ""}><span class="stscene-number">${esc(T("Scene {n}", { n: k + 1 }))}</span>${name ? `<small data-noi18n>${esc(name)}</small>` : !has ? `<small>${esc(T("empty"))}</small>` : ""}</button>`;
     }).join("");
   }
   const bpm = S.bpm >= 200 ? S.bpm : 1200;
@@ -13519,10 +14488,7 @@ function stRender() {
     + `<span class="r1"><span class="stled"></span><span class="num">${t.f + 1}</span>${t.act ? `<span class="play">${(fsTab || fsDefault())[t.f][0][0] === 2 ? "Loaded" : (fsTab || fsDefault())[t.f][0][0] === 9 ? "On" : "Playing"}</span>` : ""}</span>`
     + `<span class="big">${stTx(t.A.big, t.A.nm)}</span><span class="sub">${stTx(t.A.sub, t.A.nm)}</span><span class="gap"></span>`
     + `<span class="row"><i>2× tap</i><span>${stRowH(t.dx, t.dbl)}</span></span><span class="row"><i>Hold</i><span>${stRowH(t.hx, t.hold)}</span></span></button>`).join("");
-  $("stChips").innerHTML = chain.map((c,i) => {
-    const name=T(c[0]),on=c[2],color=c[1];
-   return `<button type="button" class="stchip liveEffectCard${on?" on":" off"}" data-effect="${esc(String(c[3]))}" style="--cc:${color}" aria-label="${esc(name)}" aria-pressed="${!!on}"${!available||stSwitching||stFxBusy?" disabled":""}><i class="liveEffectLed" aria-hidden="true"></i><span class="liveEffectName">${esc(name)}</span><span class="liveEffectState">${on?"ON":"OFF"}</span></button>`;
-  }).join("");
+  $("stChips").innerHTML=chain.map((c,i)=>`<button type="button" class="stchip liveEffectCard${c[2]?" on":" off"}" data-effect="${esc(String(c[3]))}" style="--cc:${c[1]}" aria-label="${esc(T(c[0]))}" aria-pressed="${!!c[2]}"${!available||stSwitching||stFxBusy?" disabled":""}><span class="liveEffectName">${esc(T(c[0]))}</span><span class="liveEffectState">${c[2]?"ON":"OFF"}</span></button>`).join("");
 }
 async function stDo(x) {
   const [t, a] = x;
@@ -13663,8 +14629,6 @@ async function stSwitch(kind, n) {
   }
 }
 $("stPresets").onclick = e => {
-  const preset = e.target.closest("button[data-preset]");
-  if (preset) { stSwitch("preset", +preset.dataset.preset); return; }
   const bank = e.target.closest("button[data-bank]");
   if (bank) { stBank = +bank.dataset.bank; stRender(); }
 };
@@ -14020,8 +14984,7 @@ $("fmChip").onclick = () => { if (S.fm) fmSetMode(!S.fm.live); };
 function applyMeters(d) {
   barSet($("inBar"), dbBar(d.i)); barSet($("outBar"), dbBar(d.o));
   txtSet($("inDb"), d.i <= -1400 ? "–∞" : numL((d.i / 10).toFixed(1))); txtSet($("outDb"), d.o <= -1400 ? "–∞" : numL((d.o / 10).toFixed(1)));
-  S.inDb10 = d.i; S.outDb10 = d.o;
-  stMasterSignalUpdate(d.o);
+  S.inDb10 = d.i;
   if (Date.now() - (S.lvlFullT || 0) > 250) { $("inClip").classList.toggle("on", false); $("outClip").classList.toggle("on", false); }   /* un recorte nuevo sube g: lo prende el LVL entero */
   $("outLim").classList.toggle("on", d.lr < 0); { const t = T("Output limiter: {db} dB", { db: numL((d.lr / 10).toFixed(1)) }); if ($("outLim").title !== t) $("outLim").title = t; }
   S.cpu = [d.fu, d.fb]; S.eng = [d.e, d.lim]; engSeen();
@@ -14105,9 +15068,7 @@ function applyLvl(l) {
   Log.lvl({ i, o, ci, co, ce, fu, fb, mem, sk, md, und: S.undTot ?? undefined, e: ea ? +ea[2] : 0, lim: ea ? +ea[3] : 0, p: cp ? +cp[2] : null, s: bs ? +bs[2] : null });
   barSet($("inBar"), dbBar(i)); barSet($("outBar"), dbBar(o));
   txtSet($("inDb"), i <= -1400 ? "–∞" : numL((i / 10).toFixed(1))); txtSet($("outDb"), o <= -1400 ? "–∞" : numL((o / 10).toFixed(1)));
-  S.inDb10 = i; S.outDb10 = o;
-  stMasterSignalUpdate(o);
-                                                              /* M5.0: el dibujo del panel de pedaleras con el medidor "Always" */
+  S.inDb10 = i;                                              /* M5.0: el dibujo del panel de pedaleras con el medidor "Always" */
   $("inClip").classList.toggle("on", ci > clipIn); $("outClip").classList.toggle("on", co > clipOut); clipIn = ci; clipOut = co;
   const lm = l.match(/ lim=(-?\d+)/);                       /* limitador de salida: reduccion maxima desde el LVL anterior, dB x10 (<= 0) */
   $("outLim").classList.toggle("on", !!lm && +lm[1] < 0); if (lm) $("outLim").title = T("Output limiter: {db} dB", { db: numL((+lm[1] / 10).toFixed(1)) });
@@ -18978,15 +19939,7 @@ const stMasterDb = volume => Math.round(ST_MASTER_MIN_DB + volume * (ST_MASTER_M
 const stMasterLevel = db => (Math.max(ST_MASTER_MIN_DB, Math.min(ST_MASTER_MAX_DB, db)) - ST_MASTER_MIN_DB) / (ST_MASTER_MAX_DB - ST_MASTER_MIN_DB);
 const stMasterAudioLevel = volume => volume <= 0 ? 0 : Math.pow(10, (stMasterDb(volume) - ST_MASTER_MAX_DB) / 20);
 const stMasterDbLabel = db => `${db > 0 ? "+" : ""}${db} dB`;
-let stPadAudio = null, stPadAudioNote = "", stPadTargetNote = "", stPadVolume = 0.27, stMasterVolume = stMasterLevel(S.gain[1]), stMasterUnmutedVolume = stMasterVolume, stMasterMuted = false, stMasterUserAdjusted = false, stMasterGainTimer = 0;
-function stMasterSignalUpdate(db10) {
-  const meter = $("stMasterLineMeter");
-  if (!meter) return;
-  const db = Number.isFinite(db10) ? db10 / 10 : -60;
-  const level = db <= -140 ? 0 : Math.max(0, Math.min(100, (db + 60) / 60 * 100));
-  meter.style.setProperty("--stmaster-level", `${level.toFixed(1)}%`);
-  meter.setAttribute("aria-valuenow", db.toFixed(1));
-}
+let stPadAudio = null, stPadAudioNote = "", stPadTargetNote = "", stPadAudioSinkId = "", stPadAudioSinkName = "", stPadVolume = 0.27, stMasterVolume = stMasterLevel(S.gain[1]), stMasterUnmutedVolume = stMasterVolume, stMasterMuted = false, stMasterUserAdjusted = false, stMasterGainTimer = 0;
 function stMasterSyncFromOutput() {
   if (stMasterMuted) return;
   stMasterVolume = stMasterLevel(S.gain[1]);
@@ -19051,6 +20004,19 @@ $("stMasterMute").addEventListener("click", () => {
   if (!stMasterSetOutput()) toast("Connect the pedal to control its OUTPUT gain.", "warn");
 });
 $("stMasterFocus").addEventListener("click", () => $("stMasterVolume").focus());
+function stPadStatusSet(message, detail = "") {
+  const status = $("stPadsStatus");
+  if (!status) return;
+  status.textContent = message;
+  const fullMessage = detail ? `${message}. ${detail}` : message;
+  if (fullMessage.length > 42) {
+    status.title = fullMessage;
+    status.setAttribute("aria-label", fullMessage);
+  } else {
+    status.removeAttribute("title");
+    status.removeAttribute("aria-label");
+  }
+}
 function stPadStop() {
   const audio = stPadAudio;
   stPadAudio = null;
@@ -19063,8 +20029,7 @@ function stPadStop() {
     if (url.startsWith("blob:")) URL.revokeObjectURL(url);
   }
   document.querySelectorAll(".stpadkey").forEach(button => button.classList.remove("on"));
-  const status = $("stPadsStatus");
-  if (status) status.textContent = stPadFiles.size ? "Pad stopped" : "Pads stopped";
+  stPadStatusSet(stPadFiles.size ? "Pad stopped" : "Pads stopped");
 }
 function stPadSelect(note) {
   document.querySelectorAll(".stpadkey").forEach(button => button.classList.toggle("selected", button.dataset.note === note));
@@ -19072,11 +20037,11 @@ function stPadSelect(note) {
 function stPadAssign(note, file) {
   if (!file) return;
   if (!/\.mp3$/i.test(file.name) && !/^audio\/mpeg$/i.test(file.type)) {
-    $("stPadsStatus").textContent = "Choose an MP3 file for this pad.";
+    stPadStatusSet("Choose an MP3 file for this pad.");
     return;
   }
   if (!file.size) {
-    $("stPadsStatus").textContent = `${file.name} is empty. Choose another MP3.`;
+    stPadStatusSet(`${file.name} is empty. Choose another MP3.`);
     return;
   }
   if (stPadAudioNote === note) stPadStop();
@@ -19088,11 +20053,47 @@ function stPadAssign(note, file) {
     button.title = `${file.name}. Click to play; drop another MP3 to replace.`;
     button.setAttribute("aria-label", `${note} pad loaded with ${file.name}. Click to play or drop an MP3 to replace.`);
   }
-  $("stPadsStatus").textContent = `${note} pad loaded · ${file.name}`;
+  stPadStatusSet(`${note} pad loaded · ${file.name}`);
+}
+function stPadCanSelectOutput() {
+  return !!(navigator.mediaDevices && typeof navigator.mediaDevices.selectAudioOutput === "function" &&
+    typeof HTMLMediaElement !== "undefined" && typeof HTMLMediaElement.prototype.setSinkId === "function");
+}
+async function stPadChooseOutput() {
+  if (!stPadCanSelectOutput()) {
+    throw Error(APP
+      ? "This app follows Android's system audio route. Pair Tank-G and select it as the media output in Bluetooth settings."
+      : "This browser cannot select audio outputs. Pair Tank-G and choose it as the system audio output.");
+  }
+  let device;
+  try {
+    device = stPadAudioSinkId
+      ? await navigator.mediaDevices.selectAudioOutput({ deviceId: stPadAudioSinkId })
+      : await navigator.mediaDevices.selectAudioOutput();
+  } catch (error) {
+    throw Error(`Could not choose an audio output: ${error.message || "selection was cancelled"}`);
+  }
+  if (!device || !device.deviceId) throw Error("The browser did not return an audio output.");
+  if (stPadAudio) {
+    try {
+      await stPadAudio.setSinkId(device.deviceId);
+    } catch (error) {
+      throw Error(`Could not route pad audio to ${device.label || "the selected output"}: ${error.message || "output unavailable"}`);
+    }
+  }
+  stPadAudioSinkId = device.deviceId;
+  stPadAudioSinkName = device.label || "selected output";
+  const button = $("stPadOutput");
+  button.classList.add("selected");
+  button.setAttribute("aria-pressed", "true");
+  button.title = `Pad audio output: ${stPadAudioSinkName}. Choose another output.`;
+  button.setAttribute("aria-label", `Pad audio output: ${stPadAudioSinkName}. Choose another output.`);
+  stPadStatusSet(`Pad output · ${stPadAudioSinkName}`);
 }
 async function stPadStart(note) {
   const file = stPadFiles.get(note);
   if (!file) throw Error(`Import or drop an MP3 onto ${note} first.`);
+  if (!stPadAudioSinkId && stPadCanSelectOutput()) await stPadChooseOutput();
   if (!DEMO && S.connected) {
     try {
       await Pedal.cmd("BTM on", "BTM", 5000);
@@ -19109,6 +20110,13 @@ async function stPadStart(note) {
   audio.preload = "none";
   audio.loop = true;
   audio.volume = stMasterMuted ? 0 : stPadVolume * stMasterAudioLevel(stMasterVolume);
+  if (stPadAudioSinkId) {
+    try {
+      await audio.setSinkId(stPadAudioSinkId);
+    } catch (error) {
+      throw Error(`Could not route pad audio to ${stPadAudioSinkName}: ${error.message || "output unavailable"}`);
+    }
+  }
   audio.src = URL.createObjectURL(file);
   stPadAudio = audio;
   stPadAudioNote = note;
@@ -19118,7 +20126,7 @@ async function stPadStart(note) {
       stPadAudioNote = "";
       URL.revokeObjectURL(audio.src);
       document.querySelectorAll(".stpadkey").forEach(button => button.classList.remove("on"));
-      $("stPadsStatus").textContent = `Could not play the MP3 assigned to ${note}.`;
+      stPadStatusSet(`Could not play the MP3 assigned to ${note}.`);
     }
   });
   try {
@@ -19133,7 +20141,7 @@ async function stPadStart(note) {
   }
   if (stPadAudio !== audio) return;
   document.querySelectorAll(".stpadkey").forEach(button => button.classList.toggle("on", button.dataset.note === note));
-  $("stPadsStatus").textContent = `${note} · MP3 playing`;
+  stPadStatusSet(`${note} · MP3 playing${stPadAudioSinkName ? ` · ${stPadAudioSinkName}` : " · system audio"}`);
 }
 $("stPadFile").addEventListener("change", event => {
   const file = event.target.files && event.target.files[0];
@@ -19147,11 +20155,17 @@ $("stPadVolume").addEventListener("input", event => {
   $("stPadVolumeValue").textContent = `${Math.round(stPadVolume * 100)}%`;
 });
 document.addEventListener("click", e => {
+  if (e.target.closest("#stPadOutput")) {
+    stPadChooseOutput().catch(error => {
+      stPadStatusSet("Audio output unavailable", error.message);
+    });
+    return;
+  }
   const key = e.target.closest(".stpadkey");
   if (key) {
     stPadSelect(key.dataset.note);
     if (stPadFiles.has(key.dataset.note)) stPadStart(key.dataset.note).catch(error => {
-      const status = $("stPadsStatus"); if (status) status.textContent = `Pad error: ${error.message}`;
+      stPadStatusSet("Pad error", error.message);
     });
     else {
       stPadTargetNote = key.dataset.note;
