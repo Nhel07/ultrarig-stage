@@ -1558,7 +1558,7 @@ body.st-amoled .stcurrent, body.st-mono .stcurrent { background: #000; border-co
 body.st-amoled .stbank.on, body.st-mono .stbank.on, body.st-amoled .stpreset.on, body.st-mono .stpreset.on { background: #000; color: var(--rig); border-color: var(--rig); box-shadow: inset 0 0 0 2px var(--rig); }
 .stnav-controls .stbtn.on { background: var(--rig); color: #071011; }
 body.st-amoled .stnav-controls .stbtn.on, body.st-mono .stnav-controls .stbtn.on { background: #000; color: var(--rig); box-shadow: inset 0 0 0 2px var(--rig); }
-.stscenes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; flex: 1 0 0; min-height: 92px; }
+.stscenes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; flex: 1 0 0; min-height: 92px; box-sizing: border-box; padding: 10px; border: 1px solid var(--sedge); border-radius: 12px; background: var(--sbg); }
 .stscene { position: relative; min-width: 0; padding: 12px; border: 1px solid var(--sedge); border-radius: 10px !important; background: var(--stile); color: var(--stx); font: 700 clamp(18px, 2vw, 26px)/1.1 var(--ft); cursor: pointer; overflow-wrap: anywhere; }
 .stscene small { display: block; margin-top: 8px; font: 600 15px/1.2 var(--ft); color: var(--sdim); }
 .stscene.on { background: #a6d9e7; border-color: #b9e8f2; box-shadow: inset 0 0 0 1px #fff4; color: #102a35; }
@@ -5975,6 +5975,211 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     grid-template-rows:auto 68px minmax(0,1fr) minmax(clamp(88px,13vh,108px),auto) minmax(78px,16vh);
   }
 }
+@media (min-width:761px) and (orientation:landscape) and (max-height:600px) {
+  .stage.on {
+    gap:clamp(3px,.8vh,6px);
+    padding:clamp(4px,.9vh,7px);
+    grid-template-rows:auto clamp(44px,10vh,64px) minmax(0,1fr) minmax(0,clamp(44px,10vh,64px)) minmax(0,clamp(60px,16vh,96px));
+  }
+  .stage.on .sthead {min-height:0}
+  .stage.on .stnav {height:100%;min-height:0}
+  .stage.on .stcurrent {height:100%;min-height:0}
+  .stage.on .stname {font-size:clamp(13px,3vh,18px)}
+  .stage.on .stpresets {grid-template-rows:minmax(0,1fr) minmax(0,auto);gap:clamp(2px,.5vh,4px);min-height:0}
+  .stage.on .stbanks {grid-template-rows:repeat(2,minmax(20px,.4fr)) repeat(2,minmax(0,1fr));gap:clamp(2px,.5vh,4px);min-height:0}
+  .stage.on .stbank {min-height:0;font-size:clamp(8px,1.25vh,10px)}
+  .stage.on .stpreset {min-height:0;padding:clamp(2px,.5vh,4px)}
+  .stage.on .stpreset-slot {font-size:clamp(13px,2.8vh,22px)}
+  .stage.on .stpreset-name {font-size:clamp(7px,1.3vh,10px)}
+  .stage.on .stscene {min-height:0;padding:clamp(2px,.5vh,4px);font-size:clamp(9px,1.8vh,13px)}
+  .stage.on .stscene small {margin-top:clamp(1px,.3vh,3px);font-size:clamp(7px,1.25vh,9px)}
+  .stage.on .stscenes {min-height:0;grid-template-rows:minmax(0,1fr);padding:clamp(3px,.6vh,6px)}
+  .stage.on .stchips {height:100%;min-height:0;padding:clamp(3px,.6vh,6px)}
+  .stage.on .stchips .liveEffectCard,
+  .stage.on .stchips .stchip.block {height:100%;min-height:0;max-height:100%;padding:clamp(2px,.5vh,5px);gap:clamp(1px,.4vh,3px)}
+  .stage.on .liveEffectName {font-size:clamp(8px,1.25vh,10px)}
+  .stage.on .liveEffectState {font-size:clamp(6px,1vh,8px)}
+  .stage.on .stchip.block .name {font-size:clamp(7px,1.3vh,10px)}
+  .stage.on .stchip.block .type,
+  .stage.on .stchip.block .ledLabel {font-size:clamp(5px,.9vh,7px)}
+  .stage.on .stmaster {gap:clamp(2px,.5vh,4px);padding:clamp(3px,.6vh,6px)}
+}
+@media (max-width:760px) {
+  body.staging .stage.on > .sthead {
+    display:grid!important;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-areas:"brand brand brand brand brand brand" "bpm mode tuner lock nav nav" "meters meters meters meters meters meters";
+    align-items:center;
+    gap:6px;
+  }
+  body.staging .stage.on .stbrand-stage {
+    display:flex!important;
+    grid-area:brand;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    margin:0;
+  }
+  body.staging .stage.on .stbrand-stage .mark {
+    width:54px;
+    height:54px;
+    border-radius:18px;
+  }
+  body.staging .stage.on .stbrand-stage .mark svg {width:30px;height:30px}
+  body.staging .stage.on .stbrand-stage .wordmark {
+    flex:1 1 auto;
+    min-width:0;
+    color:#e5edf8;
+    font:950 19px/1 var(--fd);
+  }
+  body.staging .stage.on .stbrand-stage .wordmark b {color:#83d8ff}
+  body.staging .stage.on .stbrand-stage small {
+    margin-top:5px;
+    font:800 9px/1 var(--ft);
+    letter-spacing:2px;
+    white-space:nowrap;
+  }
+  body.staging .stage.on .stbrand-stage .creditline {
+    display:block!important;
+    max-width:100%;
+    overflow:hidden;
+    font-size:clamp(7px,1.8vw,9px);
+    letter-spacing:0;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  body.staging .stage.on .stbpm {grid-area:bpm;justify-content:center}
+  body.staging .stage.on #stMode {grid-area:mode}
+  body.staging .stage.on #stTuner {grid-area:tuner}
+  body.staging .stage.on #stLock {grid-area:lock}
+  body.staging .stage.on .sthead .stnav-controls {
+    grid-area:nav;
+    display:flex;
+    width:100%;
+    gap:4px;
+  }
+  body.staging .stage.on .stage-meters {
+    grid-area:meters;
+    display:block;
+    width:100%;
+    max-width:none;
+    min-width:0;
+    margin-left:0;
+  }
+  body.staging .stage.on .sthead .grow {display:none!important}
+}
+.stage.on > .stmaster {position:relative;z-index:40;overflow:visible}
+.stage.on > .stmaster .stmaster-pedal {position:relative;z-index:41;overflow:visible}
+.stage.on > .stmaster .stmaster-pedal input {z-index:42!important}
+.stage.on .stcurrent {
+  min-width:0;
+  gap:clamp(2px,.7vh,6px);
+  padding:clamp(4px,.9vh,10px) clamp(6px,1vw,14px);
+}
+.stage.on .stpreset-meta,
+.stage.on .stpreset-status {
+  min-width:0;
+  font-size:clamp(8px,min(2.6vw,1.7vh),12px);
+  line-height:1.1;
+}
+.stage.on .stpreset-meta {overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.stage.on .stpreset-status {white-space:nowrap}
+.stage.on .stname {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  overflow:hidden;
+  overflow-wrap:anywhere;
+  white-space:normal;
+  font-size:clamp(14px,min(5vw,3vh),26px);
+  line-height:1.05;
+}
+@media (min-width:761px) and (orientation:landscape) {
+  .stage.on .stcurrent {
+    height:100%;
+    min-height:0;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-rows:minmax(0,auto) minmax(0,1fr) minmax(0,auto);
+    align-content:center;
+  }
+}
+@media (min-width:761px) and (orientation:landscape) and (max-height:600px) {
+  .stage.on .stcurrent {gap:2px;padding:3px 6px}
+  .stage.on .stname {
+    display:block;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:clamp(13px,3vh,17px);
+  }
+}
+.mdlg-back.warning-back {
+  background:rgba(13,14,16,.45);
+  backdrop-filter:blur(7px) saturate(.6);
+  -webkit-backdrop-filter:blur(7px) saturate(.6);
+}
+.mdlg.warning {
+  width:min(780px,100%);
+  border:1px solid var(--line2);
+  border-radius:16px;
+  padding:26px 30px;
+  background:#111a27;
+  text-align:center;
+}
+.mdlg.warning::before {
+  content:"!";
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  margin:0 auto 16px;
+  border:2px solid #91a6be;
+  border-radius:50%;
+  color:#91a6be;
+  font:700 28px/1 var(--ft);
+}
+.mdlg.warning h2 {
+  margin:0 0 8px;
+  color:var(--text);
+  font:700 clamp(18px,2.2vw,24px)/1.15 var(--ft);
+  letter-spacing:0;
+  text-transform:none;
+}
+.mdlg.warning .mdlg-body {
+  color:var(--dim);
+  font-size:clamp(14px,1.25vw,17px);
+  line-height:1.45;
+}
+.mdlg.warning .mdlg-acts {justify-content:center;gap:10px;margin-top:20px}
+.mdlg.warning .mdlg-acts.col {flex-direction:column;align-items:stretch}
+.mdlg.warning .mdlg-acts.row {flex-direction:row;flex-wrap:wrap;justify-content:center}
+.mdlg.warning .mdlg-acts .btn {
+  min-width:120px;
+  min-height:48px;
+  border-radius:4px!important;
+  font-weight:700;
+}
+.mdlg.warning .mdlg-acts.row .btn,
+.mdlg.warning .mdlg-acts.col .btn {text-align:center}
+.mdlg.warning .mdlg-acts .btn:not(.primary):not(.mdlg-danger) {
+  border:1px solid #536375;
+  background:linear-gradient(180deg,#293a50,#131f2e);
+  color:#eaf1ff;
+}
+.mdlg.warning .mdlg-acts .btn.primary {
+  border:1px solid #e4b85e;
+  background:var(--gold)!important;
+  color:#231a06!important;
+  font-weight:700;
+}
+.mdlg.warning .mdlg-acts .btn:focus-visible {outline:2px solid #f1c867;outline-offset:3px}
+@media (max-width:480px) {
+  .mdlg.warning {padding:18px 16px}
+  .mdlg.warning .mdlg-acts.row .btn {flex:1 1 100%;min-width:0}
+}
 </style>
 
 </head>
@@ -5985,7 +6190,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
 <div class="top" role="banner"><h1 class="sr-only">UltraRig control</h1>
   <div class="brand stbrand-edit" aria-label="StageTone">
     <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
-    <span class="wordmark">Stage<b>Tone</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+    <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
   </div>
   <div class="grow"></div>
   <span id="meterHome" hidden></span><div class="meters" id="meters" title="Levels. Click to set gain" tabindex="0">
@@ -6183,7 +6388,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
   <div class="sthead">
     <div class="stbrand-stage" aria-label="StageTone">
       <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
-      <span class="wordmark">Stage<b>Tone</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+      <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
     </div>
     <div class="stage-meters" id="stageMeters"></div>
     <span class="grow"></span>
@@ -6250,7 +6455,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
         <input id="stPadVolume" type="range" min="0" max="100" value="27" aria-label="Continuous pad volume">
         <output id="stPadVolumeValue" for="stPadVolume">27%</output>
       </label>
-      <button type="button" class="stpadoutput" id="stPadOutput" aria-label="Choose Tank-G as pad audio output" title="Choose Tank-G as pad audio output" aria-pressed="false">
+      <button type="button" class="stpadoutput" id="stPadOutput" aria-label="Choose pad audio output" title="Choose pad audio output" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6l-5 4H4z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M18.5 6.5a8.5 8.5 0 0 1 0 11"/></svg>
       </button>
       <button type="button" class="stpadstop" id="stPadStop" aria-label="Stop continuous pad">
@@ -6556,6 +6761,17 @@ const I18N_ES = {
   "Select preset": "Elegir preset",
   "Edit": "Editar",
   "Save or discard your changes in Edit before switching.": "Guardá o descartá tus cambios en Editar antes de cambiar.",
+  "Choose pad audio output": "Elegí la salida de audio de los pads",
+  "Select where the pads should play.": "Elegí dónde querés escuchar los pads.",
+  "System default output": "Salida predeterminada del sistema",
+  "Audio output {n}": "Salida de audio {n}",
+  "Selected output": "Salida elegida",
+  "Pad audio output": "Salida de audio de los pads",
+  "Choose another output": "Elegí otra salida",
+  "This Android app uses the current system audio output. Change it in Android's media output panel, then continue.": "Esta app de Android usa la salida de audio actual del sistema. Cambiala en el panel de salida multimedia de Android y después continuá.",
+  "This browser can only use the system audio output.": "Este navegador solo puede usar la salida de audio del sistema.",
+  "Use current system output": "Usar la salida actual del sistema",
+  "Continue with system output": "Continuar con la salida del sistema",
   "Tuner": "Afinador",
   "Working…": "Trabajando…",
   "Play a string": "Tocá una cuerda",
@@ -9419,8 +9635,8 @@ const tT = typeof T === "function" ? T : x => x;          /* alfa 10: el idioma 
  *   uiConfirm({ title, body, okLabel, cancelLabel, danger }) -> Promise<boolean>
  *   uiPrompt({ title, body, value, placeholder, maxLength, okLabel, cancelLabel }) -> Promise<string|null>
  *   uiAlert({ title, body, okLabel }) -> Promise<true>
- *   uiChoice({ title, body, choices: [{ label, sub, value, primary }], cancelLabel }) -> Promise<value|null>: opciones apiladas, cada una con su
- *     explicación debajo (para preguntas con más de un "sí", como dónde guardar un cambio); Enter elige la que tiene el foco (al abrir, la primaria)
+ *   uiChoice({ title, body, choices: [{ label, sub, value, primary }], cancelLabel }) -> Promise<value|null>: cada opción puede llevar una explicación;
+ *     una o dos opciones van en fila y las listas más largas se apilan; Enter elige la que tiene el foco (al abrir, la primaria)
  * Enter = aceptar (salvo con el foco en Cancel: ahí el Enter del botón cancela), Esc o clic en el fondo = cancelar; Tab queda dentro de la
  * ventana; al cerrar, el foco vuelve a donde estaba (el botón que la abrió). danger: botón rojo para lo que borra o pisa algo.
  * Se arma con createElement/textContent (los textos nunca se interpretan como HTML). uiModalCur: la ventana abierta (las pruebas la usan). */
@@ -9434,9 +9650,9 @@ function guideLink(n, label) {
 }
 function uiModal(o = {}) {
   return new Promise(resolve => {
-    const kind = o.kind || "confirm", prev = document.activeElement, id = "mdlg" + (++uiModalN);
+    const kind = o.kind || "confirm", warning = o.warning == null ? ["confirm", "alert", "choice"].includes(kind) : !!o.warning, prev = document.activeElement, id = "mdlg" + (++uiModalN);
     const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-    const back = mk("div", "mdlg-back"), box = mk("div", "mdlg" + (o.danger ? " danger" : ""));
+    const back = mk("div", "mdlg-back" + (warning ? " warning-back" : "")), box = mk("div", "mdlg" + (o.danger ? " danger" : "") + (warning ? " warning" : ""));
     box.setAttribute("role", o.danger ? "alertdialog" : "dialog"); box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-labelledby", id + "t"); box.setAttribute("aria-describedby", id + "b"); box.tabIndex = -1;
     const h = mk("h2", "", tT(o.title) || ""), b = mk("div", "mdlg-body", tT(o.body) || ""); h.id = id + "t"; b.id = id + "b";
@@ -9450,7 +9666,7 @@ function uiModal(o = {}) {
       input.setAttribute("aria-labelledby", id + "t"); input.setAttribute("autocomplete", "off"); box.append(input);
     }
     const fx = kind === "form" && o.build ? o.build(box, id) || {} : {};   /* 2026-10-30: form arma sus campos (build) y manda con submit */
-    const acts = mk("div", "mdlg-acts" + (kind === "choice" ? " col" : ""));
+    const acts = mk("div", "mdlg-acts" + (kind === "choice" ? " col" + ((o.choices || []).length <= 2 ? " row" : "") : ""));
     const cancel = kind === "alert" ? null : mk("button", "btn mdlg-cancel", tT(o.cancelLabel || "Cancel"));
     const chs = kind === "choice" ? (o.choices || []).map(c => {
       const x = mk("button", "btn mdlg-ch" + (c.primary ? " primary" : "")); x.type = "button"; x._v = c.value;
@@ -13261,10 +13477,9 @@ const cpuFix = () => {                                     /* M5.62st (exp/a11-s
   return b ? T("turn off a block or set the {name} to Mono", { name: lookOf(b.type).name }) : T("turn off a block");
 };
 const slotTxt = n => `${Math.floor(n / 4) + 1}${SLOT(n % 4)}`;
-/* 2026-11-14 (pedido del autor, pasada de bugs de la alfa 11, web P1-3): ir a otro preset o a otra escena desde la página con cambios sin guardar pregunta (antes
- * los descartaba con un aviso). Preset: se pierde todo lo de ED; escena: perillas y encendidos (la estructura es del preset y sigue sonando; el EQ lo decide aeqCheck).
- * true = seguir. La vista de escenario no pregunta (hace lo de las pedaleras, en vivo). "Save" pasa por saveFlow (que pregunta dónde, o pide una ranura) y sigue solo si no quedó nada sin guardar. Las pedaleras y los caminos internos
- * (discardEdits, saveFlow) llaman a loadPreset / goSnap directo */
+/* Al ir a otro preset o escena desde Edit o Live, pregunta por cambios sin guardar. Un preset puede perder todo lo de ED; una escena, sus perillas y encendidos
+ * (la estructura sigue sonando; el EQ lo decide aeqCheck). "Save" pasa por saveFlow y sigue solo si no queda nada pendiente. Los pedales y los caminos internos
+ * (discardEdits, saveFlow) llaman a loadPreset / goSnap directamente. */
 async function edLeaveAsk(preset) {
   if (!S.connected && !DEMO) return true;
   if (!(preset ? edCount() : ED.p.size + (ED.on ? 1 : 0))) return true;
@@ -14615,9 +14830,9 @@ $("stEdit").onclick = () => stageClose();
 async function stSwitch(kind, n) {
   if (stSwitching || stFxBusy || (!S.connected && !DEMO)) { stRender(); return; }
   if ((kind === "preset" && n === curPreset) || (kind === "scene" && n === S.snap)) { stRender(); return; }
-  if (edCount()) { toast("Save or discard your changes in Edit before switching.", "warn"); stRender(); return; }
   stSwitching = true; stRender();
   try {
+    if (!await edLeaveAsk(kind === "preset")) return;
     if (kind === "preset" && plist.some(p => p[0] === n)) await loadPreset(n);
     else if (kind === "scene" && n >= 0 && n < 4 && S.snaps[n]) await goSnap(n);
   } catch (e) { toast("Couldn't do that: " + e.message, "err"); }
@@ -19939,7 +20154,7 @@ const stMasterDb = volume => Math.round(ST_MASTER_MIN_DB + volume * (ST_MASTER_M
 const stMasterLevel = db => (Math.max(ST_MASTER_MIN_DB, Math.min(ST_MASTER_MAX_DB, db)) - ST_MASTER_MIN_DB) / (ST_MASTER_MAX_DB - ST_MASTER_MIN_DB);
 const stMasterAudioLevel = volume => volume <= 0 ? 0 : Math.pow(10, (stMasterDb(volume) - ST_MASTER_MAX_DB) / 20);
 const stMasterDbLabel = db => `${db > 0 ? "+" : ""}${db} dB`;
-let stPadAudio = null, stPadAudioNote = "", stPadTargetNote = "", stPadAudioSinkId = "", stPadAudioSinkName = "", stPadVolume = 0.27, stMasterVolume = stMasterLevel(S.gain[1]), stMasterUnmutedVolume = stMasterVolume, stMasterMuted = false, stMasterUserAdjusted = false, stMasterGainTimer = 0;
+let stPadAudio = null, stPadAudioNote = "", stPadTargetNote = "", stPadAudioSinkId = "", stPadAudioSinkName = "", stPadOutputChosen = false, stPadVolume = 0.27, stMasterVolume = stMasterLevel(S.gain[1]), stMasterUnmutedVolume = stMasterVolume, stMasterMuted = false, stMasterUserAdjusted = false, stMasterGainTimer = 0;
 function stMasterSyncFromOutput() {
   if (stMasterMuted) return;
   stMasterVolume = stMasterLevel(S.gain[1]);
@@ -20034,6 +20249,86 @@ function stPadStop() {
 function stPadSelect(note) {
   document.querySelectorAll(".stpadkey").forEach(button => button.classList.toggle("selected", button.dataset.note === note));
 }
+const ST_PAD_DB_NAME = "ultrarig-stage-pad-audio";
+const ST_PAD_DB_STORE = "pads";
+const ST_PAD_NOTES = new Set(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]);
+let stPadDbPromise = null;
+function stPadOpenDb() {
+  let indexedDBApi;
+  try { indexedDBApi = window.indexedDB; } catch (error) { return Promise.reject(error); }
+  if (!indexedDBApi) return Promise.reject(Error("Persistent pad storage is unavailable in this browser."));
+  if (!stPadDbPromise) {
+    stPadDbPromise = new Promise((resolve, reject) => {
+      const request = indexedDBApi.open(ST_PAD_DB_NAME, 1);
+      let blocked = false;
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains(ST_PAD_DB_STORE)) db.createObjectStore(ST_PAD_DB_STORE, { keyPath: "note" });
+      };
+      request.onblocked = () => { blocked = true; reject(Error("Pad storage is blocked by another open app tab.")); };
+      request.onerror = () => reject(request.error || Error("Could not open persistent pad storage."));
+      request.onsuccess = () => {
+        const db = request.result;
+        if (blocked) { db.close(); return; }
+        db.onversionchange = () => { db.close(); stPadDbPromise = null; };
+        resolve(db);
+      };
+    }).catch(error => { stPadDbPromise = null; throw error; });
+  }
+  return stPadDbPromise;
+}
+function stPadSaveFile(note, file) {
+  return stPadOpenDb().then(db => new Promise((resolve, reject) => {
+    const tx = db.transaction(ST_PAD_DB_STORE, "readwrite");
+    const type = file.type || "audio/mpeg";
+    tx.objectStore(ST_PAD_DB_STORE).put({
+      format: 1, note, name: file.name, type, lastModified: file.lastModified || Date.now(),
+      blob: new Blob([file], { type })
+    });
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error || Error("Could not save this pad MP3."));
+    tx.onabort = () => reject(tx.error || Error("Saving this pad MP3 was canceled."));
+  }));
+}
+function stPadReadFiles() {
+  return stPadOpenDb().then(db => new Promise((resolve, reject) => {
+    const tx = db.transaction(ST_PAD_DB_STORE, "readonly"), records = [];
+    const request = tx.objectStore(ST_PAD_DB_STORE).openCursor();
+    request.onsuccess = () => {
+      const cursor = request.result;
+      if (cursor) { records.push(cursor.value); cursor.continue(); }
+    };
+    request.onerror = () => reject(request.error || Error("Could not read saved pad MP3s."));
+    tx.oncomplete = () => resolve(records);
+    tx.onerror = () => reject(tx.error || Error("Could not read saved pad MP3s."));
+    tx.onabort = () => reject(tx.error || Error("Reading saved pad MP3s was canceled."));
+  }));
+}
+function stPadMarkLoaded(note, name) {
+  const button = document.querySelector(`.stpadkey[data-note="${note}"]`);
+  if (!button) return;
+  button.classList.add("loaded");
+  button.title = `${name}. Click to play; drop another MP3 to replace.`;
+  button.setAttribute("aria-label", `${note} pad loaded with ${name}. Click to play or drop an MP3 to replace.`);
+}
+async function stPadRestoreFiles() {
+  const records = await stPadReadFiles();
+  const restored = records.map(record => {
+    if (!record || record.format !== 1 || !ST_PAD_NOTES.has(record.note) || typeof record.name !== "string" ||
+        !record.name || !(record.blob instanceof Blob) || !record.blob.size) {
+      throw Error("Saved pad audio has invalid data and could not be restored.");
+    }
+    const type = record.type || record.blob.type || "audio/mpeg";
+    const lastModified = Number.isFinite(record.lastModified) ? record.lastModified : Date.now();
+    return { note: record.note, file: new File([record.blob], record.name, { type, lastModified }) };
+  });
+  for (const item of restored) {
+    stPadFiles.set(item.note, item.file);
+    stPadMarkLoaded(item.note, item.file.name);
+  }
+  if (records.length) stPadStatusSet(`${records.length} saved pad MP3${records.length === 1 ? "" : "s"} restored`);
+  return records.length;
+}
 function stPadAssign(note, file) {
   if (!file) return;
   if (!/\.mp3$/i.test(file.name) && !/^audio\/mpeg$/i.test(file.type)) {
@@ -20047,53 +20342,93 @@ function stPadAssign(note, file) {
   if (stPadAudioNote === note) stPadStop();
   stPadSelect(note);
   stPadFiles.set(note, file);
-  const button = document.querySelector(`.stpadkey[data-note="${note}"]`);
-  if (button) {
-    button.classList.add("loaded");
-    button.title = `${file.name}. Click to play; drop another MP3 to replace.`;
-    button.setAttribute("aria-label", `${note} pad loaded with ${file.name}. Click to play or drop an MP3 to replace.`);
-  }
+  stPadMarkLoaded(note, file.name);
   stPadStatusSet(`${note} pad loaded · ${file.name}`);
+  stPadSaveFile(note, file).then(() => {
+    if (stPadFiles.get(note) === file) stPadStatusSet(`${note} pad saved · ${file.name}`);
+  }).catch(error => {
+    if (stPadFiles.get(note) !== file) return;
+    stPadStatusSet(`${note} pad is ready but couldn't be saved`, error.message);
+    toast(`Couldn't save the ${note} pad MP3 for next time: ${error.message}`, "err");
+  });
 }
 function stPadCanSelectOutput() {
-  return !!(navigator.mediaDevices && typeof navigator.mediaDevices.selectAudioOutput === "function" &&
-    typeof HTMLMediaElement !== "undefined" && typeof HTMLMediaElement.prototype.setSinkId === "function");
+  const media = navigator.mediaDevices;
+  const canSetSink = typeof HTMLMediaElement !== "undefined" && typeof HTMLMediaElement.prototype.setSinkId === "function";
+  return !!(media && canSetSink && (typeof media.selectAudioOutput === "function" || typeof media.enumerateDevices === "function"));
 }
-async function stPadChooseOutput() {
-  if (!stPadCanSelectOutput()) {
-    throw Error(APP
-      ? "This app follows Android's system audio route. Pair Tank-G and select it as the media output in Bluetooth settings."
-      : "This browser cannot select audio outputs. Pair Tank-G and choose it as the system audio output.");
-  }
-  let device;
-  try {
-    device = stPadAudioSinkId
-      ? await navigator.mediaDevices.selectAudioOutput({ deviceId: stPadAudioSinkId })
-      : await navigator.mediaDevices.selectAudioOutput();
-  } catch (error) {
-    throw Error(`Could not choose an audio output: ${error.message || "selection was cancelled"}`);
-  }
-  if (!device || !device.deviceId) throw Error("The browser did not return an audio output.");
+async function stPadSetOutput(deviceId, name) {
   if (stPadAudio) {
-    try {
-      await stPadAudio.setSinkId(device.deviceId);
-    } catch (error) {
-      throw Error(`Could not route pad audio to ${device.label || "the selected output"}: ${error.message || "output unavailable"}`);
+    if (typeof stPadAudio.setSinkId !== "function" && deviceId) {
+      throw Error("The audio element cannot route to the selected output.");
+    }
+    if (typeof stPadAudio.setSinkId === "function") {
+      try {
+        await stPadAudio.setSinkId(deviceId);
+      } catch (error) {
+        throw Error(`Could not route pad audio to ${name || "the selected output"}: ${error.message || "output unavailable"}`);
+      }
     }
   }
-  stPadAudioSinkId = device.deviceId;
-  stPadAudioSinkName = device.label || "selected output";
+  stPadAudioSinkId = deviceId;
+  stPadAudioSinkName = name || T("System default output");
+  stPadOutputChosen = true;
   const button = $("stPadOutput");
   button.classList.add("selected");
   button.setAttribute("aria-pressed", "true");
-  button.title = `Pad audio output: ${stPadAudioSinkName}. Choose another output.`;
-  button.setAttribute("aria-label", `Pad audio output: ${stPadAudioSinkName}. Choose another output.`);
-  stPadStatusSet(`Pad output · ${stPadAudioSinkName}`);
+  button.title = `${T("Pad audio output")}: ${stPadAudioSinkName}. ${T("Choose another output")}.`;
+  button.setAttribute("aria-label", `${T("Pad audio output")}: ${stPadAudioSinkName}. ${T("Choose another output")}.`);
+  stPadStatusSet(`${T("Pad audio output")} · ${stPadAudioSinkName}`);
+}
+async function stPadChooseOutput() {
+  const media = navigator.mediaDevices;
+  if (stPadCanSelectOutput() && typeof media.selectAudioOutput === "function") {
+    let device;
+    try {
+      device = await media.selectAudioOutput(stPadAudioSinkId ? { deviceId: stPadAudioSinkId } : undefined);
+    } catch (error) {
+      if (error && error.name === "AbortError") return false;
+      throw Error(`Could not choose an audio output: ${error.message || "selection failed"}`);
+    }
+    if (!device || !device.deviceId) throw Error("The browser did not return an audio output.");
+    await stPadSetOutput(device.deviceId, device.label || T("Selected output"));
+    return true;
+  }
+  if (stPadCanSelectOutput() && typeof media.enumerateDevices === "function") {
+    let devices;
+    try { devices = await media.enumerateDevices(); }
+    catch (error) { throw Error(`Could not list audio outputs: ${error.message || "device list unavailable"}`); }
+    const outputs = devices.filter(device => device.kind === "audiooutput" && device.deviceId);
+    const choices = [{ value: "system-default", label: T("System default output"), primary: !stPadAudioSinkId }];
+    const seen = new Set();
+    outputs.forEach((device, index) => {
+      if (device.deviceId === "default" || seen.has(device.deviceId)) return;
+      seen.add(device.deviceId);
+      choices.push({ value: device.deviceId, label: device.label || T("Audio output {n}", { n: index + 1 }), primary: device.deviceId === stPadAudioSinkId });
+    });
+    const selected = await uiChoice({ title: "Choose pad audio output", body: "Select where the pads should play.", choices, cancelLabel: "Cancel" });
+    if (!selected) return false;
+    const device = outputs.find(item => item.deviceId === selected);
+    await stPadSetOutput(selected === "system-default" ? "" : selected,
+      selected === "system-default" ? T("System default output") : device && device.label || T("Selected output"));
+    return true;
+  }
+  const choice = await uiChoice({
+    title: "Choose pad audio output",
+    body: APP
+      ? "This Android app uses the current system audio output. Change it in Android's media output panel, then continue."
+      : "This browser can only use the system audio output.",
+    choices: [{ value: "system", label: APP ? "Continue with system output" : "Use current system output", primary: true }],
+    cancelLabel: "Cancel"
+  });
+  if (choice !== "system") return false;
+  await stPadSetOutput("", T("System default output"));
+  return true;
 }
 async function stPadStart(note) {
   const file = stPadFiles.get(note);
   if (!file) throw Error(`Import or drop an MP3 onto ${note} first.`);
-  if (!stPadAudioSinkId && stPadCanSelectOutput()) await stPadChooseOutput();
+  if (!stPadOutputChosen && !await stPadChooseOutput()) return;
   if (!DEMO && S.connected) {
     try {
       await Pedal.cmd("BTM on", "BTM", 5000);
@@ -20198,6 +20533,10 @@ document.addEventListener("drop", e => {
   }
 });
 document.addEventListener("dragend", () => document.querySelectorAll(".stpadkey.drop-target").forEach(button => button.classList.remove("drop-target")));
+stPadRestoreFiles().catch(error => {
+  stPadStatusSet("Couldn't restore saved pad MP3s", error.message);
+  toast(`Couldn't restore saved pad audio: ${error.message}`, "warn");
+});
 window.__urOk = true;                         /* la guardia del arranque (en <head>): la página terminó de arrancar */
 </script>
 </body>
