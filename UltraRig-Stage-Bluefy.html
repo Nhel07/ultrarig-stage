@@ -7785,7 +7785,13 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     justify-self:start!important;
     max-width:100%!important;
     margin:0!important;
-    font-size:clamp(13px,2vw,18px)!important;
+    font-size:clamp(32px,6.2vw,52px)!important;
+    line-height:1!important;
+  }
+  .stage.on .stscene {font-size:clamp(14px,2vw,18px)!important}
+  .stage.on .stscene small {
+    font-size:clamp(18px,2.4vw,20px)!important;
+    line-height:1.05!important;
   }
   .stage.on .stmaster-pedal::before,
   .stage.on .stmaster-pedal::after {display:block!important}
@@ -7899,10 +7905,97 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     height:100%!important;
     min-height:0!important;
     margin:0!important;
-    opacity:0!important;
+    opacity:1!important;
     pointer-events:auto!important;
     clip-path:none!important;
+    cursor:ns-resize!important;
+    touch-action:none!important;
   }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    border:0!important;
+    background:transparent!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-track {
+    border:0!important;
+    background:transparent!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    width:clamp(28px,3vw,36px)!important;
+    height:clamp(24px,3vh,30px)!important;
+    border:1px solid #e6eff9!important;
+    border-radius:8px!important;
+    background:linear-gradient(180deg,#fff,#b6c4d1 46%,#596b7d)!important;
+    box-shadow:inset 0 1px 2px #fff,0 2px 5px #000b!important;
+    cursor:ns-resize!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:clamp(28px,3vw,36px)!important;
+    height:clamp(24px,3vh,30px)!important;
+    border:1px solid #e6eff9!important;
+    border-radius:8px!important;
+    background:linear-gradient(180deg,#fff,#b6c4d1 46%,#596b7d)!important;
+    box-shadow:inset 0 1px 2px #fff,0 2px 5px #000b!important;
+    cursor:ns-resize!important;
+  }
+}
+
+.stage.on .stname {
+  font-size:clamp(10px,min(32vh,5vw),88px)!important;
+  line-height:1!important;
+}
+@supports (font-size:1cqi) {
+  .stage.on .stcurrent {container-type:inline-size}
+  .stage.on .stname {font-size:clamp(10px,min(32vh,20.5cqi),88px)!important}
+}
+.stage.on #stStageSlots .stpreset-slot {
+  font-size:clamp(22px,min(4.5vw,6vh),48px)!important;
+}
+.stage.on #stStageSlots .stpreset-name {
+  font-size:clamp(13px,min(1.2vw,2.4vh),20px)!important;
+}
+.stage.on #stBanks .stbank-label {
+  font-size:clamp(14px,min(1.4vw,2.4vh),20px)!important;
+}
+.stage.on #stPadKeys .stpadkey {
+  font-size:clamp(16px,min(2.2vw,3vh),24px)!important;
+}
+.stage.on #stScenes {
+  grid-auto-rows:minmax(0,1fr)!important;
+  align-content:stretch!important;
+}
+.stage.on #stMasterVolume {
+  z-index:42!important;
+  top:0!important;
+  bottom:0!important;
+  left:50%!important;
+  right:auto!important;
+  width:78%!important;
+  transform:translateX(-50%)!important;
+  min-height:0!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  clip-path:none!important;
+  touch-action:none!important;
+}
+.stage.on #stMasterVolume::-webkit-slider-thumb {
+  width:clamp(24px,2.2vw,30px)!important;
+  height:clamp(24px,2.2vw,30px)!important;
+  border:2px solid #fff!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 32% 28%,#fff 0%,#fff 35%,#e3eaf2 68%,#a7b3c2 100%)!important;
+  box-shadow:0 0 8px #fff9,inset 0 1px 2px #fff,0 2px 5px #000b!important;
+  transform:translateX(clamp(8px,2vw,24px))!important;
+  cursor:ns-resize!important;
+}
+.stage.on #stMasterVolume::-moz-range-thumb {
+  width:clamp(24px,2.2vw,30px)!important;
+  height:clamp(24px,2.2vw,30px)!important;
+  border:2px solid #fff!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 32% 28%,#fff 0%,#fff 35%,#e3eaf2 68%,#a7b3c2 100%)!important;
+  box-shadow:0 0 8px #fff9,inset 0 1px 2px #fff,0 2px 5px #000b!important;
+  transform:translateX(clamp(8px,2vw,24px))!important;
+  cursor:ns-resize!important;
 }
 
 </style>
@@ -7915,7 +8008,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
 <div class="top" role="banner"><h1 class="sr-only">UltraRig control</h1>
   <div class="brand stbrand-edit" aria-label="StageTone">
     <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
-    <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+    <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small></span>
   </div>
   <div class="grow"></div>
   <span id="meterHome" hidden></span><div class="meters" id="meters" title="Levels. Click to set gain" tabindex="0">
@@ -8011,7 +8104,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     <button type="button" class="scat" id="setc-conn" data-cat="conn" aria-controls="setg-conn" hidden><span class="sci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7.5 10 9-5 4.5v-18l5 4.5-10 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sct"><span class="scn">Connections</span><span class="scs" id="setcConnSub">Bluetooth, USB, MIDI</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="scat" id="setc-pedal" data-cat="pedal" aria-controls="setg-pedal"><span class="sci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="15" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7.5h.01M12 7.5h.01M15 7.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="sct"><span class="scn">Pedal</span><span class="scs">Footswitches, audio, details</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="scat" id="setc-app" data-cat="app" aria-controls="setg-app"><span class="sci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M6.5 6.5h.01M9.5 6.5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="sct"><span class="scn">App</span><span class="scs"><span class="nph">Language, shortcuts</span><span class="oph">Language</span></span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button type="button" class="scat" id="setc-help" data-cat="help" aria-controls="setg-help"><span class="sci" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="sct"><span class="scn">Help</span><span class="scs">Tour, updates, support</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="scat" id="setc-about" data-cat="about" aria-controls="setg-about"><span class="sci" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="sct"><span class="scn">About Us</span><span class="scs">About the system, credits</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="setg" id="setg-sound" data-cat="sound" role="group" aria-labelledby="setTitle" hidden>
   <section><h3>Global EQ <span class="qhelp" tabindex="0" title="Output EQ outside the presets: it applies to every preset">?</span></h3>
@@ -8064,6 +8157,14 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     <label class="spill langrow">Language <select id="langSel" aria-label="Language"><option value="en" lang="en">English</option><option value="es" lang="es">Español</option></select></label>
     <label class="spill"><input type="checkbox" id="kbdShort" checked> Single-key shortcuts (Space: tap tempo, T: tuner)</label></section>
   </div>
+  <div class="setg" id="setg-about" data-cat="about" role="group" aria-labelledby="setTitle" hidden>
+  <section>
+    <h3>About the system</h3>
+    <p>A redesigned version of UltraRig Alpha 13.</p>
+    <p>Credits to the original developer.</p>
+    <p>Designer: Nel Guitering</p>
+  </section>
+  </div>
   <div class="setg" id="setg-help" data-cat="help" role="group" aria-labelledby="setTitle" hidden>
   <section>
     <div class="row wrap"><button class="btn mini" id="tourBtn">Take the tour</button></div>
@@ -8113,7 +8214,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
   <div class="sthead">
     <div class="stbrand-stage" aria-label="StageTone">
       <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-8z"/></svg></span>
-      <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small><small class="creditline" data-noi18n>Redesigned by Marnel Guitering (c) UltraRig Alpha13-Developer</small></span>
+      <span class="wordmark">Stage<b>TONE</b><small>RIG PRO · LIVE PEDALBOARD</small></span>
     </div>
     <div class="stage-meters" id="stageMeters"></div>
     <span class="grow"></span>
@@ -8147,9 +8248,8 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
           <path class="groove" d="M12 18H88V68L55 98 88 128V282H12V226L45 192 12 158V88L42 114 70 88 42 60 12 88M17 22H83V66L50 98 83 130V278H17V228L40 192 17 156V94L42 118 75 88 42 54 17 82"/>
           <path d="M22 30H78V62L45 96 78 132V270H22V222L53 190 22 162V104L42 124 64 102 42 76 22 96M22 146L45 169 68 146M22 208L45 184 68 208M32 263V226L52 204 68 220V263"/>
         </svg>
-        <span class="stmaster-brand">STAGETONE</span><span class="stmaster-heel">HEEL ↔ TOE</span>
       </span>
-      <input id="stMasterVolume" type="range" min="0" max="100" value="100" aria-label="Pedal output gain from minus 30 to plus 12 decibels">
+      <input id="stMasterVolume" type="range" min="0" max="100" value="100" aria-label="Pedal output gain from minus 30 to plus 12 decibels" title="Drag the control up to increase volume and down to decrease it.">
     </label>
     <output class="stmaster-readout" id="stMasterValue" for="stMasterVolume">OUT · +12 dB</output>
   </aside>
@@ -8330,6 +8430,12 @@ const I18N_ES = {
   "Save…": "Guardar…",
   "Block": "Bloque",
   "Settings": "Ajustes",
+  "About Us": "Acerca de",
+  "About the system, credits": "Acerca del sistema, créditos",
+  "About the system": "Acerca del sistema",
+  "A redesigned version of UltraRig Alpha 13.": "Una versión rediseñada de UltraRig Alpha 13.",
+  "Credits to the original developer.": "Créditos al desarrollador original.",
+  "Designer: Nel Guitering": "Diseñador: Nel Guitering",
   "Sound": "Sonido",
   "Connections": "Conexiones",
   "EQ, input, limiter": "EQ, entrada, limitador",
@@ -16045,7 +16151,7 @@ const setCloseAsk = () => gdAskThen(setClose);                       /* cerrar p
  * la lista (lo más simple: no se recuerda el último grupo); setOpen("help") abre un grupo de una (la vuelta del recorrido, que se abrió desde Help).
  * Cada control conserva su id y lo que hace; solo cambió dónde está. setCatCur: el grupo abierto ("" = la lista) */
 let setCatCur = "";
-const SET_CATS = { sound: "Sound", conn: "Connections", pedal: "Pedal", app: "App", help: "Help" };
+const SET_CATS = { sound: "Sound", conn: "Connections", pedal: "Pedal", app: "App", about: "About Us", help: "Help" };
 const setShown = s => s.style.display !== "none" && !s.hidden;
 /* un grupo sin nada a la vista (Connections sin música, audio USB ni MIDI en este pedal) no sale en la lista; la línea gris de Connections dice lo que hay */
 function setCatSync() {
