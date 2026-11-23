@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>StageTone for Tank-G and Tank-B</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071819'/%3E%3Cpath d='M20 13v21a12 12 0 0 0 24 0V13' fill='none' stroke='%2363e0f5' stroke-width='10'/%3E%3Ccircle cx='50' cy='51' r='4.5' fill='%23ff7a1a'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236fa5ff'/%3E%3Cstop offset='1' stop-color='%23b177eb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 6 11 36h18l-3 23 27-37H32z' fill='none' stroke='%23091422' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 :root {
   --bg: #0d0e10; --bg2: #15171a; --panel: #1b1e22; --panel2: #23272c; --line: #2e333a; --line2: #3a4048;
@@ -6999,6 +6999,208 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
   .stage.on .liveEffectState,
   .stage.on .stchip.block .type,
   .stage.on .stchip.block .ledLabel {display:none!important}
+}
+
+@media (orientation:landscape) {
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after {display:block!important}
+  .stage.on .stmaster-pedal .stmaster-treadle {display:grid!important}
+  .stage.on .stmaster-treadle-pattern {display:block!important}
+  .stage.on .stmaster-pedal {
+    width:min(96px,100%)!important;
+    max-width:96px!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  .stage.on .stmaster-pedal input {
+    position:absolute!important;
+    inset:0!important;
+    z-index:42!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    opacity:0!important;
+    pointer-events:auto!important;
+    clip-path:none!important;
+  }
+  .stage.on .stmaster-pedal:focus-within .stmaster-treadle {
+    outline:2px solid #62d7ff;
+    outline-offset:3px;
+  }
+}
+
+@media (orientation:landscape) and (min-height:501px) {
+  .stage.on {
+    display:grid!important;
+    grid-template-columns:minmax(140px,27%) minmax(230px,1fr) clamp(82px,9vw,122px)!important;
+    grid-template-rows:minmax(42px,6.7vh) minmax(72px,12vh) minmax(0,1fr) minmax(64px,15.8vh) minmax(72px,22vh)!important;
+    grid-template-areas:
+      "head head head"
+      "nav presets master"
+      "pads presets master"
+      "pads scenes master"
+      "pads effects master"!important;
+    gap:clamp(4px,.6vw,8px)!important;
+    padding:clamp(4px,.8vw,11px)!important;
+    overflow:hidden!important;
+  }
+  .stage.on > .sthead {grid-area:head!important}
+  .stage.on > .stnav {grid-area:nav!important;align-self:stretch!important;height:100%!important;min-height:0!important}
+  .stage.on .stcurrent {height:100%!important;min-height:0!important}
+  .stage.on > .stpresets {grid-area:presets!important;min-height:0!important}
+  .stage.on > .stpads {grid-area:pads!important;min-height:0!important}
+  .stage.on > .stscenes {grid-area:scenes!important;min-height:0!important}
+  .stage.on .stpadkeys {
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+  }
+  .stage.on > .stchips {
+    grid-area:effects!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:clamp(4px,.5vw,7px)!important;
+    min-width:0!important;
+  }
+  .stage.on > .stchips > * {
+    flex:0 1 clamp(68px,7vw,100px)!important;
+    min-width:0!important;
+    max-width:clamp(68px,7vw,100px)!important;
+  }
+  .stage.on > .stmaster {
+    grid-area:master!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto auto minmax(0,1fr) auto!important;
+    align-items:stretch!important;
+    justify-items:center!important;
+    gap:clamp(3px,.65vh,5px)!important;
+    padding:clamp(4px,.9vh,8px)!important;
+    min-height:0!important;
+  }
+  .stage.on .stmaster-mute,
+  .stage.on .stmaster-focus {
+    display:block!important;
+    grid-column:1!important;
+    width:min(70px,100%)!important;
+    min-width:0!important;
+    min-height:26px!important;
+    height:auto!important;
+  }
+  .stage.on .stmaster-mute {grid-row:1!important}
+  .stage.on .stmaster-focus {grid-row:2!important}
+  .stage.on .stmaster-title {
+    display:block!important;
+    grid-column:1!important;
+    grid-row:3!important;
+    margin:0!important;
+    font-size:clamp(7px,1vh,10px)!important;
+  }
+  .stage.on .stmaster-pedal {
+    grid-column:1!important;
+    grid-row:4!important;
+    justify-self:center!important;
+  }
+  .stage.on .stmaster-readout {
+    grid-column:1!important;
+    grid-row:5!important;
+    justify-self:center!important;
+  }
+  .stage.on > .stsection,
+  .stage.on > .stfs {display:none!important}
+}
+
+@media (orientation:landscape) and (min-height:501px) {
+  .stage.on .stpads {
+    grid-template-rows:minmax(18px,auto) minmax(0,1fr) minmax(34px,6vh)!important;
+    gap:clamp(4px,.5vw,7px)!important;
+  }
+  .stage.on .stpadkeys {
+    height:100%!important;
+    align-content:stretch!important;
+    align-items:stretch!important;
+    gap:clamp(3px,.4vw,6px)!important;
+  }
+  .stage.on .stpadkey {
+    height:100%!important;
+    min-height:0!important;
+    font-size:clamp(12px,2vh,18px)!important;
+    line-height:1!important;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .stage.on {
+    grid-template-areas:
+      "head head master"
+      "nav presets master"
+      "pads presets master"
+      "pads scenes master"
+      "pads effects master"!important;
+  }
+  .stage.on > .stnav {grid-area:nav!important}
+  .stage.on > .stpresets {grid-area:presets!important}
+  .stage.on > .stpads {grid-area:pads!important}
+  .stage.on > .stscenes {grid-area:scenes!important}
+  .stage.on > .stchips {
+    grid-area:effects!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    min-width:0!important;
+    gap:clamp(2px,.4vw,5px)!important;
+  }
+  .stage.on > .stchips > * {
+    flex:0 1 clamp(68px,7vw,100px)!important;
+    min-width:0!important;
+    max-width:clamp(68px,7vw,100px)!important;
+  }
+  .stage.on > .stnav {align-self:stretch!important;height:100%!important}
+  .stage.on .stcurrent {height:100%!important;min-height:0!important}
+  .stage.on .stpads {
+    grid-template-rows:minmax(12px,auto) minmax(0,1fr) clamp(22px,6vh,28px)!important;
+    gap:2px!important;
+    padding:3px!important;
+  }
+  .stage.on .stpads-head {height:auto!important;min-height:0!important}
+  .stage.on .stpads-title {font-size:clamp(7px,2vh,10px)!important;line-height:1!important}
+  .stage.on .stpadkeys {
+    height:100%!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    align-content:stretch!important;
+    align-items:stretch!important;
+    gap:clamp(1px,.35vh,3px)!important;
+  }
+  .stage.on .stpadkey {
+    height:100%!important;
+    min-height:0!important;
+    padding:0 2px!important;
+    font-size:clamp(8px,2.4vh,12px)!important;
+    line-height:1!important;
+  }
+  .stage.on .stpads-volume {height:100%!important;min-height:0!important}
+  .stage.on .stpadstop,
+  .stage.on .stpadoutput {
+    width:clamp(20px,6vh,26px)!important;
+    height:clamp(20px,6vh,26px)!important;
+  }
+}
+
+@media (orientation:landscape) {
+  .stage.on .stbrand-stage .creditline {
+    display:block!important;
+    max-width:min(32vw,360px);
+    overflow:hidden;
+    font-size:clamp(6px,.8vh,9px)!important;
+    letter-spacing:0!important;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
 }
 </style>
 
