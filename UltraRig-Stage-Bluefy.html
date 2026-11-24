@@ -8017,7 +8017,10 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     margin:0!important;
     padding:0!important;
     border:0!important;
-    transform:translateX(30px)!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    transform:none!important;
     appearance:none!important;
     -webkit-appearance:none!important;
     writing-mode:vertical-lr!important;
@@ -8070,8 +8073,9 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     transform:none!important;
     touch-action:pan-x!important;
   }
-  .stage.on #stMasterVolume::-webkit-slider-runnable-track,
-  .stage.on #stMasterVolume::-moz-range-track {
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    appearance:none!important;
+    -webkit-appearance:none!important;
     width:100%!important;
     height:6px!important;
     border:1px solid #29313a!important;
@@ -8233,6 +8237,483 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
     background:linear-gradient(#3189ba,#135279 45%,#09263b)!important;
     color:#e4f6ff!important;
   }
+}
+
+/* Keep the live stage in the same three-column composition on landscape and square screens. */
+@media (orientation:landscape), (aspect-ratio:1/1) {
+  .stage.on {
+    display:grid!important;
+    grid-template-columns:clamp(112px,26vw,318px) minmax(0,1fr) clamp(56px,8vw,112px)!important;
+    grid-template-rows:minmax(44px,7vh) minmax(78px,18vh) minmax(110px,1.25fr) minmax(70px,1fr) minmax(90px,1.1fr)!important;
+    grid-template-areas:
+      "head head master"
+      "nav presets master"
+      "pads presets master"
+      "pads scenes master"
+      "effects effects master"!important;
+    align-content:stretch!important;
+    gap:clamp(4px,.7vw,8px)!important;
+    width:100vw!important;
+    height:100vh!important;
+    height:100dvh!important;
+    min-height:0!important;
+    max-height:100vh!important;
+    max-height:100dvh!important;
+    padding:max(5px,env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))!important;
+    overflow:hidden!important;
+  }
+  .stage.on > .sthead {grid-area:head!important;width:auto!important;min-width:0!important;height:100%!important;min-height:0!important}
+  .stage.on > .stnav {grid-area:nav!important;grid-template-columns:minmax(0,1fr)!important;width:auto!important;height:100%!important;min-height:0!important;align-self:stretch!important}
+  .stage.on .stcurrent {grid-column:1!important}
+  .stage.on > .stpresets {
+    grid-area:presets!important;
+    display:grid!important;
+    position:relative!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1.25fr) minmax(0,1fr)!important;
+    width:auto!important;
+    height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+  }
+  .stage.on #stBanks,
+  .stage.on #stStageSlots {
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+  }
+  .stage.on #stBanks {grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(0,1fr))!important}
+  .stage.on #stStageSlots .stslots {grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:minmax(0,1fr)!important}
+  .stage.on > .stmaster {grid-area:master!important;justify-self:stretch!important;width:auto!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important}
+  .stage.on > .stscenes {grid-area:scenes!important;width:auto!important;height:100%!important;min-width:0!important;min-height:0!important}
+  .stage.on > .stpads {
+    grid-area:pads!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;
+    width:auto!important;
+    height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    align-self:stretch!important;
+    margin:0!important;
+  }
+  .stage.on .stpads-head {grid-column:1!important;grid-row:1!important;min-width:0!important}
+  .stage.on .stpadkeys {
+    grid-column:1!important;
+    grid-row:2!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    height:100%!important;
+    min-height:0!important;
+    align-content:stretch!important;
+  }
+  .stage.on .stpadkey {height:100%!important;min-height:0!important}
+  .stage.on .stpads-volume {grid-column:1!important;grid-row:3!important;min-width:0!important;min-height:0!important}
+  .stage.on > .stchips {
+    grid-area:effects!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    width:auto!important;
+    height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:hidden!important;
+    margin:0!important;
+  }
+  .stage.on > .stchips > * {
+    flex:1 1 0!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  .stage.on .stchips .liveEffectCard,
+  .stage.on .stchips .stchip.block {height:100%!important;min-height:0!important;max-height:none!important}
+  .stage.on .stsection {display:none!important}
+  .stage.on .stmaster {
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto auto minmax(0,1fr) auto!important;
+    height:100%!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .stage.on .stmaster-pedal {
+    grid-column:1!important;
+    grid-row:4!important;
+    width:min(96px,100%)!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after {display:block!important}
+  .stage.on .stmaster-pedal .stmaster-treadle {display:grid!important}
+  .stage.on #stMasterVolume {
+    position:absolute!important;
+    inset:0!important;
+    left:0!important;
+    right:0!important;
+    z-index:42!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    opacity:0!important;
+    transform:none!important;
+    clip-path:none!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    border:0!important;
+    background:transparent!important;
+    background-color:transparent!important;
+    box-shadow:none!important;
+  }
+  .stage.on .stmaster-volume-thumb {
+    display:block!important;
+    position:absolute!important;
+    z-index:43!important;
+    top:clamp(10px,var(--stmaster-thumb-position,50%),calc(100% - 10px))!important;
+    left:50%!important;
+    width:clamp(16px,1.4vw,20px)!important;
+    height:clamp(16px,1.4vw,20px)!important;
+    border:2px solid #fff!important;
+    border-radius:50%!important;
+    background:radial-gradient(circle at 32% 28%,#fff 0%,#fff 35%,#e3eaf2 68%,#a7b3c2 100%)!important;
+    box-shadow:0 0 8px #fff9,inset 0 1px 2px #fff,0 2px 5px #000b!important;
+    transform:translate(-50%,-50%)!important;
+    pointer-events:none!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    border:0!important;
+    background:transparent!important;
+    background-color:transparent!important;
+    box-shadow:none!important;
+  }
+}
+
+@media (orientation:portrait) and (max-aspect-ratio:999/1000) {
+  .stage.on {
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:clamp(6px,1vh,10px)!important;
+    width:100vw!important;
+    height:100vh!important;
+    height:100dvh!important;
+    min-height:100vh!important;
+    min-height:100dvh!important;
+    max-height:100vh!important;
+    max-height:100dvh!important;
+    padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+  }
+  .stage.on > .sthead,
+  .stage.on > .stnav,
+  .stage.on > .stpresets,
+  .stage.on > .stmaster,
+  .stage.on > .stscenes,
+  .stage.on > .stpads,
+  .stage.on > .stchips {
+    position:relative!important;
+    inset:auto!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    transform:none!important;
+    order:initial!important;
+  }
+  .stage.on > .sthead {order:0!important;min-height:44px!important}
+  .stage.on > .stnav {order:1!important}
+  .stage.on > .stpresets {order:2!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:6px!important}
+  .stage.on #stBanks {
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    height:auto!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(2,minmax(48px,auto))!important;
+  }
+  .stage.on #stStageSlots {position:relative!important;inset:auto!important;width:100%!important;height:auto!important}
+  .stage.on #stStageSlots .stslots {grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:minmax(76px,auto)!important}
+  .stage.on > .stscenes {order:3!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:minmax(76px,auto)!important}
+  .stage.on > .stmaster {order:4!important}
+  .stage.on > .stpads {
+    order:5!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto auto!important;
+    gap:6px!important;
+    padding:8px!important;
+  }
+  .stage.on .stpads-head {grid-column:1!important;grid-row:1!important}
+  .stage.on .stpadkeys {
+    grid-column:1!important;
+    grid-row:2!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    grid-template-rows:repeat(2,minmax(50px,auto))!important;
+    height:auto!important;
+    min-height:0!important;
+  }
+  .stage.on .stpadkey {height:auto!important;min-height:50px!important}
+  .stage.on .stpads-volume {grid-column:1!important;grid-row:3!important;min-height:28px!important}
+  .stage.on > .stchips {
+    order:6!important;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-auto-rows:minmax(88px,auto)!important;
+    grid-template-rows:none!important;
+    gap:6px!important;
+    padding:6px!important;
+    overflow:visible!important;
+  }
+  .stage.on > .stchips > * {
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:100%!important;
+    min-height:88px!important;
+  }
+  .stage.on .stchips .liveEffectCard,
+  .stage.on .stchips .stchip.block {width:100%!important;min-width:0!important;height:100%!important;min-height:88px!important}
+  .stage.on > .stmaster {
+    order:4!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) minmax(56px,76px)!important;
+    grid-template-rows:auto minmax(74px,110px)!important;
+    gap:6px!important;
+    min-height:0!important;
+    padding:8px!important;
+  }
+  .stage.on .stmaster-mute {grid-column:1!important;grid-row:1!important}
+  .stage.on .stmaster-focus {grid-column:2!important;grid-row:1!important}
+  .stage.on .stmaster-title {grid-column:3!important;grid-row:1!important}
+  .stage.on .stmaster-pedal {
+    grid-column:4!important;
+    grid-row:1/3!important;
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:74px!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after {display:block!important}
+  .stage.on .stmaster-pedal .stmaster-treadle {display:grid!important}
+  .stage.on .stmaster-readout {grid-column:1/4!important;grid-row:2!important;align-self:center!important}
+  .stage.on #stMasterVolume {
+    position:absolute!important;
+    inset:0!important;
+    left:0!important;
+    right:0!important;
+    z-index:42!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    opacity:1!important;
+    transform:none!important;
+    clip-path:none!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track,
+  .stage.on #stMasterVolume::-moz-range-track {background:transparent!important;box-shadow:none!important}
+  .stage.on .stsection {display:none!important}
+  .stage.on .stmaster-pedal {
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    display:flex!important;
+    position:relative!important;
+    justify-self:stretch!important;
+    width:auto!important;
+    max-width:none!important;
+    height:24px!important;
+    min-height:0!important;
+    perspective:none!important;
+  }
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after,
+  .stage.on .stmaster-treadle {display:none!important}
+  .stage.on #stMasterVolume {
+    position:static!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    width:100%!important;
+    height:20px!important;
+    min-height:20px!important;
+    margin:0!important;
+    padding:0!important;
+    opacity:1!important;
+    transform:none!important;
+    clip-path:none!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    writing-mode:horizontal-tb!important;
+    direction:ltr!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    cursor:ew-resize!important;
+    touch-action:pan-x!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    width:100%!important;
+    height:6px!important;
+    border:1px solid #29313a!important;
+    border-radius:999px!important;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720)!important;
+    box-shadow:inset 0 1px 3px #000b!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-track {
+    width:100%!important;
+    height:6px!important;
+    border:1px solid #29313a!important;
+    border-radius:999px!important;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720)!important;
+    box-shadow:inset 0 1px 3px #000b!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    width:22px!important;
+    height:18px!important;
+    margin-top:-6px!important;
+    border:1px solid #738191!important;
+    border-radius:6px!important;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c)!important;
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b!important;
+    transform:none!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:22px!important;
+    height:18px!important;
+    border:1px solid #738191!important;
+    border-radius:6px!important;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c)!important;
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b!important;
+    transform:none!important;
+  }
+  .stage.on .stmaster-readout {grid-column:4!important;grid-row:1!important;justify-self:end!important;white-space:nowrap!important}
+}
+
+@media (max-width:599px) and (orientation:portrait) {
+  .stage.on > .stchips {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .stage.on > .stscenes {grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(70px,auto))!important}
+}
+
+@media (min-width:600px) and (orientation:portrait) {
+  .stage.on > .sthead,
+  body.staging .stage.on > .sthead {
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    gap:4px!important;
+    min-height:48px!important;
+    padding:5px!important;
+    overflow:visible!important;
+  }
+  .stage.on .stbrand-stage,
+  body.staging .stage.on .stbrand-stage {
+    display:flex!important;
+    flex:0 1 180px!important;
+    min-width:150px!important;
+    max-width:210px!important;
+    gap:5px!important;
+    margin:0!important;
+  }
+  .stage.on .stbrand-stage .mark {width:32px!important;height:32px!important}
+  .stage.on .stbrand-stage .wordmark {font-size:13px!important}
+  .stage.on .stbrand-stage small {font-size:6px!important;letter-spacing:.7px!important}
+  .stage.on .stage-meters,
+  body.staging .stage.on .stage-meters {
+    display:flex!important;
+    flex:1 1 150px!important;
+    width:auto!important;
+    min-width:130px!important;
+    max-width:220px!important;
+    margin:0!important;
+  }
+  .stage.on .sthead .grow {display:none!important}
+  .stage.on .stbpm b {font-size:clamp(16px,2.4vh,24px)!important}
+  .stage.on .sthead .stbtn {min-width:32px!important;min-height:32px!important;padding:0 6px!important;font-size:9px!important}
+  .stage.on .stcurrent {height:auto!important;min-height:clamp(72px,9vh,108px)!important}
+  .stage.on .stname {font-size:clamp(20px,3vw,34px)!important}
+  .stage.on > .stscenes {grid-template-rows:minmax(70px,auto)!important}
+  .stage.on .stscene {min-height:70px!important;height:100%!important}
+  .stage.on > .stchips {grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .stage.on > .stchips > * {min-height:76px!important}
+  .stage.on .stchips .liveEffectCard,
+  .stage.on .stchips .stchip.block {min-height:76px!important}
+}
+
+@media (orientation:landscape) and (max-height:500px),
+       (aspect-ratio:1/1) and (max-height:500px) {
+  .stage.on {
+    height:100vh!important;
+    height:100dvh!important;
+    min-height:0!important;
+    max-height:100vh!important;
+    max-height:100dvh!important;
+    grid-template-rows:minmax(44px,auto) minmax(78px,auto) minmax(110px,auto) minmax(70px,auto) minmax(90px,auto)!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+}
+
+@media (max-width:599px) and (orientation:landscape),
+       (max-width:599px) and (aspect-ratio:1/1) {
+  .stage.on .stname {font-size:clamp(14px,5vw,24px)!important}
+  .stage.on .stpreset-meta,
+  .stage.on .stpreset-status {font-size:clamp(8px,2.4vw,11px)!important}
+  .stage.on > .stchips {
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    gap:4px!important;
+    scroll-snap-type:x proximity;
+  }
+  .stage.on > .stchips > * {
+    flex:0 0 max(48px,10vw)!important;
+    scroll-snap-align:start;
+  }
+}
+
+@media (orientation:portrait) and (max-aspect-ratio:999/1000) {
+  .stage.on > .stmaster {
+    flex:0 0 auto!important;
+    height:auto!important;
+    min-height:0!important;
+    grid-template-rows:auto 52px!important;
+    gap:4px!important;
+    padding:6px!important;
+  }
+  .stage.on .stmaster-pedal {align-self:center!important}
+  .stage.on .stmaster-pedal::before,
+  .stage.on .stmaster-pedal::after {display:none!important;content:none!important}
+  .stage.on .stmaster-pedal > .stmaster-treadle {display:none!important}
+  .stage.on .stmaster-volume-thumb {display:none!important}
 }
 
 </style>
@@ -8487,6 +8968,7 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
         </svg>
       </span>
       <input id="stMasterVolume" type="range" min="0" max="100" value="100" aria-label="Pedal output gain from minus 30 to plus 12 decibels" title="Drag the control up to increase volume and down to decrease it.">
+      <span class="stmaster-volume-thumb" aria-hidden="true"></span>
     </label>
     <output class="stmaster-readout" id="stMasterValue" for="stMasterVolume">OUT · +12 dB</output>
   </aside>
@@ -22249,7 +22731,10 @@ function stMasterApply() {
   if (stPadAudio) stPadAudio.volume = stMasterMuted ? 0 : stPadVolume * stMasterAudioLevel(stMasterVolume);
   $("stMasterVolume").value = String(Math.round(stMasterVolume * 100));
   const pedal = document.querySelector(".stmaster-pedal");
-  if (pedal) pedal.style.setProperty("--stmaster-angle", `${((stMasterVolume - 0.5) * 20).toFixed(1)}deg`);
+  if (pedal) {
+    pedal.style.setProperty("--stmaster-angle", `${((stMasterVolume - 0.5) * 20).toFixed(1)}deg`);
+    pedal.style.setProperty("--stmaster-thumb-position", `${((1 - stMasterVolume) * 100).toFixed(2)}%`);
+  }
   $("stMasterValue").textContent = stMasterMuted ? `MUTED · ${stMasterDbLabel(ST_MASTER_MIN_DB)}` : `OUT · ${stMasterDbLabel(stMasterDb(stMasterVolume))}`;
   $("stMasterMute").textContent = stMasterMuted ? "MUTED" : "MUTE";
   $("stMasterMute").setAttribute("aria-pressed", String(stMasterMuted));
