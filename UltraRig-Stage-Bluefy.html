@@ -7997,6 +7997,243 @@ body.staging:not(.st-amoled):not(.st-mono) .stage.on .sttile.act .row i {color:#
   transform:translateX(clamp(8px,2vw,24px))!important;
   cursor:ns-resize!important;
 }
+.stage.on .stmaster-treadle-pattern {
+  display:block!important;
+  opacity:1!important;
+  z-index:1!important;
+}
+.stage.on .stmaster-treadle-pattern path {stroke:#d4deea!important}
+.stage.on .stmaster-treadle-pattern .groove {stroke:#718399!important}
+
+@media (orientation:landscape) and (min-width:761px) {
+  .stage.on .stmaster-pedal {position:relative!important}
+  .stage.on #stMasterVolume {
+    position:absolute!important;
+    inset:0!important;
+    z-index:42!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    transform:translateX(30px)!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    writing-mode:vertical-lr!important;
+    direction:rtl!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track {
+    width:100%!important;
+    height:100%!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-track {
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    width:clamp(16px,1.4vw,20px)!important;
+    height:clamp(16px,1.4vw,20px)!important;
+    border:2px solid #fff!important;
+    border-radius:50%!important;
+    background:radial-gradient(circle at 32% 28%,#fff 0%,#fff 35%,#e3eaf2 68%,#a7b3c2 100%)!important;
+    box-shadow:0 0 8px #fff9,inset 0 1px 2px #fff,0 2px 5px #000b!important;
+    transform:none!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:clamp(16px,1.4vw,20px)!important;
+    height:clamp(16px,1.4vw,20px)!important;
+    border:2px solid #fff!important;
+    border-radius:50%!important;
+    background:radial-gradient(circle at 32% 28%,#fff 0%,#fff 35%,#e3eaf2 68%,#a7b3c2 100%)!important;
+    box-shadow:0 0 8px #fff9,inset 0 1px 2px #fff,0 2px 5px #000b!important;
+    transform:none!important;
+  }
+}
+
+@media (max-width:599px) and (orientation:portrait) {
+  .stage.on #stMasterVolume {
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    width:100%!important;
+    height:20px!important;
+    min-height:20px!important;
+    transform:none!important;
+    touch-action:pan-x!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-runnable-track,
+  .stage.on #stMasterVolume::-moz-range-track {
+    width:100%!important;
+    height:6px!important;
+    border:1px solid #29313a!important;
+    border-radius:999px!important;
+    background:linear-gradient(90deg,#0d1218,#46505d 48%,#101720)!important;
+    box-shadow:inset 0 1px 3px #000b!important;
+  }
+  .stage.on #stMasterVolume::-webkit-slider-thumb {
+    width:22px!important;
+    height:18px!important;
+    margin-top:-6px!important;
+    border:1px solid #738191!important;
+    border-radius:6px!important;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c)!important;
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    transform:none!important;
+  }
+  .stage.on #stMasterVolume::-moz-range-thumb {
+    width:22px!important;
+    height:18px!important;
+    border:1px solid #738191!important;
+    border-radius:6px!important;
+    background:linear-gradient(180deg,#f3f6f7,#9eaab6 48%,#65717c)!important;
+    box-shadow:inset 0 1px 1px #fff9,0 2px 4px #000b!important;
+    transform:none!important;
+  }
+}
+
+@media (orientation:landscape) and (max-width:760px) and (min-height:301px) {
+  body.staging .stage.on > .sthead {
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    padding:2px 4px!important;
+    gap:clamp(2px,.5vw,4px)!important;
+    overflow:hidden!important;
+  }
+  body.staging .stage.on .stbrand-stage {
+    display:flex!important;
+    flex:1 1 150px!important;
+    min-width:0!important;
+    max-width:180px!important;
+    gap:4px!important;
+    margin:0!important;
+  }
+  body.staging .stage.on .stbrand-stage .mark {
+    flex:none!important;
+    width:30px!important;
+    height:30px!important;
+    border-radius:8px!important;
+  }
+  body.staging .stage.on .stbrand-stage .mark svg {width:20px!important;height:20px!important}
+  body.staging .stage.on .stbrand-stage .wordmark {
+    min-width:0!important;
+    font-size:clamp(10px,2.1vw,12px)!important;
+    white-space:nowrap!important;
+  }
+  body.staging .stage.on .stbrand-stage small {
+    margin-top:2px!important;
+    font-size:5px!important;
+    letter-spacing:.4px!important;
+  }
+  body.staging .stage.on .stbrand-stage .creditline,
+  body.staging .stage.on .sthead .grow {display:none!important}
+  body.staging .stage.on .stage-meters {
+    display:flex!important;
+    flex:0 1 136px!important;
+    width:136px!important;
+    max-width:136px!important;
+    min-width:110px!important;
+    height:28px!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+  body.staging .stage.on .stage-meters .meters {
+    flex:1 1 100%!important;
+    width:100%!important;
+    min-width:0!important;
+    gap:3px!important;
+    padding:2px 4px!important;
+  }
+  body.staging .stage.on .stage-meters .lbl {
+    font-size:clamp(7px,1.5vw,9px)!important;
+    line-height:1!important;
+  }
+  body.staging .stage.on .stage-meters .lbl b {font-size:8px!important}
+  body.staging .stage.on .stage-meters .bar {height:5px!important}
+  body.staging .stage.on .stbpm {
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-width:0!important;
+    gap:2px!important;
+    justify-content:center!important;
+  }
+  body.staging .stage.on .stbpm b {font-size:clamp(14px,2.7vh,18px)!important}
+  body.staging .stage.on .stbpm small {font-size:6px!important}
+  body.staging .stage.on #stMode,
+  body.staging .stage.on #stTuner,
+  body.staging .stage.on #stLock {
+    flex:0 0 28px!important;
+    width:28px!important;
+    min-width:28px!important;
+    height:28px!important;
+    min-height:28px!important;
+    padding:0!important;
+    gap:0!important;
+  }
+  body.staging .stage.on #stMode .tx,
+  body.staging .stage.on #stTuner .tx,
+  body.staging .stage.on #stLock .tx {display:none!important}
+  body.staging .stage.on .sthead .stnav-controls {
+    display:flex!important;
+    flex:0 0 auto!important;
+    width:auto!important;
+    gap:2px!important;
+  }
+  body.staging .stage.on .stnav-controls .stbtn {
+    flex:0 0 34px!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:28px!important;
+    min-height:28px!important;
+    padding:0 2px!important;
+    font-size:8px!important;
+  }
+  body.staging .stage.on .stmaster-mute,
+  body.staging .stage.on .stmaster-focus {
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:20px!important;
+    height:auto!important;
+    padding:2px!important;
+    border:1px solid #536375!important;
+    border-radius:5px!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    background:linear-gradient(#394451 0%,#202832 22%,#121820 54%,#080c11 100%)!important;
+    color:#e7edf5!important;
+    box-shadow:inset 0 1px 2px #ffffff3b,inset 0 -2px 3px #000a,0 3px 5px #000a!important;
+    font-weight:900!important;
+    font-size:clamp(7px,1.4vh,9px)!important;
+    letter-spacing:.4px!important;
+  }
+  body.staging .stage.on .stmaster-mute[aria-pressed="true"] {
+    border-color:#ff717d!important;
+    background:linear-gradient(#78343b,#3a171d)!important;
+    color:#fff!important;
+  }
+  body.staging .stage.on .stmaster-focus {
+    border-color:#3385b1!important;
+    background:linear-gradient(#3189ba,#135279 45%,#09263b)!important;
+    color:#e4f6ff!important;
+  }
+}
 
 </style>
 
